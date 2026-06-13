@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sports & Modal Verbs – A2 English</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+  :root {
+    --cobalt: #1A56DB;
+    --cobalt-light: #EBF2FF;
+    --cobalt-dark: #1139A3;
+    --yellow: #FBBF24;
+    --yellow-light: #FEF9EE;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --orange: #F97316;
+    --purple: #8B5CF6;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --radius: 16px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 32px rgba(26,86,219,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: #F0F5FF;
+    color: var(--gray-900);
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--cobalt) 0%, #2563EB 60%, #6366F1 100%);
+    color: white;
+    padding: 48px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '⚽🏄🎾🏊🚴🏔️';
+    position: absolute;
+    top: -10px; left: 0; right: 0;
+    font-size: 80px;
+    opacity: 0.07;
+    letter-spacing: 20px;
+    white-space: nowrap;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 100px;
+    padding: 4px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--yellow); }
+  .hero p {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .progress-strip {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .progress-pill {
+    background: rgba(255,255,255,0.15);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .progress-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 16px 60px; }
+
+  .section {
+    margin-top: 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-badge {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+  .badge-blue { background: var(--cobalt-light); color: var(--cobalt-dark); }
+  .badge-green { background: var(--green-light); color: #065F46; }
+  .badge-yellow { background: #FEF3C7; color: #92400E; }
+  .badge-purple { background: #EDE9FE; color: #5B21B6; }
+  .badge-red { background: var(--red-light); color: #991B1B; }
+
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gray-900);
+  }
+
+  /* ─── CARD BASE ─── */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+  }
+
+  /* ─── GRAMMAR REFERENCE ─── */
+  .grammar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .grammar-card {
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .grammar-card.must { background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-left: 4px solid var(--yellow); }
+  .grammar-card.can  { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); border-left: 4px solid var(--cobalt); }
+  .grammar-card.mustn { background: linear-gradient(135deg, #FFE4E6, #FECDD3); border-left: 4px solid var(--red); }
+  .grammar-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .grammar-card p { font-size: 14px; color: var(--gray-700); margin-bottom: 10px; }
+  .grammar-card ul { list-style: none; }
+  .grammar-card ul li {
+    font-size: 14px;
+    padding: 4px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+  .grammar-card ul li::before { content: '→'; position: absolute; left: 0; opacity: .5; }
+  .grammar-card .formula {
+    display: inline-block;
+    background: rgba(0,0,0,0.08);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+
+  /* ─── MATCHING ─── */
+  .matching-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .match-col { display: flex; flex-direction: column; gap: 10px; }
+  .match-item {
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
+    border: 2px solid transparent;
+    text-align: center;
+  }
+  .match-item.left-item {
+    background: var(--cobalt-light);
+    color: var(--cobalt-dark);
+    border-color: #BFDBFE;
+  }
+  .match-item.right-item {
+    background: var(--yellow-light);
+    color: #78350F;
+    border-color: #FDE68A;
+  }
+  .match-item.selected { border-color: var(--cobalt); box-shadow: 0 0 0 3px rgba(26,86,219,.2); transform: scale(1.02); }
+  .match-item.correct { background: var(--green-light) !important; border-color: var(--green) !important; color: #065F46 !important; }
+  .match-item.wrong { background: var(--red-light) !important; border-color: var(--red) !important; animation: shake .3s; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  .match-score { text-align: center; margin-top: 16px; font-size: 16px; font-weight: 700; color: var(--cobalt); min-height: 28px; }
+
+  /* ─── MEMO GAME ─── */
+  .memo-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .memo-card {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    background: var(--cobalt);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: transform .35s;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+  .memo-card.flipped { transform: rotateY(180deg); }
+  .memo-card.matched { background: var(--green) !important; }
+  .memo-card .front, .memo-card .back {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    backface-visibility: hidden;
+  }
+  .memo-card .front { background: var(--cobalt); font-size: 22px; color: white; }
+  .memo-card .back { background: white; transform: rotateY(180deg); font-size: 13px; font-weight: 700; text-align: center; color: var(--gray-900); padding: 6px; line-height: 1.3; border: 2px solid var(--cobalt-light); }
+  .memo-stats { display: flex; gap: 20px; justify-content: center; margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--gray-700); }
+  .memo-stats span { color: var(--cobalt); font-size: 18px; font-weight: 900; }
+  .memo-reset { display: block; margin: 16px auto 0;
+    background: var(--cobalt); color: white; border: none;
+    padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 700; cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif; transition: background .2s; }
+  .memo-reset:hover { background: var(--cobalt-dark); }
+
+  /* ─── FILL IN THE BLANKS ─── */
+  .fib-list { display: flex; flex-direction: column; gap: 14px; }
+  .fib-item {
+    background: var(--gray-50);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .fib-item .num { font-weight: 900; color: var(--cobalt); min-width: 22px; }
+  .fib-input {
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 15px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    width: 110px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .fib-input:focus { border-color: var(--cobalt); }
+  .fib-input.correct { border-color: var(--green); background: var(--green-light); }
+  .fib-input.wrong { border-color: var(--red); background: var(--red-light); }
+  .check-btn {
+    margin-top: 18px;
+    background: var(--cobalt); color: white; border: none;
+    padding: 12px 28px; border-radius: 100px; font-size: 15px; font-weight: 700;
+    cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: background .2s;
+  }
+  .check-btn:hover { background: var(--cobalt-dark); }
+  .fib-feedback { margin-top: 14px; font-size: 15px; font-weight: 600; min-height: 24px; }
+
+  /* ─── ERROR CORRECTION ─── */
+  .error-list { display: flex; flex-direction: column; gap: 12px; }
+  .error-item {
+    background: var(--red-light);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .error-sentence { font-size: 15px; font-weight: 600; color: #991B1B; }
+  .error-input {
+    border: 2px solid #FECACA;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 15px;
+    font-family: 'Space Grotesk', sans-serif;
+    background: white;
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+  }
+  .error-input:focus { border-color: var(--red); }
+  .error-input.correct { border-color: var(--green); background: var(--green-light); }
+  .error-input.wrong { border-color: var(--red); }
+  .error-hint { font-size: 12px; color: #EF4444; font-weight: 600; display: none; }
+
+  /* ─── QUIZ ─── */
+  .quiz-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+  }
+  .quiz-question {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .quiz-question .q-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--cobalt); color: white;
+    width: 30px; height: 30px; border-radius: 50%;
+    font-size: 14px; font-weight: 900;
+    margin-right: 10px; flex-shrink: 0;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-option {
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 2px solid var(--gray-200);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all .2s;
+    background: var(--gray-50);
+  }
+  .quiz-option:hover { border-color: var(--cobalt); background: var(--cobalt-light); }
+  .quiz-option.chosen-correct { background: var(--green-light); border-color: var(--green); color: #065F46; }
+  .quiz-option.chosen-wrong { background: var(--red-light); border-color: var(--red); color: #991B1B; }
+  .quiz-option.reveal-correct { background: var(--green-light); border-color: var(--green); color: #065F46; }
+  .quiz-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; }
+  .quiz-nav-btn {
+    background: var(--cobalt); color: white; border: none;
+    padding: 10px 22px; border-radius: 100px; font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: background .2s;
+  }
+  .quiz-nav-btn:hover { background: var(--cobalt-dark); }
+  .quiz-nav-btn:disabled { background: var(--gray-200); color: var(--gray-700); cursor: default; }
+  .quiz-progress-bar { flex: 1; margin: 0 16px; height: 8px; background: var(--gray-200); border-radius: 100px; overflow: hidden; }
+  .quiz-progress-fill { height: 100%; background: var(--cobalt); border-radius: 100px; transition: width .3s; }
+  .quiz-explanation { margin-top: 14px; padding: 12px 16px; border-radius: 10px; background: var(--cobalt-light); font-size: 14px; font-weight: 600; color: var(--cobalt-dark); display: none; }
+  .quiz-result { text-align: center; padding: 20px 0; }
+  .quiz-result .big-score { font-family: 'Nunito', sans-serif; font-size: 56px; font-weight: 900; color: var(--cobalt); }
+  .quiz-result p { font-size: 16px; color: var(--gray-700); margin-top: 8px; }
+  .quiz-retry {
+    margin-top: 16px;
+    background: var(--cobalt); color: white; border: none;
+    padding: 12px 28px; border-radius: 100px; font-size: 15px; font-weight: 700;
+    cursor: pointer; font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* ─── SPINNER ─── */
+  .spinner-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  #spinCanvas { border-radius: 50%; box-shadow: 0 6px 32px rgba(0,0,0,0.15); cursor: pointer; max-width: 100%; }
+  .spin-btn {
+    background: linear-gradient(135deg, var(--cobalt), #6366F1);
+    color: white; border: none;
+    padding: 14px 36px; border-radius: 100px; font-size: 16px; font-weight: 900;
+    cursor: pointer; font-family: 'Nunito', sans-serif; letter-spacing: .04em;
+    transition: transform .15s; box-shadow: 0 4px 16px rgba(26,86,219,.3);
+  }
+  .spin-btn:hover { transform: scale(1.04); }
+  .spin-result {
+    background: var(--cobalt-light);
+    border-radius: 14px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cobalt-dark);
+    text-align: center;
+    min-height: 56px;
+    max-width: 400px;
+    width: 100%;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1.4;
+  }
+
+  /* ─── SPEAKING CARDS ─── */
+  .speaking-deck {
+    perspective: 1000px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .speaking-card-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 62%;
+    cursor: pointer;
+  }
+  .speaking-card-inner {
+    position: absolute; inset: 0;
+    transform-style: preserve-3d;
+    transition: transform .5s;
+  }
+  .speaking-card-inner.flipped { transform: rotateY(180deg); }
+  .sc-face {
+    position: absolute; inset: 0;
+    border-radius: var(--radius);
+    backface-visibility: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 28px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .sc-front {
+    background: linear-gradient(135deg, var(--cobalt) 0%, #6366F1 100%);
+    color: white;
+  }
+  .sc-front .emoji { font-size: 48px; margin-bottom: 12px; }
+  .sc-front .prompt { font-size: 16px; font-weight: 700; line-height: 1.4; }
+  .sc-front .hint { font-size: 12px; opacity: .7; margin-top: 12px; }
+  .sc-back {
+    background: white;
+    transform: rotateY(180deg);
+    border: 2px solid var(--cobalt-light);
+  }
+  .sc-back .title { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--cobalt); font-weight: 700; margin-bottom: 12px; }
+  .sc-back .starters { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .sc-back .starter {
+    background: var(--cobalt-light);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cobalt-dark);
+    text-align: left;
+  }
+  .sc-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 18px; }
+  .sc-nav-btn {
+    background: white; border: 2px solid var(--cobalt-light); color: var(--cobalt);
+    padding: 8px 22px; border-radius: 100px; font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: all .2s;
+  }
+  .sc-nav-btn:hover { background: var(--cobalt-light); }
+  .sc-counter { font-size: 14px; font-weight: 700; color: var(--gray-700); }
+
+  /* ─── WRITING CHALLENGE ─── */
+  .write-area {
+    width: 100%;
+    min-height: 140px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 15px;
+    font-family: 'Space Grotesk', sans-serif;
+    resize: vertical;
+    outline: none;
+    transition: border-color .2s;
+    color: var(--gray-900);
+  }
+  .write-area:focus { border-color: var(--cobalt); }
+  .word-counter { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--gray-700); }
+  .word-counter span { color: var(--cobalt); font-weight: 900; }
+  .write-prompts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 16px; }
+  .write-prompt-chip {
+    background: var(--cobalt-light);
+    border: 2px solid #BFDBFE;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cobalt-dark);
+    cursor: pointer;
+    transition: all .2s;
+    text-align: center;
+  }
+  .write-prompt-chip:hover { background: #DBEAFE; border-color: var(--cobalt); }
+
+  /* ─── FOOTER ─── */
+  .footer { text-align: center; padding: 32px 16px; color: #9CA3AF; font-size: 13px; }
+  .footer strong { color: var(--cobalt); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 560px) {
+    .matching-wrap { grid-template-columns: 1fr; }
+    .memo-board { grid-template-columns: repeat(4, 1fr); }
+    .grammar-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Level A2 · English</div>
+  <h1>Sports & <span>Modal Verbs</span><br>Extra Practice 🏅</h1>
+  <p>Complete all the activities below. You can do them in any order!</p>
+  <div class="progress-strip">
+    <div class="progress-pill"><div class="dot"></div> Presentation</div>
+    <div class="progress-pill"><div class="dot"></div> Practice</div>
+    <div class="progress-pill"><div class="dot"></div> Production</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ─── PRESENTATION ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-blue">📖 Presentation</span>
+      <h2 class="section-title">Grammar Reference Card</h2>
+    </div>
+    <div class="grammar-grid">
+      <div class="grammar-card must">
+        <h3>MUST</h3>
+        <p>Rules, obligations, strong advice</p>
+        <ul>
+          <li>You <strong>must</strong> wear a helmet.</li>
+          <li>Swimmers <strong>must</strong> follow the rules.</li>
+        </ul>
+        <div class="formula">Subject + must + verb</div>
+      </div>
+      <div class="grammar-card can">
+        <h3>CAN / CAN'T</h3>
+        <p>Ability, possibility, permission</p>
+        <ul>
+          <li>You <strong>can</strong> swim here.</li>
+          <li>I <strong>can't</strong> climb those rocks.</li>
+        </ul>
+        <div class="formula">Subject + can/can't + verb</div>
+      </div>
+      <div class="grammar-card mustn">
+        <h3>MUSTN'T</h3>
+        <p>Prohibition – do NOT do this!</p>
+        <ul>
+          <li>You <strong>mustn't</strong> litter in the forest.</li>
+          <li>Hikers <strong>mustn't</strong> leave without water.</li>
+        </ul>
+        <div class="formula">Subject + mustn't + verb</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PRACTICE 1 – MATCHING ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-green">✏️ Practice 1</span>
+      <h2 class="section-title">Match: Rule or Situation?</h2>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:18px;font-size:15px;color:var(--gray-700);">Click a sentence on the left, then click the correct rule on the right. Match all 5 pairs!</p>
+      <div class="matching-wrap">
+        <div class="match-col" id="matchLeft"></div>
+        <div class="match-col" id="matchRight"></div>
+      </div>
+      <div class="match-score" id="matchScore"></div>
+    </div>
+  </div>
+
+  <!-- ─── PRACTICE 2 – MEMO GAME ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-green">🃏 Practice 2</span>
+      <h2 class="section-title">Memory Game: Sport + Sentence</h2>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:20px;font-size:15px;color:var(--gray-700);">Find the matching pairs: a sport emoji and its modal sentence. Click two cards to flip them!</p>
+      <div class="memo-board" id="memoBoard"></div>
+      <div class="memo-stats">
+        <div>Moves: <span id="memoMoves">0</span></div>
+        <div>Pairs found: <span id="memoPairs">0</span>/8</div>
+      </div>
+      <button class="memo-reset" onclick="initMemo()">🔄 Restart</button>
+    </div>
+  </div>
+
+  <!-- ─── PRACTICE 3 – FILL IN THE BLANKS ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-green">✍️ Practice 3</span>
+      <h2 class="section-title">Fill in the Gaps</h2>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:18px;font-size:15px;color:var(--gray-700);">Choose: <strong>can / can't / must / mustn't</strong>. Type your answer and click Check!</p>
+      <div class="fib-list" id="fibList"></div>
+      <button class="check-btn" onclick="checkFib()">✅ Check Answers</button>
+      <div class="fib-feedback" id="fibFeedback"></div>
+    </div>
+  </div>
+
+  <!-- ─── PRACTICE 4 – ERROR CORRECTION ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-green">🔍 Practice 4</span>
+      <h2 class="section-title">Correct the Mistakes</h2>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:18px;font-size:15px;color:var(--gray-700);">Each sentence has ONE mistake. Find it and write the correct sentence.</p>
+      <div class="error-list" id="errorList"></div>
+      <button class="check-btn" style="margin-top:18px;" onclick="checkErrors()">✅ Check</button>
+      <div class="fib-feedback" id="errorFeedback"></div>
+    </div>
+  </div>
+
+  <!-- ─── PRACTICE 5 – QUIZ ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-yellow">🧠 Practice 5</span>
+      <h2 class="section-title">Quick Quiz</h2>
+    </div>
+    <div class="quiz-card" id="quizCard"></div>
+  </div>
+
+  <!-- ─── PRODUCTION 1 – SPINNER ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-purple">🎯 Production 1</span>
+      <h2 class="section-title">Spinner Challenge</h2>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:20px;font-size:15px;color:var(--gray-700);text-align:center;">Spin the wheel — get a place or activity. Make <strong>2 sentences</strong> with modal verbs about it!</p>
+      <div class="spinner-wrap">
+        <canvas id="spinCanvas" width="300" height="300"></canvas>
+        <button class="spin-btn" onclick="spinWheel()">🎰 SPIN!</button>
+        <div class="spin-result" id="spinResult">Spin the wheel to get your topic!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PRODUCTION 2 – SPEAKING CARDS ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-purple">🗣️ Production 2</span>
+      <h2 class="section-title">Speaking Cards</h2>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:20px;font-size:15px;color:var(--gray-700);text-align:center;">Click the card to flip it and see sentence starters. Try to speak for <strong>30 seconds!</strong></p>
+      <div class="speaking-deck">
+        <div class="speaking-card-wrap" onclick="flipSpeakingCard()">
+          <div class="speaking-card-inner" id="scInner">
+            <div class="sc-face sc-front">
+              <div class="emoji" id="scEmoji">🏊</div>
+              <div class="prompt" id="scPrompt">Loading...</div>
+              <div class="hint">👆 Click to flip for sentence starters</div>
+            </div>
+            <div class="sc-face sc-back">
+              <div class="title">Sentence Starters</div>
+              <div class="starters" id="scStarters"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sc-nav">
+        <button class="sc-nav-btn" onclick="prevSpeakingCard()">← Previous</button>
+        <div class="sc-counter" id="scCounter">1 / 6</div>
+        <button class="sc-nav-btn" onclick="nextSpeakingCard()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PRODUCTION 3 – WRITING ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-badge badge-red">✍️ Production 3</span>
+      <h2 class="section-title">Mini Writing Task</h2>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:16px;font-size:15px;color:var(--gray-700);">Choose a topic below (or think of your own) and write <strong>5–6 sentences</strong> using <strong>can, can't, must</strong> and <strong>mustn't</strong>.</p>
+      <div class="write-prompts">
+        <div class="write-prompt-chip" onclick="setWritePrompt(this, '⛱️ Summer Safety at the Beach')">⛱️ Summer Safety at the Beach</div>
+        <div class="write-prompt-chip" onclick="setWritePrompt(this, '🏕️ Rules at a Summer Camp')">🏕️ Rules at a Summer Camp</div>
+        <div class="write-prompt-chip" onclick="setWritePrompt(this, '🚴 Cycling Safety in My Town')">🚴 Cycling Safety in My Town</div>
+        <div class="write-prompt-chip" onclick="setWritePrompt(this, '⚽ Playing Football in the Park')">⚽ Playing Football in the Park</div>
+      </div>
+      <textarea class="write-area" id="writeArea" placeholder="Start writing here... e.g. In summer at the beach, you must put on sunscreen. You can swim in the sea, but you can't go alone..." oninput="countWords()"></textarea>
+      <div class="word-counter">Words: <span id="wordCount">0</span> / aim for 40–60</div>
+      <div style="margin-top:14px;padding:14px;background:#FEF9EE;border-radius:12px;border-left:4px solid var(--yellow);">
+        <strong style="font-size:14px;">💡 Checklist:</strong>
+        <ul style="margin-top:8px;font-size:14px;color:var(--gray-700);padding-left:20px;line-height:2;">
+          <li>Did you use <strong>must</strong> for a rule?</li>
+          <li>Did you use <strong>can</strong> for something allowed?</li>
+          <li>Did you use <strong>mustn't</strong> or <strong>can't</strong> for a prohibition?</li>
+          <li>5–6 sentences? ✓</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>Sports &amp; Modal Verbs</strong> · A2 English · Good luck! 🏆
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   MATCHING GAME
+══════════════════════════════════════════ */
+const matchPairs = [
+  { left: 'You ____ wear a life jacket on the boat.', right: 'must – it\'s a rule', id: 1 },
+  { left: 'She ____ play chess very well.', right: 'can – it\'s an ability', id: 2 },
+  { left: 'Visitors ____ drop litter in the park.', right: 'mustn\'t – it\'s a prohibition', id: 3 },
+  { left: 'We ____ cycle here – there\'s a sign.', right: 'can\'t – it\'s not allowed', id: 4 },
+  { left: 'Hikers ____ carry enough water.', right: 'must – for safety', id: 5 },
+];
+
+let matchLeftSel = null, matchRightSel = null, matchCorrect = 0;
+const matchDone = new Set();
+
+function initMatching() {
+  const leftEl = document.getElementById('matchLeft');
+  const rightEl = document.getElementById('matchRight');
+  leftEl.innerHTML = ''; rightEl.innerHTML = '';
+  matchCorrect = 0; matchDone.clear();
+  document.getElementById('matchScore').textContent = '';
+
+  const shuffledLeft = [...matchPairs].sort(() => Math.random() - .5);
+  const shuffledRight = [...matchPairs].sort(() => Math.random() - .5);
+
+  shuffledLeft.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'match-item left-item'; el.textContent = p.left; el.dataset.id = p.id;
+    el.onclick = () => selectMatch(el, 'left');
+    leftEl.appendChild(el);
+  });
+  shuffledRight.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'match-item right-item'; el.textContent = p.right; el.dataset.id = p.id;
+    el.onclick = () => selectMatch(el, 'right');
+    rightEl.appendChild(el);
+  });
+}
+
+function selectMatch(el, side) {
+  if (matchDone.has(el.dataset.id)) return;
+  if (side === 'left') {
+    if (matchLeftSel) matchLeftSel.classList.remove('selected');
+    matchLeftSel = el; el.classList.add('selected');
+  } else {
+    if (matchRightSel) matchRightSel.classList.remove('selected');
+    matchRightSel = el; el.classList.add('selected');
+  }
+  if (matchLeftSel && matchRightSel) {
+    if (matchLeftSel.dataset.id === matchRightSel.dataset.id) {
+      matchLeftSel.classList.remove('selected'); matchLeftSel.classList.add('correct');
+      matchRightSel.classList.remove('selected'); matchRightSel.classList.add('correct');
+      matchDone.add(matchLeftSel.dataset.id);
+      matchCorrect++;
+      if (matchCorrect === matchPairs.length) {
+        document.getElementById('matchScore').textContent = '🎉 Perfect! All matched correctly!';
+      } else {
+        document.getElementById('matchScore').textContent = `✅ Correct! ${matchCorrect}/${matchPairs.length} done.`;
+      }
+    } else {
+      matchLeftSel.classList.add('wrong'); matchRightSel.classList.add('wrong');
+      const l = matchLeftSel, r = matchRightSel;
+      setTimeout(() => { l.classList.remove('wrong','selected'); r.classList.remove('wrong','selected'); }, 700);
+    }
+    matchLeftSel = null; matchRightSel = null;
+  }
+}
+initMatching();
+
+/* ══════════════════════════════════════════
+   MEMO GAME
+══════════════════════════════════════════ */
+const memoPairsData = [
+  { emoji: '🏊', text: 'You must\nwear goggles.' },
+  { emoji: '🏄', text: 'You can\nsurf here.' },
+  { emoji: '🚴', text: 'You must\nwear a helmet.' },
+  { emoji: '🧗', text: 'You can\'t\nclimb alone.' },
+  { emoji: '⛺', text: 'You mustn\'t\nleave fire on.' },
+  { emoji: '🎾', text: 'You can\nplay tennis here.' },
+  { emoji: '🏐', text: 'You can\'t\nplay here today.' },
+  { emoji: '🥾', text: 'Hikers must\ncarry water.' },
+];
+let memoCards = [], memoFlipped = [], memoMatched = 0, memoBusy = false, memoMoveCount = 0;
+
+function initMemo() {
+  const board = document.getElementById('memoBoard');
+  board.innerHTML = '';
+  memoMatched = 0; memoMoveCount = 0; memoFlipped = [];
+  document.getElementById('memoMoves').textContent = '0';
+  document.getElementById('memoPairs').textContent = '0';
+
+  const deck = [];
+  memoPairsData.forEach(p => {
+    deck.push({ type: 'emoji', value: p.emoji, pairKey: p.emoji });
+    deck.push({ type: 'text', value: p.text, pairKey: p.emoji });
+  });
+  deck.sort(() => Math.random() - .5);
+  memoCards = [];
+
+  deck.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'memo-card';
+    card.innerHTML = `<div class="front">❓</div><div class="back">${item.type === 'emoji' ? '<span style="font-size:32px">' + item.value + '</span>' : item.value.replace('\n','<br>')}</div>`;
+    card.dataset.idx = i; card.dataset.pair = item.pairKey;
+    card.onclick = () => memoFlip(card);
+    board.appendChild(card);
+    memoCards.push(card);
+  });
+}
+
+function memoFlip(card) {
+  if (memoBusy || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+  card.classList.add('flipped');
+  memoFlipped.push(card);
+  if (memoFlipped.length === 2) {
+    memoBusy = true; memoMoveCount++;
+    document.getElementById('memoMoves').textContent = memoMoveCount;
+    const [a, b] = memoFlipped;
+    if (a.dataset.pair === b.dataset.pair && a !== b) {
+      a.classList.add('matched'); b.classList.add('matched');
+      memoMatched++;
+      document.getElementById('memoPairs').textContent = memoMatched;
+      memoFlipped = []; memoBusy = false;
+    } else {
+      setTimeout(() => {
+        a.classList.remove('flipped'); b.classList.remove('flipped');
+        memoFlipped = []; memoBusy = false;
+      }, 900);
+    }
+  }
+}
+initMemo();
+
+/* ══════════════════════════════════════════
+   FILL IN THE BLANKS
+══════════════════════════════════════════ */
+const fibData = [
+  { before: 'You', after: 'swim without an adult – it\'s dangerous!', answer: "mustn't", hint: "prohibition" },
+  { before: 'At the campsite, visitors', after: 'make a fire without permission.', answer: "mustn't", hint: "prohibition" },
+  { before: 'Hikers', after: 'carry a map and enough water.', answer: "must", hint: "rule/obligation" },
+  { before: 'You', after: 'cycle here – there is a sign.', answer: "can't", hint: "not allowed" },
+  { before: 'We', after: 'play volleyball on this beach – it\'s allowed!', answer: "can", hint: "permission" },
+  { before: 'Campers', after: 'clean up after themselves.', answer: "must", hint: "rule" },
+];
+
+function initFib() {
+  const list = document.getElementById('fibList');
+  fibData.forEach((item, i) => {
+    list.innerHTML += `
+      <div class="fib-item">
+        <span class="num">${i+1}.</span>
+        <span>${item.before}</span>
+        <input class="fib-input" id="fib${i}" type="text" placeholder="can/must..." autocomplete="off">
+        <span>${item.after}</span>
+      </div>`;
+  });
+}
+
+function checkFib() {
+  let correct = 0;
+  fibData.forEach((item, i) => {
+    const inp = document.getElementById('fib' + i);
+    const val = inp.value.trim().toLowerCase();
+    if (val === item.answer) { inp.classList.remove('wrong'); inp.classList.add('correct'); correct++; }
+    else { inp.classList.remove('correct'); inp.classList.add('wrong'); }
+  });
+  const fb = document.getElementById('fibFeedback');
+  if (correct === fibData.length) fb.textContent = `🎉 Excellent! All ${fibData.length} correct!`;
+  else fb.textContent = `You got ${correct}/${fibData.length}. Check the red ones and try again!`;
+  fb.style.color = correct === fibData.length ? 'var(--green)' : 'var(--red)';
+}
+initFib();
+
+/* ══════════════════════════════════════════
+   ERROR CORRECTION
+══════════════════════════════════════════ */
+const errorData = [
+  { wrong: '1. You must to wear a helmet.', correct: 'You must wear a helmet.', hint: 'Remove "to" after must.' },
+  { wrong: '2. We can\'t to swim here.', correct: "We can't swim here.", hint: 'Remove "to" after can\'t.' },
+  { wrong: '3. They mustn\'t be late for breakfast? No – they must!', correct: 'They must be late for breakfast.', hint: 'The meaning changes – use must.' },
+  { wrong: '4. You can plays football on the beach.', correct: 'You can play football on the beach.', hint: 'After can, use the base form: play.' },
+  { wrong: '5. She must cleans her tent.', correct: 'She must clean her tent.', hint: 'After must, use the base form: clean.' },
+];
+
+function initErrors() {
+  const list = document.getElementById('errorList');
+  errorData.forEach((item, i) => {
+    list.innerHTML += `
+      <div class="error-item">
+        <div class="error-sentence">❌ ${item.wrong}</div>
+        <input class="error-input" id="err${i}" type="text" placeholder="Write the correct sentence here..." autocomplete="off">
+        <div class="error-hint" id="errhint${i}">💡 Hint: ${item.hint}</div>
+      </div>`;
+  });
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/[?.!,]/g, ''); }
+
+function checkErrors() {
+  let correct = 0;
+  errorData.forEach((item, i) => {
+    const inp = document.getElementById('err' + i);
+    const hint = document.getElementById('errhint' + i);
+    const val = inp.value;
+    if (normalize(val) === normalize(item.correct)) {
+      inp.classList.remove('wrong'); inp.classList.add('correct'); hint.style.display = 'none'; correct++;
+    } else {
+      inp.classList.remove('correct'); inp.classList.add('wrong'); hint.style.display = 'block';
+    }
+  });
+  const fb = document.getElementById('errorFeedback');
+  if (correct === errorData.length) fb.textContent = '🎉 All correct! Great job!';
+  else fb.textContent = `${correct}/${errorData.length} correct. Read the hints for the others.`;
+  fb.style.color = correct === errorData.length ? 'var(--green)' : 'var(--red)';
+}
+initErrors();
+
+/* ══════════════════════════════════════════
+   QUIZ
+══════════════════════════════════════════ */
+const quizData = [
+  { q: 'Swimmers ___ wear goggles. It\'s the rule.', opts: ['can','must','mustn\'t','should'], ans: 1, exp: '"Must" is used for rules and obligations.' },
+  { q: 'You ___ light a fire in the forest – it\'s forbidden!', opts: ['must','can','mustn\'t','can\'t both work'], ans: 2, exp: '"Mustn\'t" expresses prohibition.' },
+  { q: 'She ___ play tennis very well – she wins every game.', opts: ['must','mustn\'t','can','can\'t'], ans: 2, exp: '"Can" is used to talk about abilities.' },
+  { q: 'Which sentence is CORRECT?', opts: ['You must to wear a helmet.','You can plays here.','We mustn\'t make a fire.','She can swims very fast.'], ans: 2, exp: 'After modal verbs, always use the base form (infinitive without "to").' },
+  { q: 'You ___ swim here – there is no lifeguard today.', opts: ['must','can\'t','mustn\'t','can'], ans: 1, exp: '"Can\'t" means it is not allowed or possible.' },
+  { q: 'Hikers ___ carry enough water. It\'s very important for safety.', opts: ['can','mustn\'t','must','can\'t'], ans: 2, exp: '"Must" = strong obligation/rule.' },
+  { q: '"We ___ make noise after 10 pm in the camp." – This is a...', opts: ['rule (must)','prohibition (mustn\'t)','ability (can)','permission (can)'], ans: 1, exp: '"Mustn\'t" = prohibition. Do not do it!' },
+  { q: 'Choose the sentence about ABILITY:', opts: ['You must wear a life jacket.','He can\'t swim yet, but he\'s learning.','Visitors mustn\'t park here.','You must buy a ticket.'], ans: 1, exp: '"Can\'t" used for ability means he doesn\'t have the skill yet.' },
+];
+
+let quizIdx = 0, quizScore = 0, quizAnswered = false;
+
+function renderQuiz() {
+  const card = document.getElementById('quizCard');
+  if (quizIdx >= quizData.length) {
+    card.innerHTML = `<div class="quiz-result">
+      <div class="big-score">${quizScore}/${quizData.length}</div>
+      <p>${quizScore === quizData.length ? '🏆 Perfect score! Amazing!' : quizScore >= 6 ? '🎉 Great job! Well done!' : '💪 Good try! Review and retry!'}</p>
+      <button class="quiz-retry" onclick="quizIdx=0;quizScore=0;renderQuiz()">🔄 Try Again</button>
+    </div>`; return;
+  }
+  const q = quizData[quizIdx];
+  card.innerHTML = `
+    <div class="quiz-question"><span class="q-num">${quizIdx+1}</span>${q.q}</div>
+    <div class="quiz-options">${q.opts.map((o,i) => `<div class="quiz-option" onclick="quizAnswer(${i})">${o}</div>`).join('')}</div>
+    <div class="quiz-explanation" id="quizExp">💡 ${q.exp}</div>
+    <div class="quiz-nav">
+      <div style="font-size:13px;font-weight:600;color:var(--gray-700);">Score: ${quizScore}/${quizIdx}</div>
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${(quizIdx/quizData.length)*100}%"></div></div>
+      <button class="quiz-nav-btn" id="quizNext" onclick="quizNext()" disabled>Next →</button>
+    </div>`;
+  quizAnswered = false;
+}
+
+function quizAnswer(idx) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizData[quizIdx];
+  const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach((o, i) => {
+    if (i === q.ans) o.classList.add('reveal-correct');
+    else if (i === idx && idx !== q.ans) o.classList.add('chosen-wrong');
+  });
+  if (idx === q.ans) quizScore++;
+  document.getElementById('quizExp').style.display = 'block';
+  document.getElementById('quizNext').disabled = false;
+}
+
+function quizNext() { quizIdx++; renderQuiz(); }
+renderQuiz();
+
+/* ══════════════════════════════════════════
+   SPINNER
+══════════════════════════════════════════ */
+const spinTopics = [
+  { label: '🏖️ Beach', full: '🏖️ The Beach', prompts: ['You must... at the beach.', 'You can\'t... at the beach.'] },
+  { label: '🏕️ Camp', full: '🏕️ Summer Camp', prompts: ['At camp, you must...', 'Campers mustn\'t...'] },
+  { label: '🏊 Pool', full: '🏊 The Swimming Pool', prompts: ['You can... at the pool.', 'You mustn\'t... at the pool.'] },
+  { label: '🏔️ Hike', full: '🏔️ A Mountain Hike', prompts: ['Hikers must...', 'You can\'t... on the trail.'] },
+  { label: '🚴 Bike', full: '🚴 Cycling in the Park', prompts: ['Cyclists must...', 'You can... here.'] },
+  { label: '⚽ Park', full: '⚽ Playing in the Park', prompts: ['You can... in the park.', 'You mustn\'t... in the park.'] },
+  { label: '🏄 Surf', full: '🏄 Surfing Lessons', prompts: ['You must... before surfing.', 'Beginners can\'t...'] },
+  { label: '🧗 Climb', full: '🧗 Rock Climbing', prompts: ['Climbers must...', 'You mustn\'t...'] },
+];
+
+let spinAngle = 0, spinning = false;
+const canvas = document.getElementById('spinCanvas');
+const ctx = canvas.getContext('2d');
+const colors = ['#1A56DB','#2563EB','#F97316','#FBBF24','#10B981','#6366F1','#EF4444','#8B5CF6'];
+
+function drawSpinner(angle) {
+  const cx = 150, cy = 150, r = 140;
+  const slice = (2 * Math.PI) / spinTopics.length;
+  ctx.clearRect(0, 0, 300, 300);
+  spinTopics.forEach((t, i) => {
+    const start = angle + i * slice, end = start + slice;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, start, end); ctx.closePath();
+    ctx.fillStyle = colors[i]; ctx.fill();
+    ctx.strokeStyle = 'white'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(start + slice / 2);
+    ctx.textAlign = 'right'; ctx.fillStyle = 'white';
+    ctx.font = '13px Nunito'; ctx.fontWeight = '700';
+    ctx.fillText(t.label, r - 10, 5);
+    ctx.restore();
+  });
+  // pointer
+  ctx.beginPath(); ctx.moveTo(cx + r + 10, cy);
+  ctx.lineTo(cx + r - 10, cy - 12); ctx.lineTo(cx + r - 10, cy + 12);
+  ctx.closePath(); ctx.fillStyle = '#111827'; ctx.fill();
+  // center
+  ctx.beginPath(); ctx.arc(cx, cy, 18, 0, 2*Math.PI);
+  ctx.fillStyle = 'white'; ctx.fill();
+  ctx.strokeStyle = '#E5E7EB'; ctx.lineWidth = 2; ctx.stroke();
+}
+
+function spinWheel() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('spinResult').textContent = '🎰 Spinning...';
+  const totalRotation = (Math.random() * 8 + 6) * Math.PI * 2;
+  const duration = 3500;
+  const start = performance.now();
+  const startAngle = spinAngle;
+  function animate(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 4);
+    spinAngle = startAngle + totalRotation * ease;
+    drawSpinner(spinAngle);
+    if (progress < 1) { requestAnimationFrame(animate); }
+    else {
+      spinning = false;
+      const slice = (2 * Math.PI) / spinTopics.length;
+      const normalizedAngle = ((spinAngle % (2*Math.PI)) + 2*Math.PI) % (2*Math.PI);
+      const pointerAngle = 0;
+      const topicIdx = Math.floor(((2*Math.PI - ((normalizedAngle - pointerAngle + 2*Math.PI) % (2*Math.PI))) / slice) % spinTopics.length);
+      const topic = spinTopics[topicIdx];
+      document.getElementById('spinResult').innerHTML = `
+        <div>
+          <div style="font-size:22px;margin-bottom:6px">${topic.full}</div>
+          <div style="font-size:13px;opacity:.75">Make 2 sentences:<br>
+          <em>"${topic.prompts[0]}"</em><br>
+          <em>"${topic.prompts[1]}"</em></div>
+        </div>`;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+drawSpinner(0);
+
+/* ══════════════════════════════════════════
+   SPEAKING CARDS
+══════════════════════════════════════════ */
+const speakingCards = [
+  {
+    emoji: '🏄', prompt: 'What can you do at the beach in summer?',
+    starters: ['You can... at the beach.', 'You must... for safety.', 'You mustn\'t... because...']
+  },
+  {
+    emoji: '🏕️', prompt: 'What are the rules at a camping site?',
+    starters: ['Campers must...', 'You mustn\'t... at a campsite.', 'You can... if...']
+  },
+  {
+    emoji: '🚴', prompt: 'Is cycling safe in your city? What are the rules?',
+    starters: ['Cyclists must... in my city.', 'You can\'t... here because...', 'I think people should...']
+  },
+  {
+    emoji: '⚽', prompt: 'Describe your favourite sport. What can/must players do?',
+    starters: ['In [sport], players must...', 'You can... but you can\'t...', 'I can... but I can\'t...']
+  },
+  {
+    emoji: '🏊', prompt: 'What safety rules do you know about swimming?',
+    starters: ['You must... before swimming.', 'Children mustn\'t...', 'At the pool, you can...']
+  },
+  {
+    emoji: '🏔️', prompt: 'Imagine you are going on a hike. What must you do?',
+    starters: ['Before a hike, I must...', 'Hikers mustn\'t...', 'You can... on the trail, but...']
+  },
+];
+
+let scIdx = 0;
+function renderSpeakingCard() {
+  const c = speakingCards[scIdx];
+  document.getElementById('scEmoji').textContent = c.emoji;
+  document.getElementById('scPrompt').textContent = c.prompt;
+  const stEl = document.getElementById('scStarters');
+  stEl.innerHTML = c.starters.map(s => `<div class="starter">🗣️ ${s}</div>`).join('');
+  document.getElementById('scCounter').textContent = `${scIdx+1} / ${speakingCards.length}`;
+  document.getElementById('scInner').classList.remove('flipped');
+}
+function flipSpeakingCard() { document.getElementById('scInner').classList.toggle('flipped'); }
+function nextSpeakingCard() { scIdx = (scIdx + 1) % speakingCards.length; renderSpeakingCard(); }
+function prevSpeakingCard() { scIdx = (scIdx - 1 + speakingCards.length) % speakingCards.length; renderSpeakingCard(); }
+renderSpeakingCard();
+
+/* ══════════════════════════════════════════
+   WRITING
+══════════════════════════════════════════ */
+function setWritePrompt(el, text) {
+  document.querySelectorAll('.write-prompt-chip').forEach(c => c.style.borderColor = '');
+  el.style.borderColor = 'var(--cobalt)';
+  const area = document.getElementById('writeArea');
+  area.placeholder = `Topic: ${text}\n\nStart writing here...`;
+  area.focus();
+}
+function countWords() {
+  const text = document.getElementById('writeArea').value.trim();
+  const count = text === '' ? 0 : text.split(/\s+/).length;
+  document.getElementById('wordCount').textContent = count;
+}
+</script>
+</body>
+</html>
