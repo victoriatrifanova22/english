@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switch Off After Work — English Lesson</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --cream: #F7F3ED;
+    --dark: #1C1C1C;
+    --green: #3D6B4F;
+    --green-light: #EAF2EC;
+    --yellow: #E8C547;
+    --yellow-light: #FDF8E1;
+    --sand: #D9C9A8;
+    --muted: #6B6B6B;
+    --white: #ffffff;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.65;
+  }
+
+  /* HEADER */
+  .hero {
+    background: var(--green);
+    color: var(--white);
+    padding: 64px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 6vw, 58px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--yellow); font-style: italic; }
+  .hero p {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 520px;
+    margin: 0 auto 28px;
+  }
+  .progress-bar-wrap {
+    max-width: 400px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    border-radius: 99px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--yellow);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 8px;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION WRAPPERS */
+  .section {
+    padding: 56px 0 32px;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .section-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(24px, 4vw, 36px);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .section .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  .card-yellow { background: var(--yellow-light); border: 2px solid var(--yellow); }
+  .card-green { background: var(--green-light); border: 2px solid var(--green); }
+
+  /* ── PRESENTATION: READING ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  @media(max-width:600px) { .tips-grid { grid-template-columns: 1fr; } }
+
+  .tip-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--green);
+    transition: transform 0.2s;
+  }
+  .tip-card:hover { transform: translateY(-2px); }
+  .tip-number {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .tip-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .tip-card p { font-size: 14px; color: var(--muted); }
+  .highlight {
+    background: var(--yellow);
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  /* ── VOCAB ── */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .vocab-item {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    user-select: none;
+  }
+  .vocab-item:hover { border-color: var(--green); }
+  .vocab-item .word { font-weight: 700; font-size: 15px; color: var(--dark); }
+  .vocab-item .definition {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    display: none;
+  }
+  .vocab-item.revealed .definition { display: block; }
+  .vocab-item.revealed { border-color: var(--green); background: var(--green-light); }
+  .vocab-hint { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+  /* ── QUIZ ── */
+  .quiz-q {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+  .quiz-q p { font-weight: 600; font-size: 16px; margin-bottom: 14px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    background: var(--cream);
+    border: 2px solid var(--sand);
+    border-radius: 10px;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .option-btn:hover { border-color: var(--green); background: var(--green-light); }
+  .option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+  .option-btn.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+  .option-btn:disabled { cursor: default; }
+  .quiz-feedback { font-size: 13px; font-weight: 600; margin-top: 10px; min-height: 20px; }
+  .quiz-score {
+    background: var(--green);
+    color: var(--white);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    text-align: center;
+    display: none;
+  }
+  .quiz-score .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+  }
+
+  /* ── MATCHING ── */
+  .matching-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media(max-width:560px) { .matching-wrap { grid-template-columns: 1fr; } }
+  .match-col h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .match-item {
+    background: var(--white);
+    border: 2px solid var(--sand);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .match-item:hover { border-color: var(--green); }
+  .match-item.selected { border-color: var(--yellow); background: var(--yellow-light); }
+  .match-item.matched { border-color: var(--green); background: var(--green-light); cursor: default; color: var(--green); font-weight: 600; }
+  .match-item.wrong-flash { border-color: #dc3545; background: #f8d7da; animation: shake 0.3s; }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)}
+  }
+  .match-result { font-size: 14px; font-weight: 600; margin-top: 12px; color: var(--green); min-height: 22px; }
+
+  /* ── MEMO GAME ── */
+  .memo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  @media(max-width:480px) { .memo-grid { grid-template-columns: repeat(3,1fr); } }
+  .memo-card {
+    aspect-ratio: 1;
+    perspective: 600px;
+    cursor: pointer;
+  }
+  .memo-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s;
+    border-radius: 10px;
+  }
+  .memo-card.flipped .memo-inner { transform: rotateY(180deg); }
+  .memo-card.matched .memo-inner { transform: rotateY(180deg); }
+  .memo-front, .memo-back {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px;
+    font-weight: 600;
+  }
+  .memo-front {
+    background: var(--green);
+    color: var(--white);
+    font-size: 22px;
+  }
+  .memo-back {
+    background: var(--white);
+    border: 2px solid var(--green);
+    color: var(--dark);
+    transform: rotateY(180deg);
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .memo-card.matched .memo-back { background: var(--green-light); border-color: var(--green); }
+  .memo-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .memo-stat {
+    text-align: center;
+  }
+  .memo-stat .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--green);
+  }
+  .memo-stat .lbl { font-size: 12px; color: var(--muted); }
+  #memo-win {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background: var(--green);
+    border-radius: var(--radius);
+    color: var(--white);
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-top: 16px;
+  }
+
+  /* ── FILL IN THE BLANK ── */
+  .fill-sentence {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .fill-sentence input {
+    border: none;
+    border-bottom: 2px solid var(--green);
+    background: transparent;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    padding: 2px 6px;
+    min-width: 120px;
+    outline: none;
+    color: var(--dark);
+    transition: border-color 0.2s;
+  }
+  .fill-sentence input:focus { border-bottom-color: var(--yellow); }
+  .fill-sentence input.correct-input { border-bottom-color: #28a745; color: #28a745; }
+  .fill-sentence input.wrong-input { border-bottom-color: #dc3545; color: #dc3545; }
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .bank-word {
+    background: var(--white);
+    border: 2px solid var(--sand);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .bank-word:hover { border-color: var(--green); background: var(--green-light); }
+  .bank-word.used { opacity: 0.35; cursor: default; text-decoration: line-through; }
+
+  /* ── SPINNER ── */
+  .spinner-wrap { text-align: center; }
+  .wheel-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 20px;
+  }
+  #spinner-canvas { border-radius: 50%; }
+  .wheel-pointer {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 24px solid var(--dark);
+    z-index: 10;
+  }
+  .spin-btn {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 99px;
+    padding: 14px 36px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(61,107,79,0.35);
+  }
+  .spin-btn:hover { transform: scale(1.04); }
+  .spin-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+  #spin-result {
+    margin-top: 20px;
+    background: var(--yellow-light);
+    border: 2px solid var(--yellow);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    min-height: 60px;
+    display: none;
+  }
+  #spin-result .prompt-label { font-size: 12px; font-weight: 400; color: var(--muted); margin-bottom: 4px; }
+
+  /* ── SPEAKING CARDS ── */
+  .speaking-deck {
+    position: relative;
+    height: 220px;
+    margin-bottom: 20px;
+  }
+  .speak-card {
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+    transform: translateY(10px);
+    border-top: 5px solid var(--green);
+  }
+  .speak-card.active {
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 5;
+  }
+  .speak-card .card-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .speak-card .card-q {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  .speak-card .card-tip {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .speak-nav {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .speak-nav button {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 99px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .speak-nav button:hover { background: #2e5039; }
+  .speak-nav button.outline {
+    background: transparent;
+    border: 2px solid var(--green);
+    color: var(--green);
+  }
+  .speak-nav button.outline:hover { background: var(--green-light); }
+  .speak-counter { font-size: 13px; color: var(--muted); }
+
+  /* ── PRODUCTION: WRITING ── */
+  .writing-prompt {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .writing-prompt h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .writing-prompt p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+  .writing-prompt textarea {
+    width: 100%;
+    border: 2px solid var(--sand);
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 120px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--cream);
+  }
+  .writing-prompt textarea:focus { border-color: var(--green); }
+  .word-count { font-size: 12px; color: var(--muted); margin-top: 6px; text-align: right; }
+  .useful-lang {
+    background: var(--green-light);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 12px;
+  }
+  .useful-lang h5 { font-size: 13px; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+  .lang-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lang-chip {
+    background: var(--white);
+    border: 1.5px solid var(--green);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: var(--dark);
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-green { background: var(--green); color: var(--white); }
+  .btn-green:hover { background: #2e5039; }
+  .btn-yellow { background: var(--yellow); color: var(--dark); }
+  .btn-yellow:hover { background: #d4b030; }
+  .btn-outline { background: transparent; border: 2px solid var(--green); color: var(--green); }
+  .btn-outline:hover { background: var(--green-light); }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 2px solid var(--sand);
+    margin: 8px 0 40px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    margin-top: 60px;
+  }
+  footer span { color: var(--yellow); }
+
+  /* UTILITY */
+  .text-center { text-align: center; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .flex-gap { display: flex; gap: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">B1–B2 English Lesson</div>
+  <h1>Switch <span>off</span> after work</h1>
+  <p>Work-life balance, useful vocabulary, and healthy habits — all in one lesson.</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0% complete</div>
+</div>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════
+       PART 1 — PRESENTATION
+  ══════════════════════════════════ -->
+  <div class="section" id="sec-presentation">
+    <div class="section-label"><span class="dot"></span> Part 1 — Presentation</div>
+    <h2>Let's warm up 🌿</h2>
+    <p class="subtitle">Read the tips, explore the vocabulary, and make sure you understand the key ideas before practising.</p>
+
+    <!-- Warm-up -->
+    <div class="card card-yellow">
+      <strong>💭 Before you read — think about this:</strong>
+      <ul style="margin-top:10px; padding-left:20px; font-size:15px; line-height:2;">
+        <li>Do you find it easy or difficult to "switch off" after work or studying?</li>
+        <li>What do you usually do in the evening? Does it help you relax?</li>
+        <li>Have you ever worked late and regretted it the next day?</li>
+      </ul>
+      <p style="margin-top:12px; font-size:13px; color:var(--muted);">Think of your answers — you'll talk about them later! 🙂</p>
+    </div>
+
+    <!-- 6 Tips -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin:28px 0 16px;">The 6 tips — key ideas</h3>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-number">Tip 1</div>
+        <h3>Structure your working day</h3>
+        <p><span class="highlight">Tackle challenging tasks</span> early so you don't end up working late or worrying overnight.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-number">Tip 2</div>
+        <h3>Schedule wind-down time</h3>
+        <p>Make a to-do list for the next day before you log off — so it's off your mind in the evening.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-number">Tip 3</div>
+        <h3>Turn off notifications</h3>
+        <p>Work emails and apps can wait. Android even lets you create a <span class="highlight">work profile</span> to keep work apps separate.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-number">Tip 4</div>
+        <h3>Define home &amp; work spaces</h3>
+        <p>Especially for remote workers — put work stuff <span class="highlight">out of sight, out of mind</span> when the day is done.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-number">Tip 5</div>
+        <h3>Create a mini routine</h3>
+        <p>Change clothes, breathe, put on music — a small ritual helps you <span class="highlight">switch gears</span> into personal time.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-number">Tip 6</div>
+        <h3>Pencil in some fun</h3>
+        <p>Plan something to look forward to. It keeps you motivated and stops you from <span class="highlight">overthinking about work</span> when you're off the clock.</p>
+      </div>
+    </div>
+
+    <!-- Vocabulary -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin:36px 0 8px;">Key vocabulary 📚</h3>
+    <p class="vocab-hint">👆 Click each word to reveal its meaning.</p>
+    <div class="vocab-grid" id="vocab-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════
+       PART 2 — PRACTICE
+  ══════════════════════════════════ -->
+  <div class="section" id="sec-practice">
+    <div class="section-label"><span class="dot"></span> Part 2 — Practice</div>
+    <h2>Let's practise 🎯</h2>
+    <p class="subtitle">Games, quizzes, and activities to help you remember the vocabulary and ideas.</p>
+
+    <!-- ── 2A: READING QUIZ ── -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:8px;">2A — Reading comprehension quiz</h3>
+    <p class="subtitle">Check your understanding of the article. Choose the best answer.</p>
+
+    <div id="quiz-container">
+      <!-- Questions injected by JS -->
+    </div>
+    <div class="quiz-score" id="quiz-score">
+      <div>Your score:</div>
+      <div class="score-num" id="score-display">0/6</div>
+      <div id="score-msg" style="margin-top:6px;font-size:15px;"></div>
+    </div>
+    <div class="mt-16">
+      <button class="btn btn-green" id="check-quiz-btn" onclick="checkQuiz()">Check answers</button>
+      <button class="btn btn-outline" style="margin-left:10px;" onclick="resetQuiz()">Try again</button>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ── 2B: FILL IN THE BLANKS ── -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:8px;">2B — Fill in the gaps</h3>
+    <p class="subtitle">Use the words from the word bank to complete the sentences. Click a word to select it, then click the blank.</p>
+
+    <div class="word-bank" id="word-bank"></div>
+    <div id="fill-container"></div>
+    <div class="flex-gap mt-16">
+      <button class="btn btn-green" onclick="checkFill()">Check answers</button>
+      <button class="btn btn-outline" onclick="resetFill()">Reset</button>
+    </div>
+    <div id="fill-result" style="font-size:14px;font-weight:600;margin-top:12px;min-height:24px;"></div>
+
+    <hr class="divider">
+
+    <!-- ── 2C: MATCHING ── -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:8px;">2C — Match the expressions</h3>
+    <p class="subtitle">Click a phrase on the left, then click its meaning on the right. Match all 6 pairs!</p>
+
+    <div class="card">
+      <div class="matching-wrap">
+        <div class="match-col">
+          <h4>Phrases</h4>
+          <div id="match-left"></div>
+        </div>
+        <div class="match-col">
+          <h4>Meanings</h4>
+          <div id="match-right"></div>
+        </div>
+      </div>
+      <div class="match-result" id="match-result"></div>
+      <button class="btn btn-outline mt-16" onclick="resetMatching()">Reset matching</button>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ── 2D: MEMO GAME ── -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:8px;">2D — Memory game 🃏</h3>
+    <p class="subtitle">Find the matching pairs — each vocabulary word with its definition. Flip two cards at a time!</p>
+
+    <div class="memo-stats">
+      <div class="memo-stat"><div class="num" id="memo-moves">0</div><div class="lbl">moves</div></div>
+      <div class="memo-stat"><div class="num" id="memo-pairs">0</div><div class="lbl">pairs found</div></div>
+    </div>
+    <div class="memo-grid" id="memo-grid"></div>
+    <div id="memo-win">🎉 Well done! You matched all the pairs!</div>
+    <div class="text-center mt-16">
+      <button class="btn btn-outline" onclick="initMemo()">Shuffle & restart</button>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ── 2E: SPEAKING SPINNER ── -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:8px;">2E — Topic spinner 🎰</h3>
+    <p class="subtitle">Spin the wheel to get a random speaking topic. Answer in 1–2 minutes. You can spin as many times as you like!</p>
+
+    <div class="spinner-wrap">
+      <div class="wheel-container">
+        <div class="wheel-pointer"></div>
+        <canvas id="spinner-canvas" width="280" height="280"></canvas>
+      </div>
+      <button class="spin-btn" id="spinBtn" onclick="spinWheel()">Spin the wheel!</button>
+      <div id="spin-result">
+        <div class="prompt-label">Your topic:</div>
+        <div id="spin-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════
+       PART 3 — PRODUCTION
+  ══════════════════════════════════ -->
+  <div class="section" id="sec-production">
+    <div class="section-label"><span class="dot"></span> Part 3 — Production</div>
+    <h2>Let's speak &amp; write ✍️</h2>
+    <p class="subtitle">Time to use the language yourself. Express your own opinions and experiences.</p>
+
+    <!-- Speaking cards -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:16px;">3A — Speaking cards 💬</h3>
+    <p class="subtitle">Go through the cards and answer each question. Aim for 2–3 sentences per answer. Use the vocabulary from the lesson!</p>
+
+    <div class="speaking-deck" id="speaking-deck"></div>
+    <div class="speak-nav">
+      <button class="outline" onclick="moveSpeakCard(-1)">← Previous</button>
+      <span class="speak-counter" id="speak-counter">1 / 8</span>
+      <button onclick="moveSpeakCard(1)">Next →</button>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Writing -->
+    <h3 style="font-family:'DM Serif Display',serif; font-size:22px; margin-bottom:8px;">3B — Write your response ✍️</h3>
+    <p class="subtitle">Choose one task and write your response below.</p>
+
+    <div class="writing-prompt">
+      <h4>Option A — Personal reflection</h4>
+      <p>Write about your own after-work routine. What do you currently do? What tip from the article would help you the most? Why? <em>(aim for 80–120 words)</em></p>
+      <textarea id="write-a" placeholder="Start writing here..." oninput="countWords('write-a','wc-a')"></textarea>
+      <div class="word-count" id="wc-a">0 words</div>
+    </div>
+
+    <div class="writing-prompt">
+      <h4>Option B — Advice message</h4>
+      <p>A friend tells you: <em>"I never stop thinking about work in the evenings — I'm exhausted!"</em> Write them a short message (like a WhatsApp voice note transcript) with 3 pieces of advice. <em>(aim for 80–120 words)</em></p>
+      <textarea id="write-b" placeholder="Hey! I totally understand how you feel..." oninput="countWords('write-b','wc-b')"></textarea>
+      <div class="word-count" id="wc-b">0 words</div>
+    </div>
+
+    <div class="useful-lang">
+      <h5>💡 Useful language for your writing</h5>
+      <div class="lang-chips">
+        <span class="lang-chip">It's important to…</span>
+        <span class="lang-chip">One thing that helps me is…</span>
+        <span class="lang-chip">I find it hard to…</span>
+        <span class="lang-chip">It might be a good idea to…</span>
+        <span class="lang-chip">What works for me is…</span>
+        <span class="lang-chip">The tip I found most useful was…</span>
+        <span class="lang-chip">In my opinion…</span>
+        <span class="lang-chip">I used to… but now I…</span>
+        <span class="lang-chip">Have you tried …-ing?</span>
+        <span class="lang-chip">The key is to…</span>
+      </div>
+    </div>
+
+    <!-- Self-check -->
+    <div class="card card-green mt-24">
+      <strong>✅ Self-check before finishing:</strong>
+      <ul style="margin-top:10px; padding-left:20px; font-size:14px; line-height:2.2;">
+        <li>Did I use at least 3 vocabulary items from the lesson?</li>
+        <li>Did I give examples or reasons (not just opinions)?</li>
+        <li>Did I check my spelling and grammar?</li>
+        <li>Is my writing within the word count?</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>Lesson: <span>6 Tips to Switch Off After Work</span> · B1–B2 English · Good luck! 🌿</p>
+</footer>
+
+<!-- ══════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════ -->
+<script>
+// ── Progress tracking ──
+const sections = ['sec-presentation','sec-practice','sec-production'];
+let completedSections = 0;
+function updateProgress(n) {
+  completedSections = Math.max(completedSections, n);
+  const pct = Math.round((completedSections / 3) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '% complete';
+}
+
+// ── VOCABULARY DATA ──
+const vocabData = [
+  { word: 'to tackle', def: 'to deal with a difficult problem or task' },
+  { word: 'wind-down time', def: 'time to relax and slow down gradually' },
+  { word: 'to log off', def: 'to sign out / stop working on a computer' },
+  { word: 'notifications', def: 'alerts from apps or phone about new messages/activity' },
+  { word: 'to switch gears', def: 'to change from one activity/mode to another' },
+  { word: 'out of sight, out of mind', def: 'if you can\'t see something, you\'re less likely to think about it' },
+  { word: 'to boost your mood', def: 'to make yourself feel better / happier' },
+  { word: 'off the clock', def: 'not working; outside of working hours' },
+  { word: 'to pencil something in', def: 'to schedule something tentatively (not fixed)' },
+  { word: 'to overthink', def: 'to think about something too much, especially problems' },
+  { word: 'remote worker', def: 'someone who works from home, not in an office' },
+  { word: 'work-life balance', def: 'having a healthy division between your job and personal life' },
+];
+
+// Build vocab grid
+const vg = document.getElementById('vocab-grid');
+vocabData.forEach(v => {
+  const el = document.createElement('div');
+  el.className = 'vocab-item';
+  el.innerHTML = `<div class="word">${v.word}</div><div class="definition">${v.def}</div>`;
+  el.addEventListener('click', () => {
+    el.classList.toggle('revealed');
+    updateProgress(1);
+  });
+  vg.appendChild(el);
+});
+
+// ── QUIZ DATA ──
+const quizData = [
+  {
+    q: "What is the main advice in Tip 1?",
+    opts: [
+      "Do the easiest tasks first to build momentum.",
+      "Handle difficult tasks early to avoid working late.",
+      "Ask a colleague to help you with your tasks.",
+      "Write a to-do list at the start of the day."
+    ],
+    correct: 1
+  },
+  {
+    q: "According to Tip 2, what should you do before you log off?",
+    opts: [
+      "Check all your emails one final time.",
+      "Turn off your work notifications.",
+      "Make a to-do list for the next working day.",
+      "Have a short conversation with your manager."
+    ],
+    correct: 2
+  },
+  {
+    q: "What feature does the article mention that Android phones have?",
+    opts: [
+      "A focus mode that blocks all apps.",
+      "A 'work profile' to keep work apps separate.",
+      "A notification scheduler for after hours.",
+      "A built-in to-do list for work tasks."
+    ],
+    correct: 1
+  },
+  {
+    q: "Who does the article say Tip 4 is especially important for?",
+    opts: [
+      "People who work night shifts.",
+      "People who travel a lot for work.",
+      "Remote workers who work from home.",
+      "Managers and team leaders."
+    ],
+    correct: 2
+  },
+  {
+    q: "Which of these is NOT mentioned as part of a mini routine (Tip 5)?",
+    opts: [
+      "Changing clothes after work.",
+      "Taking five minutes to breathe.",
+      "Going for a long run.",
+      "Putting on a favourite playlist."
+    ],
+    correct: 2
+  },
+  {
+    q: "What is the purpose of 'pencilling in some fun' (Tip 6)?",
+    opts: [
+      "To help you be more productive at work.",
+      "To give you something to look forward to and stop overthinking.",
+      "To make sure you spend enough time with friends.",
+      "To improve your physical health and wellbeing."
+    ],
+    correct: 1
+  }
+];
+
+let quizAnswers = {};
+const qc = document.getElementById('quiz-container');
+quizData.forEach((q, qi) => {
+  const div = document.createElement('div');
+  div.className = 'quiz-q';
+  div.innerHTML = `<p>${qi+1}. ${q.q}</p>
+    <div class="options">
+      ${q.opts.map((o,oi)=>`<button class="option-btn" data-qi="${qi}" data-oi="${oi}" onclick="selectOpt(${qi},${oi})">${o}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qf-${qi}"></div>`;
+  qc.appendChild(div);
+});
+
+function selectOpt(qi, oi) {
+  const btns = document.querySelectorAll(`[data-qi="${qi}"]`);
+  btns.forEach(b => b.classList.remove('selected'));
+  btns[oi].style.fontWeight = '600';
+  quizAnswers[qi] = oi;
+  btns.forEach(b => { b.style.fontWeight = ''; });
+  btns[oi].style.fontWeight = '700';
+  updateProgress(2);
+}
+
+function checkQuiz() {
+  let score = 0;
+  quizData.forEach((q, qi) => {
+    const btns = document.querySelectorAll(`[data-qi="${qi}"]`);
+    const fb = document.getElementById(`qf-${qi}`);
+    btns.forEach(b => b.disabled = true);
+    if (quizAnswers[qi] === undefined) {
+      fb.textContent = '⚠️ Not answered';
+      fb.style.color = 'orange';
+      return;
+    }
+    if (quizAnswers[qi] === q.correct) {
+      btns[q.correct].classList.add('correct');
+      fb.textContent = '✅ Correct!';
+      fb.style.color = '#28a745';
+      score++;
+    } else {
+      btns[quizAnswers[qi]].classList.add('wrong');
+      btns[q.correct].classList.add('correct');
+      fb.textContent = '❌ Not quite — check the correct answer.';
+      fb.style.color = '#dc3545';
+    }
+  });
+  const sc = document.getElementById('quiz-score');
+  sc.style.display = 'block';
+  document.getElementById('score-display').textContent = `${score}/${quizData.length}`;
+  const msgs = ['Keep reading! Try again 💪','Getting there! Review the tips 📖','Good effort!','Well done! 🌿','Great score! 🎉','Perfect! Outstanding! ⭐'];
+  document.getElementById('score-msg').textContent = msgs[score] || '';
+}
+
+function resetQuiz() {
+  quizAnswers = {};
+  document.getElementById('quiz-score').style.display = 'none';
+  qc.innerHTML = '';
+  quizData.forEach((q, qi) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.innerHTML = `<p>${qi+1}. ${q.q}</p>
+      <div class="options">
+        ${q.opts.map((o,oi)=>`<button class="option-btn" data-qi="${qi}" data-oi="${oi}" onclick="selectOpt(${qi},${oi})">${o}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="qf-${qi}"></div>`;
+    qc.appendChild(div);
+  });
+}
+
+// ── FILL IN THE BLANKS ──
+const fillData = [
+  { sentence: 'I always try to {blank} the most difficult tasks early in the morning.', answer: 'tackle', display: 'tackle' },
+  { sentence: 'She needs some {blank} before bed — she watches TV or reads a book.', answer: 'wind-down time', display: 'wind-down time' },
+  { sentence: 'After work I put my laptop away — {blank}, so I stop thinking about emails.', answer: 'out of sight out of mind', display: 'out of sight, out of mind' },
+  { sentence: 'He is a {blank} — his office is the kitchen table.', answer: 'remote worker', display: 'remote worker' },
+  { sentence: 'Turn off your phone {blank} — there\'s no need to check work messages now.', answer: 'notifications', display: 'notifications' },
+  { sentence: 'I put on my favourite playlist to {blank} after a stressful day.', answer: 'boost my mood', display: 'boost my mood' },
+  { sentence: 'She tends to {blank} — she replays every conversation in her head.', answer: 'overthink', display: 'overthink' },
+];
+
+const bankWords = ['tackle','wind-down time','out of sight out of mind','remote worker','notifications','boost my mood','overthink'];
+let fillSelected = null;
+let fillInputs = {};
+
+function initFill() {
+  const wb = document.getElementById('word-bank');
+  wb.innerHTML = '';
+  bankWords.forEach(w => {
+    const el = document.createElement('span');
+    el.className = 'bank-word';
+    el.textContent = w;
+    el.dataset.word = w;
+    el.addEventListener('click', () => {
+      if(el.classList.contains('used')) return;
+      document.querySelectorAll('.bank-word').forEach(b=>b.style.outline='');
+      fillSelected = w;
+      el.style.outline = '3px solid var(--green)';
+    });
+    wb.appendChild(el);
+  });
+
+  const fc = document.getElementById('fill-container');
+  fc.innerHTML = '';
+  fillData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'fill-sentence';
+    const parts = item.sentence.split('{blank}');
+    div.innerHTML = `${parts[0]}<input type="text" id="fill-${i}" placeholder="…" data-idx="${i}" autocomplete="off">${parts[1]}`;
+    fc.appendChild(div);
+    const inp = div.querySelector('input');
+    inp.addEventListener('click', () => {
+      if(fillSelected) {
+        inp.value = fillSelected;
+        // mark bank word used
+        document.querySelectorAll('.bank-word').forEach(b=>{
+          if(b.dataset.word === fillSelected) {
+            b.classList.add('used');
+            b.style.outline='';
+          }
+        });
+        fillSelected = null;
+        document.querySelectorAll('.bank-word').forEach(b=>b.style.outline='');
+      }
+    });
+  });
+}
+initFill();
+
+function checkFill() {
+  let correct = 0;
+  fillData.forEach((item, i) => {
+    const inp = document.getElementById(`fill-${i}`);
+    const val = inp.value.trim().toLowerCase().replace(/,/g,'');
+    const ans = item.answer.toLowerCase().replace(/,/g,'');
+    inp.classList.remove('correct-input','wrong-input');
+    if(val === ans) {
+      inp.classList.add('correct-input');
+      correct++;
+    } else {
+      inp.classList.add('wrong-input');
+    }
+  });
+  document.getElementById('fill-result').textContent = `✅ ${correct} / ${fillData.length} correct`;
+  document.getElementById('fill-result').style.color = correct === fillData.length ? 'var(--green)' : '#dc3545';
+}
+
+function resetFill() {
+  fillSelected = null;
+  document.getElementById('fill-result').textContent = '';
+  initFill();
+}
+
+// ── MATCHING ──
+const matchPairs = [
+  { phrase: 'to switch gears', meaning: 'to change from work mode to personal mode' },
+  { phrase: 'off the clock', meaning: 'not working; outside working hours' },
+  { phrase: 'to pencil something in', meaning: 'to schedule something tentatively' },
+  { phrase: 'to log off', meaning: 'to sign out and stop working' },
+  { phrase: 'work-life balance', meaning: 'a healthy split between work and personal time' },
+  { phrase: 'to boost your mood', meaning: 'to make yourself feel happier' },
+];
+
+let matchSelectedLeft = null;
+let matchSelectedRight = null;
+let matchedCount = 0;
+
+function initMatching() {
+  matchSelectedLeft = null;
+  matchSelectedRight = null;
+  matchedCount = 0;
+  document.getElementById('match-result').textContent = '';
+
+  const leftData = [...matchPairs].sort(() => Math.random()-0.5);
+  const rightData = [...matchPairs].sort(() => Math.random()-0.5);
+
+  const ml = document.getElementById('match-left');
+  const mr = document.getElementById('match-right');
+  ml.innerHTML = '';
+  mr.innerHTML = '';
+
+  leftData.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = p.phrase;
+    el.dataset.key = p.phrase;
+    el.addEventListener('click', () => selectMatchLeft(el));
+    ml.appendChild(el);
+  });
+
+  rightData.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'match-item';
+    el.textContent = p.meaning;
+    el.dataset.key = p.phrase;
+    el.addEventListener('click', () => selectMatchRight(el));
+    mr.appendChild(el);
+  });
+}
+
+function selectMatchLeft(el) {
+  if(el.classList.contains('matched')) return;
+  document.querySelectorAll('#match-left .match-item').forEach(e=>e.classList.remove('selected'));
+  matchSelectedLeft = el;
+  el.classList.add('selected');
+  tryMatch();
+}
+function selectMatchRight(el) {
+  if(el.classList.contains('matched')) return;
+  document.querySelectorAll('#match-right .match-item').forEach(e=>e.classList.remove('selected'));
+  matchSelectedRight = el;
+  el.classList.add('selected');
+  tryMatch();
+}
+function tryMatch() {
+  if(!matchSelectedLeft || !matchSelectedRight) return;
+  if(matchSelectedLeft.dataset.key === matchSelectedRight.dataset.key) {
+    matchSelectedLeft.classList.add('matched');
+    matchSelectedRight.classList.add('matched');
+    matchSelectedLeft.classList.remove('selected');
+    matchSelectedRight.classList.remove('selected');
+    matchedCount++;
+    if(matchedCount === matchPairs.length) {
+      document.getElementById('match-result').textContent = '🎉 Perfect! All pairs matched!';
+      updateProgress(2);
+    }
+  } else {
+    matchSelectedLeft.classList.add('wrong-flash');
+    matchSelectedRight.classList.add('wrong-flash');
+    const l = matchSelectedLeft, r = matchSelectedRight;
+    setTimeout(()=>{
+      l.classList.remove('wrong-flash','selected');
+      r.classList.remove('wrong-flash','selected');
+    },400);
+  }
+  matchSelectedLeft = null;
+  matchSelectedRight = null;
+}
+
+function resetMatching() { initMatching(); }
+initMatching();
+
+// ── MEMO GAME ──
+const memoPairs = [
+  { word: 'tackle', def: 'deal with a task' },
+  { word: 'log off', def: 'stop working / sign out' },
+  { word: 'overthink', def: 'think too much about problems' },
+  { word: 'off the clock', def: 'outside working hours' },
+  { word: 'remote worker', def: 'works from home' },
+  { word: 'boost mood', def: 'feel happier' },
+  { word: 'pencil in', def: 'schedule tentatively' },
+  { word: 'wind down', def: 'relax gradually' },
+];
+
+let memoFlipped = [];
+let memoMatched = 0;
+let memoMoves = 0;
+let memoBusy = false;
+
+function initMemo() {
+  memoFlipped = [];
+  memoMatched = 0;
+  memoMoves = 0;
+  memoBusy = false;
+  document.getElementById('memo-moves').textContent = '0';
+  document.getElementById('memo-pairs').textContent = '0';
+  document.getElementById('memo-win').style.display = 'none';
+
+  const grid = document.getElementById('memo-grid');
+  grid.innerHTML = '';
+
+  let cards = [];
+  memoPairs.forEach((p,i) => {
+    cards.push({ id: i, type:'word', content: p.word, pairId: i });
+    cards.push({ id: i+100, type:'def', content: p.def, pairId: i });
+  });
+  cards.sort(() => Math.random()-0.5);
+
+  cards.forEach(c => {
+    const mc = document.createElement('div');
+    mc.className = 'memo-card';
+    mc.dataset.pairId = c.pairId;
+    mc.dataset.type = c.type;
+    mc.dataset.cardId = c.id;
+    mc.innerHTML = `<div class="memo-inner">
+      <div class="memo-front">🃏</div>
+      <div class="memo-back">${c.content}</div>
+    </div>`;
+    mc.addEventListener('click', () => flipMemo(mc));
+    grid.appendChild(mc);
+  });
+}
+
+function flipMemo(card) {
+  if(memoBusy) return;
+  if(card.classList.contains('flipped') || card.classList.contains('matched')) return;
+  card.classList.add('flipped');
+  memoFlipped.push(card);
+
+  if(memoFlipped.length === 2) {
+    memoMoves++;
+    document.getElementById('memo-moves').textContent = memoMoves;
+    memoBusy = true;
+    const [a,b] = memoFlipped;
+    if(a.dataset.pairId === b.dataset.pairId && a.dataset.type !== b.dataset.type) {
+      a.classList.add('matched');
+      b.classList.add('matched');
+      memoMatched++;
+      document.getElementById('memo-pairs').textContent = memoMatched;
+      memoFlipped = [];
+      memoBusy = false;
+      if(memoMatched === memoPairs.length) {
+        document.getElementById('memo-win').style.display = 'block';
+      }
+    } else {
+      setTimeout(()=>{
+        a.classList.remove('flipped');
+        b.classList.remove('flipped');
+        memoFlipped = [];
+        memoBusy = false;
+      }, 900);
+    }
+  }
+}
+initMemo();
+
+// ── SPINNER ──
+const spinTopics = [
+  'Your evening routine',
+  'Work-life balance in your country',
+  'Notifications — friend or enemy?',
+  'Remote work pros & cons',
+  'How do you "switch gears"?',
+  'Planning fun activities',
+  'Overthinking — how to stop?',
+  'Your ideal work schedule',
+];
+
+const colors = ['#3D6B4F','#E8C547','#5A8A72','#D4A843','#2e5039','#C9A840','#4d7a62','#b8972e'];
+const canvas = document.getElementById('spinner-canvas');
+const ctx = canvas.getContext('2d');
+let spinAngle = 0;
+let spinning = false;
+
+function drawWheel(angle) {
+  const cx = 140, cy = 140, r = 130;
+  ctx.clearRect(0,0,280,280);
+  const n = spinTopics.length;
+  const arc = (Math.PI*2)/n;
+  spinTopics.forEach((t,i) => {
+    const start = angle + i*arc;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,start+arc);
+    ctx.closePath();
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(start + arc/2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 11px Inter, sans-serif';
+    const words = t.split(' ');
+    if(words.length <= 2) {
+      ctx.fillText(t, r-10, 4);
+    } else {
+      const mid = Math.ceil(words.length/2);
+      ctx.fillText(words.slice(0,mid).join(' '), r-10, -4);
+      ctx.fillText(words.slice(mid).join(' '), r-10, 10);
+    }
+    ctx.restore();
+  });
+  // center circle
+  ctx.beginPath();
+  ctx.arc(cx,cy,16,0,Math.PI*2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+}
+drawWheel(0);
+
+function spinWheel() {
+  if(spinning) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+  document.getElementById('spin-result').style.display = 'none';
+
+  const extraSpins = (5 + Math.random()*4) * Math.PI * 2;
+  const targetAngle = spinAngle + extraSpins;
+  const duration = 3000;
+  const start = performance.now();
+  const startAngle = spinAngle;
+
+  function animate(now) {
+    const elapsed = now - start;
+    const t = Math.min(elapsed/duration, 1);
+    const ease = 1 - Math.pow(1-t, 3);
+    spinAngle = startAngle + (targetAngle-startAngle)*ease;
+    drawWheel(spinAngle);
+    if(t < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      spinning = false;
+      document.getElementById('spinBtn').disabled = false;
+      // determine winner
+      const n = spinTopics.length;
+      const arc = (Math.PI*2)/n;
+      let a = ((-spinAngle) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
+      const idx = Math.floor(a/arc) % n;
+      const topic = spinTopics[idx];
+      document.getElementById('spin-text').textContent = '🗣️ ' + topic;
+      document.getElementById('spin-result').style.display = 'block';
+      updateProgress(2);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+// ── SPEAKING CARDS ──
+const speakCards = [
+  { q: 'Do you find it easy to stop thinking about work or studies after hours? Why / why not?', tip: 'Use: "I find it hard to… / What tends to happen is…"' },
+  { q: 'Which of the 6 tips from the article do you already follow? Give an example.', tip: 'Use: "I usually… / One thing I already do is…"' },
+  { q: 'Which tip would be the most useful for you personally? Why?', tip: 'Use: "I think tip number… would help me because…"' },
+  { q: 'Do you have a wind-down routine? Describe what you do in the evening after work/study.', tip: 'Use: "First I…, then I…, and finally I…"' },
+  { q: 'Do you think people work too much in today\'s world? What could employers do to help?', tip: 'Use: "In my opinion… / I believe that…"' },
+  { q: 'What\'s something fun you like to pencil in to look forward to? How does it make you feel?', tip: 'Use: "I really enjoy…-ing / It makes me feel…"' },
+  { q: 'Are you someone who tends to overthink? Give an example of when you did this.', tip: 'Use: "I remember once when… / I kept thinking about…"' },
+  { q: 'If a friend asked you for advice on work-life balance, what would you tell them?', tip: 'Use: "I would suggest… / One important thing is to… / Have you tried…-ing?"' },
+];
+
+let speakIndex = 0;
+const deck = document.getElementById('speaking-deck');
+
+function buildSpeakCards() {
+  deck.innerHTML = '';
+  speakCards.forEach((c, i) => {
+    const el = document.createElement('div');
+    el.className = 'speak-card' + (i===0?' active':'');
+    el.id = `speak-${i}`;
+    el.innerHTML = `<div class="card-num">Card ${i+1} of ${speakCards.length}</div>
+      <div class="card-q">${c.q}</div>
+      <div class="card-tip">💡 ${c.tip}</div>`;
+    deck.appendChild(el);
+  });
+}
+buildSpeakCards();
+
+function moveSpeakCard(dir) {
+  document.getElementById(`speak-${speakIndex}`).classList.remove('active');
+  speakIndex = (speakIndex + dir + speakCards.length) % speakCards.length;
+  document.getElementById(`speak-${speakIndex}`).classList.add('active');
+  document.getElementById('speak-counter').textContent = `${speakIndex+1} / ${speakCards.length}`;
+  updateProgress(3);
+}
+
+// ── WORD COUNT ──
+function countWords(id, counterId) {
+  const val = document.getElementById(id).value.trim();
+  const count = val === '' ? 0 : val.split(/\s+/).length;
+  document.getElementById(counterId).textContent = count + ' words';
+  updateProgress(3);
+}
+</script>
+</body>
+</html>
