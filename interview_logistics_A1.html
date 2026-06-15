@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Interview Preparation - Logistics</title>
+    <style>
+        :root {
+            --primary: #1E3A8A; /* Dark blue for corporate feel */
+            --secondary: #3B82F6;
+            --accent: #F59E0B;
+            --bg: #F8FAFC;
+            --text: #1E293B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 { color: var(--primary); text-align: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
+        h2 { color: var(--secondary); margin-top: 40px; font-size: 1.5em; border-left: 4px solid var(--accent); padding-left: 10px;}
+        .section { margin-bottom: 50px; }
+        
+        /* Presentation Area */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .vocab-card {
+            background: #EFF6FF;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+        .vocab-card strong { color: var(--primary); font-size: 1.1em;}
+        ul { margin-top: 5px; padding-left: 20px; }
+        
+        /* Matching Game */
+        .matching-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .match-col { flex: 1; display: flex; flex-direction: column; gap: 10px;}
+        .match-item {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        .match-item.selected { border-color: var(--accent); background: #FFFBEB;}
+        .match-item.matched { border-color: var(--success); background: #ECFDF5; color: #64748B; cursor: default;}
+        
+        /* Quiz */
+        .quiz-question { margin-bottom: 20px; background: #FAFAFA; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;}
+        .quiz-options label { display: block; margin: 8px 0; cursor: pointer; padding: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 5px;}
+        .quiz-options label:hover { background: #f1f5f9; }
+        button {
+            background: var(--secondary); color: white; border: none;
+            padding: 12px 24px; border-radius: 6px; font-size: 1.1em;
+            cursor: pointer; transition: 0.3s; margin-top: 10px; font-weight: bold;
+        }
+        button:hover { background: var(--primary); }
+        
+        /* Spinner */
+        .spinner-container { text-align: center; margin: 20px 0; }
+        .spinner-result {
+            font-size: 1.5em; font-weight: bold; color: var(--primary);
+            min-height: 80px; margin: 20px 0; padding: 20px;
+            border: 3px dashed var(--secondary); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: #EFF6FF;
+        }
+        
+        /* Speaking Cards */
+        .speaking-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .speaking-card {
+            perspective: 1000px;
+            height: 220px;
+        }
+        .card-inner {
+            width: 100%; height: 100%; transition: transform 0.6s;
+            transform-style: preserve-3d; cursor: pointer;
+            position: relative;
+        }
+        .speaking-card:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            width: 100%; height: 100%; position: absolute;
+            backface-visibility: hidden; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            padding: 20px; box-sizing: border-box; text-align: center;
+        }
+        .card-front { background: var(--primary); color: white; font-size: 1.3em; font-weight: bold;}
+        .card-front span { font-size: 2em; margin-bottom: 10px; }
+        .card-back { background: var(--accent); color: var(--text); transform: rotateY(180deg); font-size: 1.1em; font-weight: 500;}
+
+        @media(max-width: 600px) {
+            .matching-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💼 My Job Interview</h1>
+    <p style="text-align:center; font-size: 1.1em; color: #475569;">Welcome! Today we prepare for your job interview. Learn the words, make sentences, and practice speaking.</p>
+
+    <!-- PRESENTATION -->
+    <div class="section" id="presentation">
+        <h2>1. Vocabulary: Jobs & Places</h2>
+        <p>Read the words. Do you know them?</p>
+        
+        <div class="vocab-grid">
+            <div class="vocab-card">
+                <strong>Places of Work 🏢</strong>
+                <ul>
+                    <li>a warehouse (склад)</li>
+                    <li>an office</li>
+                    <li>a logistics company</li>
+                    <li>a transport company</li>
+                    <li>a distribution center</li>
+                </ul>
+            </div>
+            <div class="vocab-card">
+                <strong>People (Jobs) 👨‍💼</strong>
+                <ul>
+                    <li>a truck driver</li>
+                    <li>a delivery driver</li>
+                    <li>a stock manager</li>
+                    <li>a logistics coordinator</li>
+                </ul>
+            </div>
+            <div class="vocab-card">
+                <strong>Past Experience (Past Simple) ⏱️</strong>
+                <ul>
+                    <li>I answer<b>ed</b> emails and phone calls.</li>
+                    <li>I talk<b>ed</b> to customers.</li>
+                    <li>I help<b>ed</b> clients.</li>
+                    <li>I work<b>ed</b> with documents.</li>
+                </ul>
+            </div>
+            <div class="vocab-card">
+                <strong>Why change jobs? 🤔</strong>
+                <ul>
+                    <li>I want<b>ed</b> a better job.</li>
+                    <li>I want<b>ed</b> new experience.</li>
+                    <li>I want<b>ed</b> more money.</li>
+                    <li>I mov<b>ed</b> to another city.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 1: MATCHING GAME (WORDS) -->
+    <div class="section">
+        <h2>2. Practice: Word Match</h2>
+        <p>Match the sentence with the correct job or place. Click a box on the left, then click its partner on the right.</p>
+        <div class="matching-container">
+            <div class="match-col" id="matchLeft1"></div>
+            <div class="match-col" id="matchRight1"></div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 2: QUIZ -->
+    <div class="section">
+        <h2>3. Practice: Grammar & Chunks Quiz</h2>
+        <p>Choose the correct word to make a good sentence.</p>
+        <div id="quizContainer"></div>
+        <button onclick="checkQuiz()">Check Answers</button>
+        <p id="quizResult" style="font-weight: bold; margin-top: 10px; font-size: 1.2em;"></p>
+    </div>
+
+    <!-- PRACTICE 3: MATCHING GAME (QUESTIONS & ANSWERS) -->
+    <div class="section">
+        <h2>4. Practice: HR Questions Match</h2>
+        <p>Match the HR Manager's question with your answer.</p>
+        <div class="matching-container">
+            <div class="match-col" id="matchLeft2"></div>
+            <div class="match-col" id="matchRight2"></div>
+        </div>
+    </div>
+
+    <!-- PRODUCTION 1: SPINNER -->
+    <div class="section">
+        <h2>5. Speaking: The Interview Spinner</h2>
+        <p>Click "Spin". The HR Manager asks you a question. Answer the question out loud!</p>
+        <div class="spinner-container">
+            <div class="spinner-result" id="spinnerBox">Hello! Are you ready? 🎰</div>
+            <button onclick="spinWheel()">Ask me a question!</button>
+        </div>
+    </div>
+
+    <!-- PRODUCTION 2: SPEAKING CARDS -->
+    <div class="section">
+        <h2>6. Roleplay: HR Interview Simulation</h2>
+        <p>Hover your mouse over the cards (or tap them). Read the task and speak out loud. Try to speak for 30-60 seconds.</p>
+        <div class="speaking-cards">
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>👋</span>Card 1: <br>Introduction</div>
+                    <div class="card-back">"Tell me about yourself."<br><br>Say your name, where you are from, and your current job.</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>📋</span>Card 2: <br>Past Experience</div>
+                    <div class="card-back">"What were your main responsibilities?"<br><br>Name 3 things you did every day in your last job (use Past Simple!).</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>🚀</span>Card 3: <br>Motivation</div>
+                    <div class="card-back">"Why did you leave your last job?"<br><br>Give 1 or 2 good reasons. Tell them what you want now.</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>💪</span>Card 4: <br>Strengths</div>
+                    <div class="card-back">"What are your strengths?"<br><br>Tell them what you are good at (e.g. communication, time management, working with people).</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+
+    function createMatching(data, leftContainerId, rightContainerId) {
+        const leftCol = document.getElementById(leftContainerId);
+        const rightCol = document.getElementById(rightContainerId);
+        
+        let leftItems = data.map(d => ({id: d.id, text: d.left}));
+        let rightItems = data.map(d => ({id: d.id, text: d.right}));
+        
+        shuffle(leftItems);
+        shuffle(rightItems);
+
+        let selectedLeft = null;
+        let selectedRight = null;
+
+        function checkMatch() {
+            if (selectedLeft.dataset.id === selectedRight.dataset.id) {
+                selectedLeft.classList.remove('selected');
+                selectedRight.classList.remove('selected');
+                selectedLeft.classList.add('matched');
+                selectedRight.classList.add('matched');
+            } else {
+                let tempL = selectedLeft;
+                let tempR = selectedRight;
+                setTimeout(() => {
+                    tempL.classList.remove('selected');
+                    tempR.classList.remove('selected');
+                }, 500);
+            }
+            selectedLeft = null;
+            selectedRight = null;
+        }
+
+        function selectItem(el, side) {
+            if(el.classList.contains('matched')) return;
+
+            if (side === 'left') {
+                leftCol.querySelectorAll('.match-item').forEach(i => i.classList.remove('selected'));
+                el.classList.add('selected');
+                selectedLeft = el;
+            } else {
+                rightCol.querySelectorAll('.match-item').forEach(i => i.classList.remove('selected'));
+                el.classList.add('selected');
+                selectedRight = el;
+            }
+
+            if (selectedLeft && selectedRight) {
+                checkMatch();
+            }
+        }
+
+        leftItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectItem(div, 'left');
+            leftCol.appendChild(div);
+        });
+
+        rightItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectItem(div, 'right');
+            rightCol.appendChild(div);
+        });
+    }
+
+    // Match 1 Data
+    const match1Data = [
+        { id: '1', left: "This person drives a truck.", right: "Truck driver" },
+        { id: '2', left: "This person manages a warehouse.", right: "Stock manager" },
+        { id: '3', left: "A place where you keep boxes and goods.", right: "Warehouse" },
+        { id: '4', left: "This person plans deliveries.", right: "Logistics coordinator" },
+        { id: '5', left: "People who buy your service.", right: "Customers" }
+    ];
+    createMatching(match1Data, 'matchLeft1', 'matchRight1');
+
+    // Match 2 Data
+    const match2Data = [
+        { id: '1', left: "Tell me about yourself.", right: "I am from Spain and I work in logistics." },
+        { id: '2', left: "What were your tasks?", right: "I answered emails and worked with documents." },
+        { id: '3', left: "Why did you leave your job?", right: "I wanted a better job and new experience." },
+        { id: '4', left: "Do you prefer working in a team?", right: "Yes, I enjoy working with people." },
+        { id: '5', left: "What are your strengths?", right: "I have good communication and computer skills." }
+    ];
+    createMatching(match2Data, 'matchLeft2', 'matchRight2');
+
+    // --- QUIZ LOGIC ---
+    const quizData = [
+        { q: "I work ______ a logistics company.", options: ["in", "for"], answer: 1 },
+        { q: "Every day, I talk ______ customers.", options: ["to", "with"], answer: 0 },
+        { q: "In my last job, I ______ clients.", options: ["help", "helped"], answer: 1 },
+        { q: "I ______ communication skills.", options: ["learn", "learned"], answer: 1 },
+        { q: "Why did you leave? I ______ a better job.", options: ["wanted", "want"], answer: 0 },
+        { q: "I ______ working with people.", options: ["enjoy", "enjoyed"], answer: 0 }
+    ];
+
+    function initQuiz() {
+        const container = document.getElementById('quizContainer');
+        quizData.forEach((q, index) => {
+            let div = document.createElement('div');
+            div.className = 'quiz-question';
+            div.innerHTML = `<strong>${index + 1}. ${q.q}</strong><div class="quiz-options">
+                <label><input type="radio" name="q${index}" value="0"> ${q.options[0]}</label>
+                <label><input type="radio" name="q${index}" value="1"> ${q.options[1]}</label>
+            </div>`;
+            container.appendChild(div);
+        });
+    }
+
+    function checkQuiz() {
+        let score = 0;
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const questionDiv = document.querySelectorAll('.quiz-question')[index];
+            if (selected && parseInt(selected.value) === q.answer) {
+                score++;
+                questionDiv.style.borderLeft = "4px solid var(--success)";
+            } else {
+                questionDiv.style.borderLeft = "4px solid var(--danger)";
+            }
+        });
+        document.getElementById('quizResult').innerText = `You got ${score} out of ${quizData.length} correct!`;
+        document.getElementById('quizResult').style.color = score === quizData.length ? "var(--success)" : "var(--primary)";
+    }
+
+    initQuiz();
+
+    // --- SPINNER LOGIC ---
+    const questions = [
+        "Tell me about yourself.",
+        "Where do you live?",
+        "Can you describe your family?",
+        "What are your hobbies?",
+        "What is your current job?",
+        "What were your main responsibilities?",
+        "Why did you leave your last job?",
+        "What motivates you at work?",
+        "What are your strengths?",
+        "Do you prefer working independently or in a team?"
+    ];
+
+    function spinWheel() {
+        const box = document.getElementById('spinnerBox');
+        let counter = 0;
+        box.style.borderColor = "var(--secondary)";
+        
+        let interval = setInterval(() => {
+            box.innerText = questions[Math.floor(Math.random() * questions.length)];
+            counter++;
+            if (counter > 20) {
+                clearInterval(interval);
+                box.innerText = questions[Math.floor(Math.random() * questions.length)];
+                box.style.borderColor = "var(--success)";
+                box.style.transform = "scale(1.02)";
+                setTimeout(() => box.style.transform = "scale(1)", 200);
+            }
+        }, 50);
+    }
+
+</script>
+</body>
+</html>
