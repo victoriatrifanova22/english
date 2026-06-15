@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeling Unwell - English Practice</title>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #F39C12;
+            --bg: #F9F9FB;
+            --text: #333;
+            --success: #2ECC71;
+            --danger: #E74C3C;
+            --white: #fff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 { color: var(--primary); text-align: center; border-bottom: 2px solid #eee; padding-bottom: 10px;}
+        h2 { color: var(--secondary); margin-top: 40px;}
+        .section { margin-bottom: 50px; }
+        
+        /* Presentation Area */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .vocab-card {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        .vocab-card strong { color: var(--primary); font-size: 1.1em;}
+        
+        /* Memory Game */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .memory-card {
+            background: var(--primary);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            color: transparent;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            transition: all 0.3s;
+            user-select: none;
+        }
+        .memory-card.flipped {
+            background: var(--white);
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+        .memory-card.matched {
+            background: var(--success);
+            color: var(--white);
+            cursor: default;
+        }
+        
+        /* Matching Game */
+        .matching-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .match-col { flex: 1; display: flex; flex-direction: column; gap: 10px;}
+        .match-item {
+            background: #eee;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .match-item.selected { border-color: var(--secondary); background: #fff3e0;}
+        .match-item.matched { border-color: var(--success); background: #e8f8f5; color: #888; cursor: default;}
+        
+        /* Quiz */
+        .quiz-question { margin-bottom: 20px; background: #fafafa; padding: 15px; border-radius: 8px;}
+        .quiz-options label { display: block; margin: 8px 0; cursor: pointer; }
+        button {
+            background: var(--primary); color: white; border: none;
+            padding: 12px 24px; border-radius: 6px; font-size: 1em;
+            cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        button:hover { background: #357abd; }
+        
+        /* Spinner */
+        .spinner-container { text-align: center; margin: 20px 0; }
+        .spinner-result {
+            font-size: 2em; font-weight: bold; color: var(--secondary);
+            min-height: 60px; margin: 20px 0; padding: 20px;
+            border: 3px dashed #ccc; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        /* Speaking Cards */
+        .speaking-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .speaking-card {
+            perspective: 1000px;
+            height: 200px;
+        }
+        .card-inner {
+            width: 100%; height: 100%; transition: transform 0.6s;
+            transform-style: preserve-3d; cursor: pointer;
+            position: relative;
+        }
+        .speaking-card:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            width: 100%; height: 100%; position: absolute;
+            backface-visibility: hidden; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px; box-sizing: border-box; text-align: center;
+        }
+        .card-front { background: var(--primary); color: white; font-size: 1.5em; font-weight: bold;}
+        .card-back { background: var(--secondary); color: white; transform: rotateY(180deg); font-size: 1.1em;}
+
+        @media(max-width: 600px) {
+            .memory-game { grid-template-columns: repeat(2, 1fr); }
+            .matching-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🩺 Feeling Under the Weather</h1>
+    <p style="text-align:center; font-size: 1.1em;">Welcome to your interactive English lesson! Today we are learning how to talk about health problems and give advice.</p>
+
+    <!-- PRESENTATION -->
+    <div class="section" id="presentation">
+        <h2>1. Presentation: Useful Vocabulary & Phrases</h2>
+        <p>Read the phrases below. Make sure you understand them before playing the games!</p>
+        
+        <div class="vocab-grid">
+            <div class="vocab-card">
+                <strong>Asking about health:</strong><br>
+                • What's wrong?<br>
+                • What's the problem?<br>
+                • Are you OK?<br>
+                • How are you today?
+            </div>
+            <div class="vocab-card">
+                <strong>Saying you are not well:</strong><br>
+                • I don't feel well.<br>
+                • I feel terrible.<br>
+                • I've got a headache. (or a cold, a stomachache, a toothache, backache)<br>
+                • My leg/arm hurts.<br>
+                • My eyes hurt.
+            </div>
+            <div class="vocab-card">
+                <strong>Answering & Giving Advice:</strong><br>
+                • Oh no! Poor you.<br>
+                • I'm so sorry.<br>
+                • Get well soon!<br>
+                • It's a good idea to... (stay in bed / go to a doctor / take aspirin).
+            </div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 1: MEMORY GAME -->
+    <div class="section">
+        <h2>2. Practice: Memory Game</h2>
+        <p>Find the matching pairs! Match the health problem with the correct emoji.</p>
+        <div class="memory-game" id="memoryGame"></div>
+    </div>
+
+    <!-- PRACTICE 2: MATCHING GAME -->
+    <div class="section">
+        <h2>3. Practice: Phrase Matching</h2>
+        <p>Match the sentence on the left with the correct response on the right. Click a grey box, then click its partner.</p>
+        <div class="matching-container">
+            <div class="match-col" id="matchLeft"></div>
+            <div class="match-col" id="matchRight"></div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 3: QUIZ -->
+    <div class="section">
+        <h2>4. Practice: Grammar & Vocabulary Quiz</h2>
+        <p>Choose the correct alternative to complete the sentences.</p>
+        <div id="quizContainer"></div>
+        <button onclick="checkQuiz()">Check Answers</button>
+        <p id="quizResult" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+
+    <!-- PRODUCTION 1: SPINNER -->
+    <div class="section">
+        <h2>5. Production: The Excuse Spinner</h2>
+        <p>Imagine you have plans with your teacher or friend, but you can't go. Click "Spin" to find out what your problem is. Then, practice saying the excuse out loud!</p>
+        <div class="spinner-container">
+            <div class="spinner-result" id="spinnerBox">What's wrong? 🎰</div>
+            <button onclick="spinWheel()">Spin the Wheel!</button>
+        </div>
+    </div>
+
+    <!-- PRODUCTION 2: SPEAKING CARDS -->
+    <div class="section">
+        <h2>6. Production: Speaking Roleplay Cards</h2>
+        <p>Hover over (or tap) the cards to reveal a situation. Imagine you are in this situation. What do you say? Practice out loud!</p>
+        <div class="speaking-cards">
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 1</div>
+                    <div class="card-back">You are at work. Your back hurts a lot. Tell your boss you need to go home.</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 2</div>
+                    <div class="card-back">Your friend calls you to go to the cinema. You have a terrible toothache. What do you say?</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 3</div>
+                    <div class="card-back">Your cat 🐱 looks sick and you think it has a stomachache. Call the vet (animal doctor) and explain the problem.</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 4</div>
+                    <div class="card-back">Your partner says: "I don't feel well. I've got a bad cold." Give them sympathy and some advice.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- MEMORY GAME LOGIC ---
+    const memoryItems = [
+        { id: 1, text: 'a headache' }, { id: 1, text: '🤕' },
+        { id: 2, text: 'a toothache' }, { id: 2, text: '🦷' },
+        { id: 3, text: 'a cold' }, { id: 3, text: '🤧' },
+        { id: 4, text: 'a stomachache' }, { id: 4, text: '🤢' },
+        { id: 5, text: 'an earache' }, { id: 5, text: '👂⚡' },
+        { id: 6, text: 'backache' }, { id: 6, text: '🔙⚡' }
+    ];
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+
+    function createMemoryGame() {
+        const board = document.getElementById('memoryGame');
+        shuffle(memoryItems);
+        memoryItems.forEach(item => {
+            const card = document.createElement('div');
+            card.classList.add('memory-card');
+            card.dataset.id = item.id;
+            card.innerHTML = `<span>${item.text}</span>`;
+            card.querySelector('span').style.opacity = 0; // Hide text initially
+            card.addEventListener('click', flipCard);
+            board.appendChild(card);
+        });
+    }
+
+    function flipCard() {
+        if (lockBoard) return;
+        if (this === firstCard) return;
+
+        this.classList.add('flipped');
+        this.querySelector('span').style.opacity = 1;
+
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+            return;
+        }
+
+        secondCard = this;
+        checkForMatch();
+    }
+
+    function checkForMatch() {
+        let isMatch = firstCard.dataset.id === secondCard.dataset.id;
+        isMatch ? disableCards() : unflipCards();
+    }
+
+    function disableCards() {
+        firstCard.classList.add('matched');
+        secondCard.classList.add('matched');
+        resetBoard();
+    }
+
+    function unflipCards() {
+        lockBoard = true;
+        setTimeout(() => {
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            firstCard.querySelector('span').style.opacity = 0;
+            secondCard.querySelector('span').style.opacity = 0;
+            resetBoard();
+        }, 1000);
+    }
+
+    function resetBoard() {
+        [hasFlippedCard, lockBoard] = [false, false];
+        [firstCard, secondCard] = [null, null];
+    }
+
+    createMemoryGame();
+
+    // --- MATCHING GAME LOGIC ---
+    const matchData = [
+        { id: 'm1', left: "Are you OK?", right: "No, I don't feel well." },
+        { id: 'm2', left: "What's wrong?", right: "I've got a bad headache." },
+        { id: 'm3', left: "I feel terrible.", right: "Oh, poor you." },
+        { id: 'm4', left: "My foot hurts.", right: "It's a good idea to put something cold on it." },
+        { id: 'm5', left: "I've got a cold.", right: "Stay in bed and drink hot tea." }
+    ];
+    
+    let selectedLeft = null;
+    let selectedRight = null;
+
+    function initMatching() {
+        const leftCol = document.getElementById('matchLeft');
+        const rightCol = document.getElementById('matchRight');
+        
+        let leftItems = matchData.map(d => ({id: d.id, text: d.left}));
+        let rightItems = matchData.map(d => ({id: d.id, text: d.right}));
+        
+        shuffle(leftItems);
+        shuffle(rightItems);
+
+        leftItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item left-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectMatchItem(div, 'left');
+            leftCol.appendChild(div);
+        });
+
+        rightItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item right-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectMatchItem(div, 'right');
+            rightCol.appendChild(div);
+        });
+    }
+
+    function selectMatchItem(el, side) {
+        if(el.classList.contains('matched')) return;
+
+        if (side === 'left') {
+            document.querySelectorAll('.left-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedLeft = el;
+        } else {
+            document.querySelectorAll('.right-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedRight = el;
+        }
+
+        if (selectedLeft && selectedRight) {
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        if (selectedLeft.dataset.id === selectedRight.dataset.id) {
+            selectedLeft.classList.remove('selected');
+            selectedRight.classList.remove('selected');
+            selectedLeft.classList.add('matched');
+            selectedRight.classList.add('matched');
+        } else {
+            let tempL = selectedLeft;
+            let tempR = selectedRight;
+            setTimeout(() => {
+                tempL.classList.remove('selected');
+                tempR.classList.remove('selected');
+            }, 500);
+        }
+        selectedLeft = null;
+        selectedRight = null;
+    }
+
+    initMatching();
+
+    // --- QUIZ LOGIC ---
+    const quizData = [
+        { q: "What's ______ ?", options: ["problem", "wrong"], answer: 1 },
+        { q: "I'm cold and I'm ______.", options: ["tired", "bad"], answer: 0 },
+        { q: "______ your baby OK?", options: ["Is", "Are"], answer: 0 },
+        { q: "She's ______ bad earache.", options: ["got", "got a"], answer: 1 },
+        { q: "My arm ______.", options: ["hurts", "hurt"], answer: 0 },
+        { q: "Poor ______!", options: ["you", "your"], answer: 0 }
+    ];
+
+    function initQuiz() {
+        const container = document.getElementById('quizContainer');
+        quizData.forEach((q, index) => {
+            let div = document.createElement('div');
+            div.className = 'quiz-question';
+            div.innerHTML = `<strong>${index + 1}. ${q.q}</strong><div class="quiz-options">
+                <label><input type="radio" name="q${index}" value="0"> ${q.options[0]}</label>
+                <label><input type="radio" name="q${index}" value="1"> ${q.options[1]}</label>
+            </div>`;
+            container.appendChild(div);
+        });
+    }
+
+    function checkQuiz() {
+        let score = 0;
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const questionDiv = document.querySelectorAll('.quiz-question')[index];
+            if (selected && parseInt(selected.value) === q.answer) {
+                score++;
+                questionDiv.style.borderLeft = "4px solid var(--success)";
+            } else {
+                questionDiv.style.borderLeft = "4px solid var(--danger)";
+            }
+        });
+        document.getElementById('quizResult').innerText = `You got ${score} out of ${quizData.length} correct!`;
+        document.getElementById('quizResult').style.color = score === quizData.length ? "var(--success)" : "var(--primary)";
+    }
+
+    initQuiz();
+
+    // --- SPINNER LOGIC ---
+    const excuses = [
+        "I've got a terrible headache! 🤕",
+        "My back hurts! 🔙⚡",
+        "I have a bad cold! 🤧",
+        "I've got a stomachache! 🤢",
+        "My eyes hurt! 👀",
+        "I've got an earache! 👂",
+        "I feel terrible! 🤒"
+    ];
+
+    function spinWheel() {
+        const box = document.getElementById('spinnerBox');
+        let counter = 0;
+        box.style.borderColor = "var(--primary)";
+        
+        let interval = setInterval(() => {
+            box.innerText = excuses[Math.floor(Math.random() * excuses.length)];
+            counter++;
+            if (counter > 20) {
+                clearInterval(interval);
+                box.innerText = excuses[Math.floor(Math.random() * excuses.length)];
+                box.style.borderColor = "var(--success)";
+                box.style.transform = "scale(1.05)";
+                setTimeout(() => box.style.transform = "scale(1)", 200);
+            }
+        }, 50);
+    }
+
+</script>
+</body>
+</html>
