@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Big Review - English Practice</title>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #E67E22;
+            --accent: #16A085;
+            --bg: #FDFBF7;
+            --text: #333;
+            --success: #27AE60;
+            --danger: #C0392B;
+            --white: #fff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        h1 { color: var(--primary); text-align: center; border-bottom: 3px solid var(--accent); padding-bottom: 15px; font-size: 2.5em;}
+        h2 { color: var(--secondary); margin-top: 50px; font-size: 1.8em; border-left: 5px solid var(--secondary); padding-left: 15px;}
+        h3 { color: var(--primary); }
+        .section { margin-bottom: 60px; }
+        p.intro { text-align: center; font-size: 1.2em; color: #555; margin-bottom: 40px; }
+        
+        /* Presentation Area */
+        .grammar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .grammar-card {
+            background: #f4f8fb;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 5px solid var(--accent);
+        }
+        .grammar-card h4 { margin-top: 0; color: var(--accent); font-size: 1.2em; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .grammar-table th, .grammar-table td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+        .grammar-table th { background: #e0eceb; }
+
+        /* Memory Game */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .memory-card {
+            background: var(--primary);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            color: transparent;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            transition: all 0.3s;
+            user-select: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .memory-card.flipped {
+            background: var(--white);
+            color: var(--text);
+            border: 3px solid var(--primary);
+            box-shadow: none;
+        }
+        .memory-card.matched {
+            background: var(--success);
+            color: var(--white);
+            border: 3px solid var(--success);
+            cursor: default;
+        }
+        
+        /* Matching Game */
+        .matching-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .match-col { flex: 1; display: flex; flex-direction: column; gap: 15px;}
+        .match-item {
+            background: #fdfdfd;
+            padding: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid #ccc;
+            transition: 0.2s;
+            font-size: 1.1em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .match-item:hover { border-color: var(--accent); }
+        .match-item.selected { border-color: var(--secondary); background: #fff3e0; transform: scale(1.02); }
+        .match-item.matched { border-color: var(--success); background: #eafaf1; color: #777; cursor: default; box-shadow: none; }
+        
+        /* Quiz */
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        .quiz-question { background: #fafafa; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
+        .quiz-options label { display: block; margin: 10px 0; cursor: pointer; padding: 8px; background: #fff; border-radius: 5px; border: 1px solid #ddd; transition: 0.2s;}
+        .quiz-options label:hover { background: #f0f0f0; }
+        button {
+            background: var(--accent); color: white; border: none;
+            padding: 15px 30px; border-radius: 8px; font-size: 1.1em; font-weight: bold;
+            cursor: pointer; transition: 0.3s; margin-top: 20px; display: block; margin-left: auto; margin-right: auto;
+        }
+        button:hover { background: #12876f; transform: translateY(-2px); }
+        
+        /* Spinner */
+        .spinner-container { text-align: center; margin: 30px auto; max-width: 500px; }
+        .spinner-result {
+            font-size: 2.2em; font-weight: bold; color: var(--primary);
+            min-height: 100px; margin: 20px 0; padding: 30px;
+            border: 4px dashed var(--secondary); border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            background: #fffaf5; transition: all 0.3s ease;
+        }
+        
+        /* Speaking Cards */
+        .speaking-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .speaking-card {
+            perspective: 1000px;
+            height: 250px;
+        }
+        .card-inner {
+            width: 100%; height: 100%; transition: transform 0.6s;
+            transform-style: preserve-3d; cursor: pointer;
+            position: relative;
+        }
+        .speaking-card:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            width: 100%; height: 100%; position: absolute;
+            backface-visibility: hidden; border-radius: 15px;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            padding: 30px; box-sizing: border-box; text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .card-front { background: var(--primary); color: white; font-size: 1.6em; font-weight: bold;}
+        .card-front span { font-size: 2em; margin-bottom: 10px; }
+        .card-back { background: var(--secondary); color: white; transform: rotateY(180deg); font-size: 1.2em;}
+
+        @media(max-width: 768px) {
+            .memory-game { grid-template-columns: repeat(3, 1fr); }
+            .matching-container { flex-direction: column; }
+        }
+        @media(max-width: 480px) {
+            .memory-game { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌟 A1 English: The Big Review</h1>
+    <p class="intro">Welcome to your ultimate review lesson! Today we are going to remember everything we've learned: routines, grammar, asking questions, and talking about ourselves. Let's go!</p>
+
+    <!-- PRESENTATION -->
+    <div class="section" id="presentation">
+        <h2>1. Presentation: Grammar & Vocabulary Refresh</h2>
+        <p>Before we start playing, let's quickly review our main grammar rules.</p>
+        
+        <div class="grammar-grid">
+            <div class="grammar-card">
+                <h4>Present Simple</h4>
+                <p>We use it for habits and routines.</p>
+                <table class="grammar-table">
+                    <tr><th>+</th><td>I / You / We / They <b>work</b>.<br>He / She / It <b>works</b>.</td></tr>
+                    <tr><th>-</th><td>I <b>don't</b> work.<br>She <b>doesn't</b> work.</td></tr>
+                    <tr><th>?</th><td><b>Do</b> you work?<br><b>Does</b> he work?</td></tr>
+                </table>
+                <p><i>Example: I wake up at 7 AM and go to the gym. She loves cats.</i></p>
+            </div>
+            <div class="grammar-card">
+                <h4>Verb "To Be"</h4>
+                <p>We use it for names, age, feelings, and places.</p>
+                <table class="grammar-table">
+                    <tr><th>+</th><td>I <b>am</b> (I'm). He/She/It <b>is</b>.<br>You/We/They <b>are</b>.</td></tr>
+                    <tr><th>-</th><td>I <b>am not</b>. He <b>isn't</b>.<br>We <b>aren't</b>.</td></tr>
+                    <tr><th>?</th><td><b>Are</b> you OK? <b>Is</b> she a teacher?</td></tr>
+                </table>
+                <p><i>Example: I am 24 years old. My cat is very cute!</i></p>
+            </div>
+            <div class="grammar-card">
+                <h4>Have got</h4>
+                <p>We use it to talk about possession and family.</p>
+                <table class="grammar-table">
+                    <tr><th>+</th><td>I <b>have got</b> ('ve got).<br>She <b>has got</b> ('s got).</td></tr>
+                    <tr><th>-</th><td>I <b>haven't got</b>.<br>He <b>hasn't got</b>.</td></tr>
+                    <tr><th>?</th><td><b>Have</b> you <b>got</b> a pet?<br><b>Has</b> she <b>got</b> a brother?</td></tr>
+                </table>
+                <p><i>Example: I've got a lot of interesting science books.</i></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 1: MEMORY GAME -->
+    <div class="section">
+        <h2>2. Practice: Vocabulary Memory Game</h2>
+        <p>Let's remember our action verbs. Match the daily routine phrase with the correct emoji!</p>
+        <div class="memory-game" id="memoryGame"></div>
+    </div>
+
+    <!-- PRACTICE 2: MATCHING GAME -->
+    <div class="section">
+        <h2>3. Practice: Question & Answer Match</h2>
+        <p>Match the question on the left with the correct logical answer on the right. Click a white box, then click its partner.</p>
+        <div class="matching-container">
+            <div class="match-col" id="matchLeft"></div>
+            <div class="match-col" id="matchRight"></div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 3: QUIZ -->
+    <div class="section">
+        <h2>4. Practice: The Ultimate Grammar Quiz</h2>
+        <p>Choose the correct word to complete the sentences. Pay attention to "to be", "Present Simple" and "have got"!</p>
+        <div class="quiz-grid" id="quizContainer"></div>
+        <button onclick="checkQuiz()">Check My Answers</button>
+        <p id="quizResult" style="font-weight: bold; margin-top: 15px; text-align: center; font-size: 1.2em;"></p>
+    </div>
+
+    <!-- PRODUCTION 1: SPINNER -->
+    <div class="section">
+        <h2>5. Production: The Speaking Spinner</h2>
+        <p>Click "Spin". When the wheel stops, talk about the topic for <b>1 minute</b> without stopping! Try to use the vocabulary and grammar we practiced.</p>
+        <div class="spinner-container">
+            <div class="spinner-result" id="spinnerBox">Click the button! 🎯</div>
+            <button onclick="spinWheel()">Spin the Wheel!</button>
+        </div>
+    </div>
+
+    <!-- PRODUCTION 2: SPEAKING CARDS -->
+    <div class="section">
+        <h2>6. Production: Roleplay & Story Cards</h2>
+        <p>Hover over (or tap) the cards to reveal a task. Answer with full sentences.</p>
+        <div class="speaking-cards">
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>🏋️‍♀️</span>Card 1: <br>Morning Routine</div>
+                    <div class="card-back">Tell me about your perfect morning. What time do you wake up? Do you do any exercises? What do you eat for breakfast?</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>🐈</span>Card 2: <br>Pets & Animals</div>
+                    <div class="card-back">Have you got any pets? Tell me about them (name, age, what they like doing). If not, what pet do you want to have?</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>🗣️</span>Card 3: <br>Roleplay - Meeting</div>
+                    <div class="card-back">Imagine we meet for the first time at an English course. Introduce yourself: name, age, job, and hobbies. Ask me 3 questions about me!</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front"><span>📚</span>Card 4: <br>Free Time</div>
+                    <div class="card-back">What do you usually do in the evening? Do you like reading books or watching TV? Tell me about your favorite book or film.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p style="text-align: center; color: #888; margin-top: 50px;">Great job today! Keep practicing your English! ✨</p>
+
+</div>
+
+<script>
+    // --- MEMORY GAME LOGIC ---
+    const memoryItems = [
+        { id: 1, text: 'wake up early' }, { id: 1, text: '⏰' },
+        { id: 2, text: 'go to the gym' }, { id: 2, text: '🏋️‍♀️' },
+        { id: 3, text: 'feed the cat' }, { id: 3, text: '🐈' },
+        { id: 4, text: 'read a book' }, { id: 4, text: '📚' },
+        { id: 5, text: 'have breakfast' }, { id: 5, text: '🍳' },
+        { id: 6, text: 'drink coffee' }, { id: 6, text: '☕' },
+        { id: 7, text: 'have a shower' }, { id: 7, text: '🚿' },
+        { id: 8, text: 'go to bed' }, { id: 8, text: '🛌' }
+    ];
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+
+    function createMemoryGame() {
+        const board = document.getElementById('memoryGame');
+        shuffle(memoryItems);
+        memoryItems.forEach(item => {
+            const card = document.createElement('div');
+            card.classList.add('memory-card');
+            card.dataset.id = item.id;
+            card.innerHTML = `<span>${item.text}</span>`;
+            card.querySelector('span').style.opacity = 0; 
+            card.addEventListener('click', flipCard);
+            board.appendChild(card);
+        });
+    }
+
+    function flipCard() {
+        if (lockBoard) return;
+        if (this === firstCard) return;
+
+        this.classList.add('flipped');
+        this.querySelector('span').style.opacity = 1;
+
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+            return;
+        }
+
+        secondCard = this;
+        checkForMatch();
+    }
+
+    function checkForMatch() {
+        let isMatch = firstCard.dataset.id === secondCard.dataset.id;
+        isMatch ? disableCards() : unflipCards();
+    }
+
+    function disableCards() {
+        firstCard.classList.add('matched');
+        secondCard.classList.add('matched');
+        resetBoard();
+    }
+
+    function unflipCards() {
+        lockBoard = true;
+        setTimeout(() => {
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            firstCard.querySelector('span').style.opacity = 0;
+            secondCard.querySelector('span').style.opacity = 0;
+            resetBoard();
+        }, 1200);
+    }
+
+    function resetBoard() {
+        [hasFlippedCard, lockBoard] = [false, false];
+        [firstCard, secondCard] = [null, null];
+    }
+
+    createMemoryGame();
+
+    // --- MATCHING GAME LOGIC ---
+    const matchData = [
+        { id: 'm1', left: "What time do you usually wake up?", right: "At 7 AM. Then I go to the gym." },
+        { id: 'm2', left: "Do you have any pets?", right: "Yes, I have a beautiful cat." },
+        { id: 'm3', left: "What do you do in the evening?", right: "I usually read books or study." },
+        { id: 'm4', left: "Are you from London?", right: "No, I'm not. I am from another city." },
+        { id: 'm5', left: "Has she got a brother?", right: "No, she hasn't. But she has a sister." },
+        { id: 'm6', left: "Where does he work?", right: "He works in a big office." }
+    ];
+    
+    let selectedLeft = null;
+    let selectedRight = null;
+
+    function initMatching() {
+        const leftCol = document.getElementById('matchLeft');
+        const rightCol = document.getElementById('matchRight');
+        
+        let leftItems = matchData.map(d => ({id: d.id, text: d.left}));
+        let rightItems = matchData.map(d => ({id: d.id, text: d.right}));
+        
+        shuffle(leftItems);
+        shuffle(rightItems);
+
+        leftItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item left-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectMatchItem(div, 'left');
+            leftCol.appendChild(div);
+        });
+
+        rightItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item right-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectMatchItem(div, 'right');
+            rightCol.appendChild(div);
+        });
+    }
+
+    function selectMatchItem(el, side) {
+        if(el.classList.contains('matched')) return;
+
+        if (side === 'left') {
+            document.querySelectorAll('.left-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedLeft = el;
+        } else {
+            document.querySelectorAll('.right-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedRight = el;
+        }
+
+        if (selectedLeft && selectedRight) {
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        if (selectedLeft.dataset.id === selectedRight.dataset.id) {
+            selectedLeft.classList.remove('selected');
+            selectedRight.classList.remove('selected');
+            selectedLeft.classList.add('matched');
+            selectedRight.classList.add('matched');
+        } else {
+            let tempL = selectedLeft;
+            let tempR = selectedRight;
+            setTimeout(() => {
+                tempL.classList.remove('selected');
+                tempR.classList.remove('selected');
+            }, 600);
+        }
+        selectedLeft = null;
+        selectedRight = null;
+    }
+
+    initMatching();
+
+    // --- QUIZ LOGIC ---
+    const quizData = [
+        { q: "I ______ to the gym every morning.", options: ["go", "goes"], answer: 0 },
+        { q: "My cat ______ a lot of food! 🐈", options: ["eat", "eats"], answer: 1 },
+        { q: "______ you like reading books?", options: ["Are", "Do"], answer: 1 },
+        { q: "She ______ got a big family.", options: ["has", "have"], answer: 0 },
+        { q: "What time ______ they usually wake up?", options: ["does", "do"], answer: 1 },
+        { q: "I ______ usually tired in the evening.", options: ["am", "do"], answer: 0 },
+        { q: "______ he a teacher?", options: ["Does", "Is"], answer: 1 },
+        { q: "We ______ work on Sundays. It's our free day.", options: ["don't", "doesn't"], answer: 0 },
+        { q: "I ______ got a car, but I have a bicycle.", options: ["haven't", "hasn't"], answer: 0 },
+        { q: "Where ______ your parents live?", options: ["do", "are"], answer: 0 }
+    ];
+
+    function initQuiz() {
+        const container = document.getElementById('quizContainer');
+        quizData.forEach((q, index) => {
+            let div = document.createElement('div');
+            div.className = 'quiz-question';
+            div.innerHTML = `<strong style="font-size: 1.1em;">${index + 1}. ${q.q}</strong><div class="quiz-options">
+                <label><input type="radio" name="q${index}" value="0"> ${q.options[0]}</label>
+                <label><input type="radio" name="q${index}" value="1"> ${q.options[1]}</label>
+            </div>`;
+            container.appendChild(div);
+        });
+    }
+
+    function checkQuiz() {
+        let score = 0;
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const questionDiv = document.querySelectorAll('.quiz-question')[index];
+            if (selected && parseInt(selected.value) === q.answer) {
+                score++;
+                questionDiv.style.borderLeft = "5px solid var(--success)";
+                questionDiv.style.backgroundColor = "#eafaf1";
+            } else {
+                questionDiv.style.borderLeft = "5px solid var(--danger)";
+                questionDiv.style.backgroundColor = "#fdeaea";
+            }
+        });
+        const resultText = document.getElementById('quizResult');
+        resultText.innerText = `You got ${score} out of ${quizData.length} correct!`;
+        resultText.style.color = score === quizData.length ? "var(--success)" : "var(--danger)";
+        
+        if(score === quizData.length) {
+            resultText.innerText += " Excellent job! 🎉";
+        }
+    }
+
+    initQuiz();
+
+    // --- SPINNER LOGIC ---
+    const topics = [
+        "My typical morning 🌅",
+        "My favorite animals 🐱",
+        "My best friend 👯‍♀️",
+        "My hobbies and books 📚",
+        "My favorite food 🍳",
+        "My weekend routine 🛋️",
+        "My job / studies 💼",
+        "Sports and fitness 🏋️‍♀️"
+    ];
+
+    function spinWheel() {
+        const box = document.getElementById('spinnerBox');
+        let counter = 0;
+        box.style.borderColor = "var(--primary)";
+        box.style.backgroundColor = "#fff";
+        
+        let interval = setInterval(() => {
+            box.innerText = topics[Math.floor(Math.random() * topics.length)];
+            counter++;
+            if (counter > 25) {
+                clearInterval(interval);
+                box.innerText = topics[Math.floor(Math.random() * topics.length)];
+                box.style.borderColor = "var(--success)";
+                box.style.backgroundColor = "#eafaf1";
+                box.style.transform = "scale(1.05)";
+                setTimeout(() => box.style.transform = "scale(1)", 200);
+            }
+        }, 60);
+    }
+
+</script>
+</body>
+</html>
