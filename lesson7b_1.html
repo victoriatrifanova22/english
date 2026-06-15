@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lesson 7B · Was & Were · Childhood Stories</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sky: #4AAFF0;
+  --sky-light: #C9E8FA;
+  --sky-dark: #1A6FA8;
+  --mint: #52C98A;
+  --mint-light: #C2F0D9;
+  --mint-dark: #1F8A55;
+  --sun: #FFD84D;
+  --sun-deep: #FFA726;
+  --coral: #FF7B7B;
+  --lilac: #B57BFF;
+  --cloud: #F0F8FF;
+  --ink: #1A2E44;
+  --ink-soft: #3D5A7A;
+  --page: #EBF6FF;
+  --white: #ffffff;
+  --shadow: 0 4px 20px rgba(30,80,140,.13);
+  --shadow-sm: 0 2px 10px rgba(30,80,140,.10);
+  --r: 16px;
+  --r-sm: 10px;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--page);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── decorative clouds ── */
+body::before {
+  content:'';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 300px 120px at 10% 8%, rgba(255,255,255,.55) 0%, transparent 70%),
+    radial-gradient(ellipse 200px 80px at 30% 5%, rgba(255,255,255,.45) 0%, transparent 70%),
+    radial-gradient(ellipse 350px 140px at 80% 12%, rgba(255,255,255,.5) 0%, transparent 70%),
+    linear-gradient(160deg, #BFE8FF 0%, #EBF6FF 40%, #DAF4EC 100%);
+  z-index: -1;
+}
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(135deg, #1A6FA8 0%, #4AAFF0 50%, #52C98A 100%);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+header::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0; right: 0; height: 40px;
+  background: var(--page);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.header-inner {
+  max-width: 860px; margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex; align-items: center; gap: 1.5rem;
+  position: relative; z-index: 1;
+}
+.header-badge {
+  background: rgba(255,255,255,.22); border: 2px solid rgba(255,255,255,.5);
+  color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800;
+  font-size: 13px; padding: 5px 14px; border-radius: 30px;
+  letter-spacing: .04em; white-space: nowrap;
+}
+.header-text h1 {
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 28px;
+  color: #fff; line-height: 1.2; text-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+.header-text p {
+  font-size: 14px; color: rgba(255,255,255,.88); margin-top: 5px;
+}
+.header-emojis {
+  position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%);
+  font-size: 40px; opacity: .35; letter-spacing: 6px;
+  display: none;
+}
+
+/* floating deco dots */
+.dot {
+  position: absolute; border-radius: 50%; opacity: .18;
+}
+
+/* ── NAV TABS ── */
+.tab-nav {
+  max-width: 860px; margin: -4px auto 0;
+  padding: 0 1rem;
+  display: flex; gap: 6px; overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  padding: 12px 22px; border-radius: 12px 12px 0 0;
+  border: none; cursor: pointer; font-family: 'Nunito', sans-serif;
+  font-weight: 700; font-size: 14px; white-space: nowrap;
+  background: rgba(255,255,255,.5);
+  color: var(--sky-dark); transition: all .2s;
+  display: flex; align-items: center; gap: 7px;
+}
+.tab-btn:hover { background: rgba(255,255,255,.75); }
+.tab-btn.active {
+  background: #fff; color: var(--sky-dark);
+  box-shadow: 0 -3px 10px rgba(74,175,240,.15);
+}
+.tab-btn .icon { font-size: 18px; }
+
+/* ── MAIN ── */
+main {
+  max-width: 860px; margin: 0 auto;
+  background: #fff; border-radius: 0 0 24px 24px;
+  box-shadow: var(--shadow);
+}
+.tab-panel { display: none; padding: 1.75rem 1.5rem 2rem; }
+.tab-panel.active { display: block; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--sky-dark);
+  background: var(--sky-light); padding: 5px 14px;
+  border-radius: 30px; margin-bottom: 1.1rem;
+}
+.section-label.green { color: var(--mint-dark); background: var(--mint-light); }
+.section-label.sun { color: #8A5A00; background: #FFF3CC; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--cloud); border: 2px solid var(--sky-light);
+  border-radius: var(--r); padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
+  transition: box-shadow .15s;
+}
+.card:hover { box-shadow: var(--shadow-sm); }
+.card.green-card { background: #F3FDF7; border-color: var(--mint-light); }
+.card.sun-card { background: #FFFBEC; border-color: #FFE9A0; }
+
+/* ── FLIP CARDS ── */
+.flip-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.flip-arrow {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid var(--sky-light); background: #fff;
+  cursor: pointer; font-size: 18px; color: var(--sky-dark);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; box-shadow: var(--shadow-sm);
+}
+.flip-arrow:hover { background: var(--sky-light); transform: scale(1.08); }
+.flip-counter {
+  font-family: 'Nunito', sans-serif; font-weight: 700;
+  font-size: 14px; color: var(--ink-soft);
+}
+.flip-wrap {
+  perspective: 900px; height: 160px; cursor: pointer; margin-bottom: 1.5rem;
+}
+.flip-inner {
+  width: 100%; height: 100%; position: relative;
+  transform-style: preserve-3d; transition: transform .5s cubic-bezier(.4,0,.2,1);
+}
+.flip-inner.flipped { transform: rotateY(180deg); }
+.flip-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; border-radius: var(--r);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 1.5rem;
+}
+.flip-front {
+  background: linear-gradient(135deg, #4AAFF0 0%, #1A6FA8 100%);
+  box-shadow: 0 6px 20px rgba(74,175,240,.35);
+}
+.flip-back {
+  background: linear-gradient(135deg, #52C98A 0%, #1F8A55 100%);
+  transform: rotateY(180deg);
+  box-shadow: 0 6px 20px rgba(82,201,138,.35);
+}
+.flip-word { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 30px; color: #fff; }
+.flip-hint { font-size: 12px; color: rgba(255,255,255,.75); margin-top: 6px; }
+.flip-trans { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 24px; color: #fff; }
+.flip-ex { font-size: 13px; color: rgba(255,255,255,.88); margin-top: 8px; font-style: italic; }
+
+/* ── CHOICE BUTTONS ── */
+.choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.q-text {
+  font-size: 15px; line-height: 1.65; margin-bottom: 12px;
+  color: var(--ink);
+}
+.choice-btn {
+  padding: 9px 22px; border-radius: 30px;
+  border: 2px solid var(--sky-light); background: #fff;
+  cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 700;
+  font-size: 14px; color: var(--sky-dark);
+  transition: all .15s; box-shadow: 0 2px 6px rgba(74,175,240,.12);
+}
+.choice-btn:hover:not(.disabled) {
+  background: var(--sky-light); border-color: var(--sky);
+  transform: translateY(-2px); box-shadow: 0 4px 12px rgba(74,175,240,.2);
+}
+.choice-btn.correct {
+  background: linear-gradient(135deg, #52C98A, #27A869);
+  border-color: transparent; color: #fff;
+  box-shadow: 0 4px 12px rgba(82,201,138,.4);
+}
+.choice-btn.wrong {
+  background: linear-gradient(135deg, #FF7B7B, #E53535);
+  border-color: transparent; color: #fff;
+}
+.choice-btn.disabled { pointer-events: none; }
+.choice-btn.correct.disabled { opacity: 1; }
+
+/* ── FEEDBACK ── */
+.feedback {
+  display: none; font-size: 13px; font-weight: 600;
+  padding: 9px 14px; border-radius: var(--r-sm); margin-top: 10px;
+}
+.feedback.show { display: block; }
+.feedback.ok {
+  background: #EAFAF2; color: var(--mint-dark);
+  border: 1.5px solid var(--mint-light);
+}
+.feedback.err {
+  background: #FFF0F0; color: #B02020;
+  border: 1.5px solid #FFCACA;
+}
+
+/* ── SCORE BAR ── */
+.score-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 18px; border-radius: var(--r);
+  background: linear-gradient(135deg, var(--sky-light) 0%, #D5F2E9 100%);
+  border: 2px solid var(--sky-light); margin-bottom: 1.25rem;
+}
+.score-num {
+  font-family: 'Nunito', sans-serif; font-weight: 900;
+  font-size: 28px; color: var(--sky-dark);
+}
+.score-label { font-size: 14px; color: var(--ink-soft); font-weight: 600; }
+
+/* ── FILL IN ── */
+.convo-box {
+  background: linear-gradient(160deg, #F0F8FF 0%, #F0FDF7 100%);
+  border: 2px solid var(--sky-light); border-radius: var(--r);
+  padding: 1.25rem; margin-bottom: 1.1rem;
+}
+.convo-line {
+  font-size: 15px; line-height: 2.1;
+}
+.speaker {
+  display: inline-block; width: 24px; height: 24px; border-radius: 50%;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 11px;
+  text-align: center; line-height: 24px; margin-right: 8px; color: #fff;
+}
+.speaker.a { background: var(--sky); }
+.speaker.b { background: var(--mint); }
+
+.fill-input {
+  border: none; border-bottom: 2.5px solid var(--sky);
+  background: transparent; font-size: 15px; font-family: 'Nunito Sans', sans-serif;
+  width: 100px; text-align: center; outline: none;
+  color: var(--sky-dark); padding: 0 4px;
+  transition: border-color .2s;
+}
+.fill-input:focus { border-color: var(--sun-deep); }
+.fill-input.ok { border-color: var(--mint); background: #EAFAF2; border-radius: 6px; color: var(--mint-dark); }
+.fill-input.err { border-color: var(--coral); }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 11px 26px; border-radius: 30px; border: none;
+  cursor: pointer; font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: 14px; transition: all .15s;
+}
+.btn-sky {
+  background: linear-gradient(135deg, #4AAFF0, #1A6FA8);
+  color: #fff; box-shadow: 0 4px 14px rgba(74,175,240,.4);
+}
+.btn-sky:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(74,175,240,.5); }
+.btn-ghost {
+  background: #fff; color: var(--sky-dark);
+  border: 2px solid var(--sky-light); box-shadow: none;
+}
+.btn-ghost:hover { background: var(--sky-light); }
+.btn-sun {
+  background: linear-gradient(135deg, #FFD84D, #FFA726);
+  color: var(--ink); box-shadow: 0 4px 14px rgba(255,167,38,.3);
+}
+.btn-sun:hover { transform: translateY(-2px); }
+.btn-mint {
+  background: linear-gradient(135deg, #52C98A, #27A869);
+  color: #fff; box-shadow: 0 4px 14px rgba(82,201,138,.35);
+}
+
+/* ── NEG TASK ── */
+.neg-input {
+  width: 100%; border: 2px solid var(--sky-light); border-radius: var(--r-sm);
+  padding: 10px 14px; font-size: 14px; font-family: 'Nunito Sans', sans-serif;
+  outline: none; color: var(--ink); transition: border-color .2s;
+  margin-top: 8px;
+}
+.neg-input:focus { border-color: var(--sky); }
+
+/* ── MONOLOGUE SCAFFOLD ── */
+.monologue-banner {
+  display: flex; align-items: center; gap: 16px;
+  background: linear-gradient(135deg, #1A6FA8 0%, #4AAFF0 60%, #52C98A 100%);
+  border-radius: var(--r); padding: 1.1rem 1.4rem; margin-bottom: 1.25rem;
+}
+.banner-icon { font-size: 36px; flex-shrink: 0; }
+.banner-title { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 17px; color: #fff; }
+.banner-sub { font-size: 13px; color: rgba(255,255,255,.88); margin-top: 3px; }
+
+.step-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem;
+}
+.step-tab {
+  padding: 8px 18px; border-radius: 30px;
+  border: 2px solid var(--sky-light); background: #fff;
+  cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 700;
+  font-size: 13px; color: var(--sky-dark); transition: all .18s;
+}
+.step-tab:hover { background: var(--sky-light); }
+.step-tab.active {
+  background: linear-gradient(135deg, #4AAFF0, #1A6FA8);
+  color: #fff; border-color: transparent;
+  box-shadow: 0 4px 12px rgba(74,175,240,.35);
+}
+
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+.scaffold-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 1.25rem;
+}
+@media (max-width: 540px) { .scaffold-grid { grid-template-columns: 1fr; } }
+
+.scaffold-block {
+  border-radius: var(--r); padding: 1rem 1.1rem;
+  border: 2px solid color-mix(in srgb, var(--c) 30%, transparent);
+  background: var(--cl);
+  transition: transform .15s, box-shadow .15s;
+}
+.scaffold-block:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.09); }
+.sb-label {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
+  color: var(--c); margin-bottom: 9px; display: block;
+}
+.sb-phrase {
+  font-size: 14px; line-height: 1.9; color: var(--ink);
+}
+.chip {
+  display: inline-block; background: var(--c); color: #fff;
+  font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 12px;
+  padding: 1px 8px; border-radius: 20px; vertical-align: middle;
+  margin: 0 1px;
+}
+.blank-chip {
+  display: inline-block; border-bottom: 2px dashed var(--c);
+  font-style: italic; color: var(--ink-soft); font-size: 13px;
+  padding: 0 4px;
+}
+.adj-chips {
+  display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0 4px;
+}
+.adj {
+  background: rgba(255,255,255,.75); border: 1.5px solid color-mix(in srgb, var(--c) 40%, transparent);
+  color: var(--ink-soft); font-size: 12px; font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  padding: 3px 10px; border-radius: 20px; cursor: default;
+}
+
+.sample-box {
+  background: #fff; border: 2px dashed var(--sky-light);
+  border-radius: var(--r); padding: 1rem 1.2rem; margin-bottom: 1.25rem;
+}
+.sample-label {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px;
+  color: var(--sky-dark); text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: 8px;
+}
+.sample-text {
+  font-size: 14px; line-height: 1.85; color: var(--ink);
+}
+.sample-text u { color: var(--sky-dark); text-decoration-color: var(--sky); font-weight: 700; }
+
+.final-prompt {
+  background: linear-gradient(135deg, #F5EEFF 0%, #EBF6FF 100%);
+  border: 2px solid #D8C2FF; border-radius: var(--r);
+  padding: 1.25rem 1.4rem;
+}
+.fp-title {
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 17px;
+  color: var(--lilac); margin-bottom: 8px;
+}
+.fp-text { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 14px; }
+.fp-checklist {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.fp-checklist label {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer;
+}
+.fp-checklist input[type=checkbox] {
+  width: 18px; height: 18px; accent-color: var(--mint); cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center; padding: 1.5rem;
+  font-size: 13px; color: var(--ink-soft);
+}
+footer span { color: var(--sky-dark); font-weight: 700; }
+
+/* ── PROGRESS PILLS ── */
+.progress-row { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.prog-pip {
+  height: 8px; flex: 1; min-width: 18px; border-radius: 10px;
+  background: var(--sky-light); transition: background .3s;
+}
+.prog-pip.done { background: var(--mint); }
+.prog-pip.current { background: var(--sky); }
+
+/* ── SEPARATOR ── */
+.sep { border: none; border-top: 2px dashed var(--sky-light); margin: 1.75rem 0; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sky-light); border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <span class="header-badge">📚 Lesson 7B</span>
+    <div class="header-text">
+      <h1>Was &amp; Were · Childhood Stories</h1>
+      <p>Vocabulary · Grammar · Speaking Practice · A2 Level</p>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('vocab', this)">
+    <span class="icon">🃏</span> Vocabulary
+  </button>
+  <button class="tab-btn" onclick="switchTab('grammar', this)">
+    <span class="icon">✏️</span> Grammar
+  </button>
+  <button class="tab-btn" onclick="switchTab('fill', this)">
+    <span class="icon">📝</span> Fill In
+  </button>
+  <button class="tab-btn" onclick="switchTab('speak', this)">
+    <span class="icon">💬</span> Speaking
+  </button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════ VOCABULARY ══════════════════════════════ -->
+<div id="tab-vocab" class="tab-panel active">
+
+  <span class="section-label">🃏 Flashcards — tap to flip</span>
+
+  <div class="flip-nav">
+    <button class="flip-arrow" onclick="prevCard()">&#8592;</button>
+    <span class="flip-counter" id="flip-counter">1 / 10</span>
+    <button class="flip-arrow" onclick="nextCard()">&#8594;</button>
+  </div>
+
+  <div class="flip-wrap" onclick="flipCard()" id="flip-wrap">
+    <div class="flip-inner" id="flip-inner">
+      <div class="flip-face flip-front">
+        <span class="flip-word" id="flip-word"></span>
+        <span class="flip-hint">tap to see translation</span>
+      </div>
+      <div class="flip-face flip-back">
+        <span class="flip-trans" id="flip-trans"></span>
+        <span class="flip-ex" id="flip-ex"></span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep"/>
+  <span class="section-label green">✅ Multiple Choice — pick the best word</span>
+  <div id="vocab-mc"></div>
+
+</div>
+
+<!-- ══════════════════════════════ GRAMMAR ══════════════════════════════ -->
+<div id="tab-grammar" class="tab-panel">
+
+  <div class="score-bar">
+    <span class="score-num" id="gram-score">0</span>
+    <div>
+      <div class="score-label">correct answers ⭐</div>
+      <div style="font-size:12px; color:#6B8FAE; margin-top:2px;">Choose <strong>was / were / wasn't / weren't</strong></div>
+    </div>
+  </div>
+
+  <div class="progress-row" id="gram-progress"></div>
+  <div id="grammar-qs"></div>
+
+</div>
+
+<!-- ══════════════════════════════ FILL IN ══════════════════════════════ -->
+<div id="tab-fill" class="tab-panel">
+
+  <span class="section-label">💬 Complete the dialogue</span>
+  <div class="card sun-card" style="margin-bottom:1rem; padding: 10px 16px;">
+    <span style="font-size:13px; font-weight:700; color:#7A5500;">
+      Word bank: &nbsp;<em>was &nbsp;· &nbsp;wasn't &nbsp;· &nbsp;were &nbsp;· &nbsp;weren't &nbsp;· &nbsp;Were &nbsp;· &nbsp;Was</em>
+    </span>
+  </div>
+
+  <div class="convo-box" id="fill-convo"></div>
+
+  <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem;">
+    <button class="btn btn-sky" onclick="checkFill()">🔍 Check answers</button>
+    <button class="btn btn-ghost" onclick="resetFill()">↺ Reset</button>
+  </div>
+  <div class="feedback" id="fill-fb"></div>
+
+  <hr class="sep"/>
+  <span class="section-label green">✏️ Make it negative</span>
+  <div id="neg-qs"></div>
+
+</div>
+
+<!-- ══════════════════════════════ SPEAKING ══════════════════════════════ -->
+<div id="tab-speak" class="tab-panel">
+
+  <!-- intro banner -->
+  <div class="monologue-banner">
+    <div class="banner-icon">🎓</div>
+    <div>
+      <div class="banner-title">My school &amp; university life</div>
+      <div class="banner-sub">Use the blocks below to build your story. Speak for <strong>1–2 minutes</strong>!</div>
+    </div>
+  </div>
+
+  <!-- step selector -->
+  <div class="step-tabs">
+    <button class="step-tab active" onclick="setStep(0,this)">1 · School</button>
+    <button class="step-tab" onclick="setStep(1,this)">2 · Teachers &amp; friends</button>
+    <button class="step-tab" onclick="setStep(2,this)">3 · University / College</button>
+    <button class="step-tab" onclick="setStep(3,this)">4 · My hero</button>
+  </div>
+
+  <!-- STEP 0 — school -->
+  <div class="step-panel active" id="step-0">
+    <div class="scaffold-grid">
+
+      <div class="scaffold-block" style="--c:#4AAFF0; --cl:#EBF6FF;">
+        <div class="sb-label">🏫 Where?</div>
+        <div class="sb-phrase">My school <span class="chip">was</span> in <span class="blank-chip">your city</span>.</div>
+        <div class="sb-phrase">It <span class="chip">was</span> a big / small school.</div>
+        <div class="sb-phrase">There <span class="chip">were</span> about ___ students.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#52C98A; --cl:#F0FDF7;">
+        <div class="sb-label">📅 When?</div>
+        <div class="sb-phrase">I <span class="chip">was</span> at school from ___ to ___.</div>
+        <div class="sb-phrase">I <span class="chip">was</span> ___ years old.</div>
+        <div class="sb-phrase">It <span class="chip">wasn't</span> very long ago!</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#B57BFF; --cl:#F5EEFF;">
+        <div class="sb-label">😊 How was it?</div>
+        <div class="sb-phrase">School <span class="chip">was</span> <span class="adj-wrap"></span></div>
+        <div class="adj-chips">
+          <span class="adj">amazing</span><span class="adj">fun</span><span class="adj">boring</span>
+          <span class="adj">difficult</span><span class="adj">interesting</span><span class="adj">hard</span>
+        </div>
+        <div class="sb-phrase">My favourite subject <span class="chip">was</span> ___.</div>
+        <div class="sb-phrase">Maths / English / PE <span class="chip">wasn't</span> my favourite.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#FFA726; --cl:#FFFBEC;">
+        <div class="sb-label">👩‍🎓 You as a student</div>
+        <div class="sb-phrase">I <span class="chip">was</span> a good / quiet / funny student.</div>
+        <div class="sb-phrase">I <span class="chip">wasn't</span> very fast at reading.</div>
+        <div class="sb-phrase">My grades <span class="chip">were</span> good / ok / not great.</div>
+      </div>
+
+    </div>
+    <div class="sample-box">
+      <div class="sample-label">💬 Sample monologue — read &amp; adapt</div>
+      <p class="sample-text">My school <u>was</u> in Incheon. It <u>was</u> a big school — there <u>were</u> about 800 students. I <u>was</u> at school from 2005 to 2018. My favourite subject <u>was</u> art. I <u>was</u> quite a good student, but maths <u>wasn't</u> easy for me!</p>
+    </div>
+  </div>
+
+  <!-- STEP 1 — teachers & friends -->
+  <div class="step-panel" id="step-1">
+    <div class="scaffold-grid">
+
+      <div class="scaffold-block" style="--c:#4AAFF0; --cl:#EBF6FF;">
+        <div class="sb-label">👩‍🏫 Teachers</div>
+        <div class="sb-phrase">My favourite teacher <span class="chip">was</span> ___.</div>
+        <div class="sb-phrase">He / She <span class="chip">was</span> kind / strict / funny / young.</div>
+        <div class="sb-phrase">The lessons <span class="chip">were</span> always interesting.</div>
+        <div class="sb-phrase">He / She <span class="chip">wasn't</span> boring at all!</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#FF7B7B; --cl:#FFF0F0;">
+        <div class="sb-label">👫 Friends</div>
+        <div class="sb-phrase">My best friend <span class="chip">was</span> ___.</div>
+        <div class="sb-phrase">We <span class="chip">were</span> in the same class.</div>
+        <div class="sb-phrase">He / She <span class="chip">was</span> very funny / smart / positive.</div>
+        <div class="sb-phrase">There <span class="chip">were</span> 5 of us in our group.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#52C98A; --cl:#F0FDF7;">
+        <div class="sb-label">🗣️ Useful phrases</div>
+        <div class="sb-phrase"><span class="chip">Also,</span> my teacher <span class="chip">was</span> very patient.</div>
+        <div class="sb-phrase"><span class="chip">But</span> sometimes the homework <span class="chip">was</span> too hard.</div>
+        <div class="sb-phrase"><span class="chip">I think</span> school <span class="chip">was</span> a great time.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#B57BFF; --cl:#F5EEFF;">
+        <div class="sb-label">🎨 Adjectives to use</div>
+        <div class="adj-chips" style="padding:0;">
+          <span class="adj">kind</span><span class="adj">strict</span><span class="adj">funny</span>
+          <span class="adj">smart</span><span class="adj">strong</span><span class="adj">amazing</span>
+          <span class="adj">famous</span><span class="adj">positive</span><span class="adj">rich</span><span class="adj">poor</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="sample-box">
+      <div class="sample-label">💬 Sample</div>
+      <p class="sample-text">My favourite teacher <u>was</u> Mrs Kim. She <u>was</u> very kind and funny. Her lessons <u>were</u> never boring! My best friend <u>was</u> Jisoo. We <u>were</u> in the same class for three years. She <u>was</u> amazing at maths but I <u>wasn't</u>!</p>
+    </div>
+  </div>
+
+  <!-- STEP 2 — university -->
+  <div class="step-panel" id="step-2">
+    <div class="scaffold-grid">
+
+      <div class="scaffold-block" style="--c:#4AAFF0; --cl:#EBF6FF;">
+        <div class="sb-label">🎓 Where &amp; what?</div>
+        <div class="sb-phrase">I <span class="chip">was</span> a student at ___ University.</div>
+        <div class="sb-phrase">My subject <span class="chip">was</span> ___.</div>
+        <div class="sb-phrase">The university <span class="chip">was</span> in ___.</div>
+        <div class="sb-phrase">There <span class="chip">were</span> many international students.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#FFA726; --cl:#FFFBEC;">
+        <div class="sb-label">📚 Student life</div>
+        <div class="sb-phrase">The lectures <span class="chip">were</span> long but interesting.</div>
+        <div class="sb-phrase">My dormitory <span class="chip">was</span> small but cosy.</div>
+        <div class="sb-phrase">We <span class="chip">weren't</span> rich — we <span class="chip">were</span> students!</div>
+        <div class="sb-phrase">The canteen food <span class="chip">was</span> ok / amazing / terrible.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#52C98A; --cl:#F0FDF7;">
+        <div class="sb-label">🌟 Best &amp; worst</div>
+        <div class="sb-phrase">The best part <span class="chip">was</span> ___.</div>
+        <div class="sb-phrase">The worst part <span class="chip">was</span> the exams!</div>
+        <div class="sb-phrase">My group <span class="chip">was</span> very friendly.</div>
+        <div class="sb-phrase">The professors <span class="chip">were</span> strict but fair.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#FF7B7B; --cl:#FFF0F0;">
+        <div class="sb-label">💭 Your opinion</div>
+        <div class="sb-phrase">I think university <span class="chip">was</span> the best time.</div>
+        <div class="sb-phrase">It <span class="chip">was</span> hard but very interesting.</div>
+        <div class="sb-phrase">I <span class="chip">wasn't</span> ready for the exams!</div>
+        <div class="sb-phrase">But I <span class="chip">was</span> happy there.</div>
+      </div>
+
+    </div>
+    <div class="sample-box">
+      <div class="sample-label">💬 Sample</div>
+      <p class="sample-text">I <u>was</u> a student at Seoul University. My subject <u>was</u> business. The lectures <u>were</u> long but I <u>was</u> very interested. My group <u>was</u> great — we <u>were</u> all very different people. The best part <u>was</u> our trips together. The worst part <u>was</u> the exams — I <u>wasn't</u> ready at all!</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 — hero -->
+  <div class="step-panel" id="step-3">
+    <div class="scaffold-grid">
+
+      <div class="scaffold-block" style="--c:#B57BFF; --cl:#F5EEFF;">
+        <div class="sb-label">⭐ Who?</div>
+        <div class="sb-phrase">My hero <span class="chip">was</span> ___.</div>
+        <div class="sb-phrase">He / She <span class="chip">was</span> a famous ___.</div>
+        <div class="adj-chips">
+          <span class="adj">singer</span><span class="adj">athlete</span><span class="adj">actor</span>
+          <span class="adj">teacher</span><span class="adj">scientist</span><span class="adj">footballer</span>
+        </div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#4AAFF0; --cl:#EBF6FF;">
+        <div class="sb-label">🌟 Why a hero?</div>
+        <div class="sb-phrase">He / She <span class="chip">was</span> very strong / smart / kind.</div>
+        <div class="sb-phrase">He / She <span class="chip">was</span> the best in the world.</div>
+        <div class="sb-phrase">He / She <span class="chip">wasn't</span> rich at first, but…</div>
+        <div class="sb-phrase">His / Her story <span class="chip">was</span> amazing.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#52C98A; --cl:#F0FDF7;">
+        <div class="sb-label">💚 Why important to you?</div>
+        <div class="sb-phrase">I <span class="chip">was</span> a big fan when I <span class="chip">was</span> young.</div>
+        <div class="sb-phrase">He / She <span class="chip">was</span> my inspiration.</div>
+        <div class="sb-phrase">I <span class="chip">wasn't</span> the same person after…</div>
+        <div class="sb-phrase">For me, he / she <span class="chip">was</span> the best person.</div>
+      </div>
+
+      <div class="scaffold-block" style="--c:#FFA726; --cl:#FFFBEC;">
+        <div class="sb-label">🔗 Connectors</div>
+        <div class="sb-phrase"><span class="chip">Also,</span> he / she <span class="chip">was</span> very humble.</div>
+        <div class="sb-phrase"><span class="chip">But</span> life <span class="chip">wasn't</span> easy for them.</div>
+        <div class="sb-phrase"><span class="chip">And</span> they <span class="chip">were</span> always positive.</div>
+        <div class="sb-phrase"><span class="chip">So</span> for me they <span class="chip">were</span> amazing.</div>
+      </div>
+
+    </div>
+    <div class="sample-box">
+      <div class="sample-label">💬 Sample</div>
+      <p class="sample-text">My hero <u>was</u> Roger Federer. He <u>was</u> the best tennis player in the world. His story <u>was</u> amazing — he <u>wasn't</u> rich at the beginning but he <u>was</u> always positive and strong. I <u>was</u> a big fan when I <u>was</u> at school. For me, he <u>was</u> the best person in sport.</p>
+    </div>
+
+    <!-- final prompt -->
+    <div class="final-prompt">
+      <div class="fp-title">🎤 Now it's YOUR turn!</div>
+      <p class="fp-text">Use all 4 blocks (school → teachers &amp; friends → university → hero) to make your own monologue. Try to speak for <strong>1–2 minutes</strong>. Use <strong>was / were / wasn't / weren't</strong> in every part!</p>
+      <div class="fp-checklist">
+        <label><input type="checkbox"/> I talked about my school</label>
+        <label><input type="checkbox"/> I described a teacher or friend</label>
+        <label><input type="checkbox"/> I talked about university / college</label>
+        <label><input type="checkbox"/> I mentioned my hero</label>
+        <label><input type="checkbox"/> I used <strong>was / were</strong> many times ⭐</label>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer>Made with ❤️ for <span>English Lesson 7B</span> · Was &amp; Were · Childhood Stories</footer>
+
+<script>
+/* ─── DATA ─── */
+const WORDS = [
+  {en:'amazing',  ru:'удивительный / поразительный', ex:'"The film was amazing!" · He was an amazing runner.'},
+  {en:'famous',   ru:'знаменитый / известный',        ex:'"She was a famous singer."'},
+  {en:'fast',     ru:'быстрый',                        ex:'"He was a very fast runner."'},
+  {en:'poor',     ru:'бедный',                         ex:'"My grandparents were poor."'},
+  {en:'rich',     ru:'богатый',                        ex:'"They weren\'t rich."'},
+  {en:'strong',   ru:'сильный / крепкий',              ex:'"He was very strong."'},
+  {en:'weak',     ru:'слабый',                         ex:'"I wasn\'t weak at school."'},
+  {en:'positive', ru:'позитивный / оптимистичный',     ex:'"She was always positive."'},
+  {en:'slow',     ru:'медленный',                      ex:'"The car was slow."'},
+  {en:'best',     ru:'лучший',                         ex:'"He was the best player in town."'},
+];
+
+let curCard = 0;
+
+function showCard(i){
+  const w = WORDS[i];
+  document.getElementById('flip-word').textContent = w.en;
+  document.getElementById('flip-trans').textContent = w.ru;
+  document.getElementById('flip-ex').textContent = w.ex;
+  document.getElementById('flip-counter').textContent = (i+1)+' / '+WORDS.length;
+  document.getElementById('flip-inner').classList.remove('flipped');
+}
+function flipCard(){ document.getElementById('flip-inner').classList.toggle('flipped'); }
+function nextCard(){ curCard=(curCard+1)%WORDS.length; showCard(curCard); }
+function prevCard(){ curCard=(curCard-1+WORDS.length)%WORDS.length; showCard(curCard); }
+showCard(0);
+
+/* ─── VOCAB MC ─── */
+const VMC = [
+  {q:'Neymar is a _____ footballer from Brazil.',                 opts:['weak','best','famous'],   ans:'famous'},
+  {q:"Petra's family are very _____ – they have lots of money.", opts:['poor','rich','strong'],   ans:'rich'},
+  {q:"Mika's _____ because he swims every day.",                 opts:['famous','strong','poor'], ans:'strong'},
+  {q:"Osman's restaurant is the _____ in town.",                 opts:['best','amazing','weak'],  ans:'best'},
+  {q:"I can type but I'm very _____.",                           opts:['strong','positive','slow'],ans:'slow'},
+  {q:"My mother is a very _____ person – she's always happy.",   opts:['best','fast','positive'], ans:'positive'},
+];
+
+function buildVMC(){
+  const c=document.getElementById('vocab-mc'); c.innerHTML='';
+  VMC.forEach((q,qi)=>{
+    const d=document.createElement('div'); d.className='card';
+    d.innerHTML=`<p class="q-text"><strong>${qi+1}.</strong> ${q.q}</p><div class="choices" id="vc-${qi}"></div><div class="feedback" id="vf-${qi}"></div>`;
+    c.appendChild(d);
+    q.opts.forEach(o=>{
+      const b=document.createElement('button'); b.className='choice-btn'; b.textContent=o;
+      b.onclick=()=>{
+        const row=document.getElementById('vc-'+qi);
+        const fb=document.getElementById('vf-'+qi);
+        Array.from(row.children).forEach(x=>x.classList.add('disabled'));
+        if(o===q.ans){
+          b.classList.add('correct');
+          fb.textContent='✅ Correct! Great job!'; fb.className='feedback show ok';
+        } else {
+          b.classList.add('wrong');
+          fb.textContent='❌ Not quite. The answer is: '+q.ans; fb.className='feedback show err';
+          row.querySelectorAll('.choice-btn').forEach(x=>{ if(x.textContent===q.ans) x.classList.add('correct'); });
+        }
+      };
+      document.getElementById('vc-'+qi).appendChild(b);
+    });
+  });
+}
+buildVMC();
+
+/* ─── GRAMMAR ─── */
+const GQS = [
+  {q:'My grandmother _____ a famous singer.',                           opts:['was','were','wasn\'t'],    ans:'was'},
+  {q:'My parents _____ rich. They had very little money.',              opts:['were','wasn\'t','weren\'t'],ans:'weren\'t'},
+  {q:'Where _____ you yesterday?',                                      opts:['was','were','weren\'t'],   ans:'were'},
+  {q:'It _____ Yuri\'s birthday last week.',                            opts:['wasn\'t','weren\'t','were'],ans:'wasn\'t'},
+  {q:'I _____ at the cinema yesterday evening.',                        opts:['was','were','weren\'t'],   ans:'was'},
+  {q:'_____ the food good at the café yesterday?',                      opts:['Was','Were','Wasn\'t'],    ans:'Was'},
+  {q:'My grandparents _____ from big families.',                        opts:['was','were','wasn\'t'],    ans:'were'},
+  {q:'A: Was Ahmed in class?  B: Yes, he _____.',                       opts:['was','were','weren\'t'],   ans:'was'},
+  {q:'My parents _____ on holiday in China last week.',                  opts:['were','was','weren\'t'],   ans:'were'},
+  {q:'Who _____ your childhood hero?',                                  opts:['was','were','wasn\'t'],    ans:'was'},
+];
+let gramScore=0;
+function buildGrammar(){
+  const c=document.getElementById('grammar-qs'); c.innerHTML='';
+  const p=document.getElementById('gram-progress'); p.innerHTML='';
+  GQS.forEach((_,i)=>{ const pip=document.createElement('div'); pip.className='prog-pip'; pip.id='pp-'+i; p.appendChild(pip); });
+  GQS.forEach((q,qi)=>{
+    const d=document.createElement('div'); d.className='card';
+    d.innerHTML=`<p class="q-text"><strong>${qi+1}.</strong> ${q.q}</p><div class="choices" id="gq-${qi}"></div><div class="feedback" id="gf-${qi}"></div>`;
+    c.appendChild(d);
+    q.opts.forEach(o=>{
+      const b=document.createElement('button'); b.className='choice-btn'; b.textContent=o;
+      b.onclick=()=>{
+        const row=document.getElementById('gq-'+qi);
+        const fb=document.getElementById('gf-'+qi);
+        const pip=document.getElementById('pp-'+qi);
+        Array.from(row.children).forEach(x=>x.classList.add('disabled'));
+        if(o===q.ans){
+          b.classList.add('correct');
+          fb.textContent='✅ Correct!'; fb.className='feedback show ok';
+          gramScore++; document.getElementById('gram-score').textContent=gramScore;
+          pip.classList.add('done');
+        } else {
+          b.classList.add('wrong');
+          fb.textContent='❌ Not this time. The correct answer: '+q.ans; fb.className='feedback show err';
+          row.querySelectorAll('.choice-btn').forEach(x=>{ if(x.textContent===q.ans) x.classList.add('correct'); });
+          pip.classList.add('current');
+        }
+      };
+      document.getElementById('gq-'+qi).appendChild(b);
+    });
+  });
+}
+buildGrammar();
+
+/* ─── FILL IN ─── */
+const FILL = [
+  {sp:'A', pre:'Where ',       blank:'were',    post:' you yesterday evening?'},
+  {sp:'B', pre:'I ',           blank:'was',     post:' at home.'},
+  {sp:'A', pre:'How ',         blank:'was',     post:' your holiday?'},
+  {sp:'B', pre:'It ',          blank:'was',     post:' amazing!'},
+  {sp:'A', pre:'',             blank:'Were',    post:' you born in France?'},
+  {sp:'B', pre:'No, I ',       blank:"wasn't",  post:'. I was born in the UK.'},
+  {sp:'A', pre:'Who ',         blank:'were',    post:' your childhood friends?'},
+  {sp:'B', pre:'Amy and Abby. They ', blank:'were', post:' in my class.'},
+];
+function buildFill(){
+  const c=document.getElementById('fill-convo'); c.innerHTML='';
+  FILL.forEach((l,i)=>{
+    const p=document.createElement('p'); p.className='convo-line';
+    p.innerHTML=`<span class="speaker ${l.sp.toLowerCase()}">${l.sp}</span> ${l.pre}<input class="fill-input" id="fi-${i}" placeholder="____" />${l.post}`;
+    c.appendChild(p);
+  });
+}
+buildFill();
+function checkFill(){
+  let ok=0;
+  FILL.forEach((l,i)=>{
+    const inp=document.getElementById('fi-'+i);
+    const val=inp.value.trim().toLowerCase();
+    if(val===l.blank.toLowerCase()){ inp.classList.add('ok'); inp.classList.remove('err'); ok++; }
+    else { inp.classList.add('err'); inp.classList.remove('ok'); inp.value=l.blank; }
+  });
+  const fb=document.getElementById('fill-fb');
+  if(ok===FILL.length){ fb.textContent='🎉 All correct! Excellent work!'; fb.className='feedback show ok'; }
+  else { fb.textContent=ok+' / '+FILL.length+' correct. Wrong answers are shown — study them!'; fb.className='feedback show err'; }
+}
+function resetFill(){ buildFill(); document.getElementById('fill-fb').className='feedback'; }
+
+/* ─── NEGATIVE ─── */
+const NEGS=[
+  {q:'Roger Federer was a weak tennis player.', ans:"Roger Federer wasn't a weak tennis player."},
+  {q:'My grandparents were rich.',              ans:"My grandparents weren't rich."},
+  {q:'I was slow at swimming.',                 ans:"I wasn't slow at swimming."},
+  {q:'The café was poor yesterday.',            ans:"The café wasn't poor yesterday."},
+];
+function buildNeg(){
+  const c=document.getElementById('neg-qs'); c.innerHTML='';
+  NEGS.forEach((q,qi)=>{
+    const d=document.createElement('div'); d.className='card';
+    d.innerHTML=`
+      <p class="q-text" style="text-decoration:line-through; color:#999;">${q.q}</p>
+      <p style="font-size:12px; color:var(--sky-dark); font-weight:700; margin-bottom:4px;">✏️ Make it negative:</p>
+      <input class="neg-input" id="nq-${qi}" placeholder="Type the negative sentence here…"/>
+      <div class="feedback" id="nf-${qi}"></div>
+      <button class="btn btn-sun" style="margin-top:10px; font-size:13px; padding:8px 18px;" onclick="checkNeg(${qi})">Check</button>`;
+    c.appendChild(d);
+  });
+}
+buildNeg();
+function checkNeg(qi){
+  const inp=document.getElementById('nq-'+qi), fb=document.getElementById('nf-'+qi);
+  const val=inp.value.trim().toLowerCase().replace(/[.!]/g,'');
+  const exp=NEGS[qi].ans.toLowerCase().replace(/[.!]/g,'');
+  if(val===exp){ fb.textContent='✅ Perfect sentence!'; fb.className='feedback show ok'; }
+  else { fb.textContent='❌ Check: '+NEGS[qi].ans; fb.className='feedback show err'; }
+}
+
+/* ─── SPEAKING STEP SWITCHER ─── */
+function setStep(i, btn){
+  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.step-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('step-'+i).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ─── TABS ─── */
+function switchTab(name, btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
