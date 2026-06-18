@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food & Eating Out - English Practice</title>
+    <style>
+        :root {
+            --primary: #E67E22;
+            --secondary: #27AE60;
+            --bg: #FBF6EF;
+            --text: #333;
+            --success: #2ECC71;
+            --danger: #E74C3C;
+            --white: #fff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 { color: var(--primary); text-align: center; border-bottom: 2px solid #eee; padding-bottom: 10px;}
+        h2 { color: var(--secondary); margin-top: 40px;}
+        .section { margin-bottom: 50px; }
+
+        /* Presentation Area */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .vocab-card {
+            background: #fff6ec;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        .vocab-card strong { color: var(--primary); font-size: 1.1em;}
+
+        /* Memory Game */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .memory-card {
+            background: var(--primary);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            color: transparent;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            transition: all 0.3s;
+            user-select: none;
+        }
+        .memory-card.flipped {
+            background: var(--white);
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+        .memory-card.matched {
+            background: var(--success);
+            color: var(--white);
+            cursor: default;
+        }
+
+        /* Matching Game */
+        .matching-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .match-col { flex: 1; display: flex; flex-direction: column; gap: 10px;}
+        .match-item {
+            background: #eee;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .match-item.selected { border-color: var(--secondary); background: #e8f8f0;}
+        .match-item.matched { border-color: var(--success); background: #e8f8f5; color: #888; cursor: default;}
+
+        /* Some/Any sorting */
+        .sort-area { display: flex; gap: 20px; flex-wrap: wrap; }
+        .sort-pool {
+            flex: 1 1 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            min-height: 50px;
+            padding: 10px;
+        }
+        .word-chip {
+            background: var(--primary);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            user-select: none;
+            transition: 0.2s;
+        }
+        .word-chip:hover { transform: translateY(-2px); }
+        .word-chip.correct { background: var(--success); cursor: default; }
+        .word-chip.wrong { background: var(--danger); }
+        .bins { display: flex; gap: 20px; flex: 1 1 100%; }
+        .bin {
+            flex: 1;
+            min-height: 120px;
+            border: 3px dashed #ccc;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+        .bin h4 { margin: 0 0 10px; color: var(--secondary); }
+        .bin .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+        /* Quiz */
+        .quiz-question { margin-bottom: 20px; background: #fafafa; padding: 15px; border-radius: 8px;}
+        .quiz-options label { display: block; margin: 8px 0; cursor: pointer; }
+        button {
+            background: var(--primary); color: white; border: none;
+            padding: 12px 24px; border-radius: 6px; font-size: 1em;
+            cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        button:hover { background: #cf6f15; }
+
+        /* Spinner */
+        .spinner-container { text-align: center; margin: 20px 0; }
+        .spinner-result {
+            font-size: 2em; font-weight: bold; color: var(--secondary);
+            min-height: 60px; margin: 20px 0; padding: 20px;
+            border: 3px dashed #ccc; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Speaking Cards */
+        .speaking-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .speaking-card {
+            perspective: 1000px;
+            height: 200px;
+        }
+        .card-inner {
+            width: 100%; height: 100%; transition: transform 0.6s;
+            transform-style: preserve-3d; cursor: pointer;
+            position: relative;
+        }
+        .speaking-card:hover .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            width: 100%; height: 100%; position: absolute;
+            backface-visibility: hidden; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px; box-sizing: border-box; text-align: center;
+        }
+        .card-front { background: var(--primary); color: white; font-size: 1.5em; font-weight: bold;}
+        .card-back { background: var(--secondary); color: white; transform: rotateY(180deg); font-size: 1.1em;}
+
+        @media(max-width: 600px) {
+            .memory-game { grid-template-columns: repeat(2, 1fr); }
+            .matching-container { flex-direction: column; }
+            .bins { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🍽️ Food & Eating Out</h1>
+    <p style="text-align:center; font-size: 1.1em;">Welcome to your interactive English lesson! Today we are learning food vocabulary, how to talk about quantities (<em>some / any, much / many</em>) and how to order food in a café.</p>
+
+    <!-- PRESENTATION -->
+    <div class="section" id="presentation">
+        <h2>1. Presentation: Useful Vocabulary & Phrases</h2>
+        <p>Read the phrases below. Make sure you understand them before playing the games!</p>
+
+        <div class="vocab-grid">
+            <div class="vocab-card">
+                <strong>Food & drinks:</strong><br>
+                • fruit & vegetables 🍎🥕<br>
+                • meat, fish & chicken 🍗<br>
+                • rice, pasta & bread 🍞<br>
+                • a cup of coffee / tea ☕<br>
+                • a glass of water / juice 🧃
+            </div>
+            <div class="vocab-card">
+                <strong>Talking about food you like:</strong><br>
+                • I love / like ...<br>
+                • I don't really like ...<br>
+                • I can't stand ...<br>
+                • My favourite food is ...<br>
+                • It's delicious / tasty / healthy.
+            </div>
+            <div class="vocab-card">
+                <strong>Ordering in a café:</strong><br>
+                • Can I have a ..., please?<br>
+                • I'd like ..., please.<br>
+                • Anything to drink?<br>
+                • How much is it?<br>
+                • Here you are. / Enjoy your meal!
+            </div>
+            <div class="vocab-card">
+                <strong>Grammar focus — quantity:</strong><br>
+                • <strong>some</strong> + ✅ (I'd like some bread.)<br>
+                • <strong>any</strong> + ❓/❌ (Have you got any milk?)<br>
+                • <strong>How much</strong> + uncountable (sugar)<br>
+                • <strong>How many</strong> + countable (apples)
+            </div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 1: MEMORY GAME -->
+    <div class="section">
+        <h2>2. Practice: Memory Game</h2>
+        <p>Find the matching pairs! Match the food word with the correct emoji.</p>
+        <div class="memory-game" id="memoryGame"></div>
+    </div>
+
+    <!-- PRACTICE 2: MATCHING GAME -->
+    <div class="section">
+        <h2>3. Practice: Café Conversation Matching</h2>
+        <p>Match the question on the left with the correct response on the right. Click a grey box, then click its partner.</p>
+        <div class="matching-container">
+            <div class="match-col" id="matchLeft"></div>
+            <div class="match-col" id="matchRight"></div>
+        </div>
+    </div>
+
+    <!-- PRACTICE 3: SOME / ANY SORTING -->
+    <div class="section">
+        <h2>4. Practice: Countable or Uncountable?</h2>
+        <p>Click each food word to send it to the correct basket. <strong>Countable</strong> = we can count it (one apple, two apples). <strong>Uncountable</strong> = we can't count it (water, rice).</p>
+        <div class="sort-area">
+            <div class="sort-pool" id="sortPool"></div>
+            <div class="bins">
+                <div class="bin">
+                    <h4>🔢 Countable</h4>
+                    <div class="drop-zone" id="binCountable"></div>
+                </div>
+                <div class="bin">
+                    <h4>💧 Uncountable</h4>
+                    <div class="drop-zone" id="binUncountable"></div>
+                </div>
+            </div>
+        </div>
+        <p id="sortResult" style="font-weight: bold;"></p>
+    </div>
+
+    <!-- PRACTICE 4: QUIZ -->
+    <div class="section">
+        <h2>5. Practice: Grammar & Vocabulary Quiz</h2>
+        <p>Choose the correct alternative to complete the sentences.</p>
+        <div id="quizContainer"></div>
+        <button onclick="checkQuiz()">Check Answers</button>
+        <p id="quizResult" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+
+    <!-- PRODUCTION 1: SPINNER -->
+    <div class="section">
+        <h2>6. Production: The Menu Spinner</h2>
+        <p>Click "Spin" to get a meal. Then practise saying out loud: <em>"For my meal I'd like ... I think it's ..."</em> (delicious / healthy / a bit unhealthy).</p>
+        <div class="spinner-container">
+            <div class="spinner-result" id="spinnerBox">What's on your plate? 🎰</div>
+            <button onclick="spinWheel()">Spin the Wheel!</button>
+        </div>
+    </div>
+
+    <!-- PRODUCTION 2: SPEAKING CARDS -->
+    <div class="section">
+        <h2>7. Production: Speaking Roleplay Cards</h2>
+        <p>Hover over (or tap) the cards to reveal a situation. Imagine you are in this situation. What do you say? Practise out loud!</p>
+        <div class="speaking-cards">
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 1</div>
+                    <div class="card-back">You are in a café. Order a sandwich and something to drink. Ask how much it is.</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 2</div>
+                    <div class="card-back">A friend asks: "What's your favourite food and why?" Answer with at least three sentences.</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 3</div>
+                    <div class="card-back">You want to make a pizza 🍕. Tell your partner what food you need. Use "some" and "any".</div>
+                </div>
+            </div>
+            <div class="speaking-card">
+                <div class="card-inner">
+                    <div class="card-front">Situation 4</div>
+                    <div class="card-back">You are the waiter. Your partner is the customer. Take their order and recommend the soup of the day.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- MEMORY GAME LOGIC ---
+    const memoryItems = [
+        { id: 1, text: 'an apple' }, { id: 1, text: '🍎' },
+        { id: 2, text: 'bread' }, { id: 2, text: '🍞' },
+        { id: 3, text: 'cheese' }, { id: 3, text: '🧀' },
+        { id: 4, text: 'a banana' }, { id: 4, text: '🍌' },
+        { id: 5, text: 'coffee' }, { id: 5, text: '☕' },
+        { id: 6, text: 'fish' }, { id: 6, text: '🐟' }
+    ];
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+
+    function createMemoryGame() {
+        const board = document.getElementById('memoryGame');
+        shuffle(memoryItems);
+        memoryItems.forEach(item => {
+            const card = document.createElement('div');
+            card.classList.add('memory-card');
+            card.dataset.id = item.id;
+            card.innerHTML = `<span>${item.text}</span>`;
+            card.querySelector('span').style.opacity = 0; // Hide text initially
+            card.addEventListener('click', flipCard);
+            board.appendChild(card);
+        });
+    }
+
+    function flipCard() {
+        if (lockBoard) return;
+        if (this === firstCard) return;
+
+        this.classList.add('flipped');
+        this.querySelector('span').style.opacity = 1;
+
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+            return;
+        }
+
+        secondCard = this;
+        checkForMatch();
+    }
+
+    function checkForMatch() {
+        let isMatch = firstCard.dataset.id === secondCard.dataset.id;
+        isMatch ? disableCards() : unflipCards();
+    }
+
+    function disableCards() {
+        firstCard.classList.add('matched');
+        secondCard.classList.add('matched');
+        resetBoard();
+    }
+
+    function unflipCards() {
+        lockBoard = true;
+        setTimeout(() => {
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            firstCard.querySelector('span').style.opacity = 0;
+            secondCard.querySelector('span').style.opacity = 0;
+            resetBoard();
+        }, 1000);
+    }
+
+    function resetBoard() {
+        [hasFlippedCard, lockBoard] = [false, false];
+        [firstCard, secondCard] = [null, null];
+    }
+
+    createMemoryGame();
+
+    // --- MATCHING GAME LOGIC ---
+    const matchData = [
+        { id: 'm1', left: "Can I help you?", right: "Yes, I'd like a coffee, please." },
+        { id: 'm2', left: "Anything to drink?", right: "A glass of orange juice, please." },
+        { id: 'm3', left: "How much is it?", right: "It's four euros, please." },
+        { id: 'm4', left: "Would you like some cake?", right: "No, thanks. I'm full." },
+        { id: 'm5', left: "Enjoy your meal!", right: "Thank you very much!" }
+    ];
+
+    let selectedLeft = null;
+    let selectedRight = null;
+
+    function initMatching() {
+        const leftCol = document.getElementById('matchLeft');
+        const rightCol = document.getElementById('matchRight');
+
+        let leftItems = matchData.map(d => ({id: d.id, text: d.left}));
+        let rightItems = matchData.map(d => ({id: d.id, text: d.right}));
+
+        shuffle(leftItems);
+        shuffle(rightItems);
+
+        leftItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item left-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectMatchItem(div, 'left');
+            leftCol.appendChild(div);
+        });
+
+        rightItems.forEach(item => {
+            let div = document.createElement('div');
+            div.className = 'match-item right-item';
+            div.innerText = item.text;
+            div.dataset.id = item.id;
+            div.onclick = () => selectMatchItem(div, 'right');
+            rightCol.appendChild(div);
+        });
+    }
+
+    function selectMatchItem(el, side) {
+        if(el.classList.contains('matched')) return;
+
+        if (side === 'left') {
+            document.querySelectorAll('.left-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedLeft = el;
+        } else {
+            document.querySelectorAll('.right-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedRight = el;
+        }
+
+        if (selectedLeft && selectedRight) {
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        if (selectedLeft.dataset.id === selectedRight.dataset.id) {
+            selectedLeft.classList.remove('selected');
+            selectedRight.classList.remove('selected');
+            selectedLeft.classList.add('matched');
+            selectedRight.classList.add('matched');
+        } else {
+            let tempL = selectedLeft;
+            let tempR = selectedRight;
+            setTimeout(() => {
+                tempL.classList.remove('selected');
+                tempR.classList.remove('selected');
+            }, 500);
+        }
+        selectedLeft = null;
+        selectedRight = null;
+    }
+
+    initMatching();
+
+    // --- COUNTABLE / UNCOUNTABLE SORTING ---
+    const sortWords = [
+        { word: 'apple', type: 'c' },
+        { word: 'water', type: 'u' },
+        { word: 'egg', type: 'c' },
+        { word: 'rice', type: 'u' },
+        { word: 'banana', type: 'c' },
+        { word: 'milk', type: 'u' },
+        { word: 'sandwich', type: 'c' },
+        { word: 'bread', type: 'u' },
+        { word: 'tomato', type: 'c' },
+        { word: 'sugar', type: 'u' }
+    ];
+    let sortSolved = 0;
+
+    function initSort() {
+        const pool = document.getElementById('sortPool');
+        shuffle(sortWords);
+        sortWords.forEach(item => {
+            const chip = document.createElement('span');
+            chip.className = 'word-chip';
+            chip.innerText = item.word;
+            chip.dataset.type = item.type;
+            chip.onclick = () => sortWord(chip);
+            pool.appendChild(chip);
+        });
+    }
+
+    function sortWord(chip) {
+        if (chip.classList.contains('correct')) return;
+        const correctBin = chip.dataset.type === 'c' ? 'binCountable' : 'binUncountable';
+        document.getElementById(correctBin).appendChild(chip);
+        chip.classList.add('correct');
+        chip.onclick = null;
+        sortSolved++;
+        if (sortSolved === sortWords.length) {
+            document.getElementById('sortResult').innerText = "🎉 Great job! All words sorted correctly!";
+            document.getElementById('sortResult').style.color = "var(--success)";
+        }
+    }
+
+    initSort();
+
+    // --- QUIZ LOGIC ---
+    const quizData = [
+        { q: "I'd like ______ water, please.", options: ["some", "any"], answer: 0 },
+        { q: "Have we got ______ apples?", options: ["some", "any"], answer: 1 },
+        { q: "How ______ sugar do you want?", options: ["much", "many"], answer: 0 },
+        { q: "How ______ eggs are in the box?", options: ["much", "many"], answer: 1 },
+        { q: "There isn't ______ milk in the fridge.", options: ["some", "any"], answer: 1 },
+        { q: "Can I ______ a cup of tea, please?", options: ["have", "has"], answer: 0 }
+    ];
+
+    function initQuiz() {
+        const container = document.getElementById('quizContainer');
+        quizData.forEach((q, index) => {
+            let div = document.createElement('div');
+            div.className = 'quiz-question';
+            div.innerHTML = `<strong>${index + 1}. ${q.q}</strong><div class="quiz-options">
+                <label><input type="radio" name="q${index}" value="0"> ${q.options[0]}</label>
+                <label><input type="radio" name="q${index}" value="1"> ${q.options[1]}</label>
+            </div>`;
+            container.appendChild(div);
+        });
+    }
+
+    function checkQuiz() {
+        let score = 0;
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            const questionDiv = document.querySelectorAll('.quiz-question')[index];
+            if (selected && parseInt(selected.value) === q.answer) {
+                score++;
+                questionDiv.style.borderLeft = "4px solid var(--success)";
+            } else {
+                questionDiv.style.borderLeft = "4px solid var(--danger)";
+            }
+        });
+        document.getElementById('quizResult').innerText = `You got ${score} out of ${quizData.length} correct!`;
+        document.getElementById('quizResult').style.color = score === quizData.length ? "var(--success)" : "var(--primary)";
+    }
+
+    initQuiz();
+
+    // --- SPINNER LOGIC ---
+    const meals = [
+        "a bowl of vegetable soup 🥣",
+        "a chicken sandwich 🥪",
+        "spaghetti with tomato sauce 🍝",
+        "a fresh green salad 🥗",
+        "fish and chips 🍟",
+        "a slice of chocolate cake 🍰",
+        "rice with vegetables 🍚",
+        "a cheese pizza 🍕"
+    ];
+
+    function spinWheel() {
+        const box = document.getElementById('spinnerBox');
+        let counter = 0;
+        box.style.borderColor = "var(--primary)";
+
+        let interval = setInterval(() => {
+            box.innerText = meals[Math.floor(Math.random() * meals.length)];
+            counter++;
+            if (counter > 20) {
+                clearInterval(interval);
+                box.innerText = meals[Math.floor(Math.random() * meals.length)];
+                box.style.borderColor = "var(--success)";
+                box.style.transform = "scale(1.05)";
+                setTimeout(() => box.style.transform = "scale(1)", 200);
+            }
+        }, 50);
+    }
+
+</script>
+</body>
+</html>
