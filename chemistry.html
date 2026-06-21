@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Lab Vocabulary Interactive Lesson</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: 'Nunito', sans-serif;
+            background-color: #fafafa;
+            /* Grid background to mimic notebook paper */
+            background-image: 
+                linear-gradient(#e0e0e0 1px, transparent 1px),
+                linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
+            background-size: 25px 25px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Task Boxes */
+        .task-box {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .mint-box {
+            background-color: #e5f3f0;
+            border: 2px solid #bce0d6;
+        }
+
+        .peach-box {
+            background-color: #fdf5f2;
+            border: 2px solid #f9ded5;
+        }
+
+        /* Matching Game Styles */
+        .matching-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .match-btn {
+            padding: 12px;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .match-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .match-btn.selected {
+            background: #346c84;
+            color: white;
+            border-color: #346c84;
+        }
+
+        .match-btn.matched {
+            background: #a8d5c9;
+            color: #1b4d3e;
+            border-color: #a8d5c9;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* Multiple Choice Styles */
+        .quiz-question {
+            margin-bottom: 20px;
+        }
+        
+        .quiz-question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .quiz-options label:hover {
+            background: rgba(0,0,0,0.03);
+        }
+
+        .check-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .check-btn:hover {
+            background: #1a252f;
+        }
+
+        #quiz-result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Speech Bubble Styles (from reference image) */
+        .speech-bubble-container {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .speech-bubble {
+            background: #346c84; /* Dark teal/blue from reference */
+            color: white;
+            border-radius: 40px 40px 5px 40px;
+            padding: 30px 40px;
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(52, 108, 132, 0.2);
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .speech-bubble .highlight {
+            color: #ffde82;
+            font-weight: bold;
+        }
+
+        .verb-list {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255,255,255,0.3);
+            font-size: 0.9em;
+        }
+        
+        .verb-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🧪 Lab Work Planner</h1>
+        <p class="subtitle">Glyphosate Detection & Analysis Workflow</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- Task 1: Matching -->
+        <div class="task-box mint-box">
+            <h2>📌 1. Term Match-Up</h2>
+            <p style="font-size: 0.9em; margin-bottom: 20px;">Click a term on the left, then click its correct definition on the right.</p>
+            
+            <div class="matching-container">
+                <div class="matching-column" id="terms-col">
+                    <button class="match-btn term" data-match="1">Herbicide</button>
+                    <button class="match-btn term" data-match="2">Ultrasound bath</button>
+                    <button class="match-btn term" data-match="3">Derivatization</button>
+                    <button class="match-btn term" data-match="4">Multiple Reaction Monitoring</button>
+                </div>
+                <div class="matching-column" id="defs-col">
+                    <button class="match-btn def" data-match="3">Changing a chemical's structure so the machine can "see" it better.</button>
+                    <button class="match-btn def" data-match="1">A chemical used to kill unwanted plants.</button>
+                    <button class="match-btn def" data-match="4">A setting where the machine looks for one specific molecule and ignores everything else.</button>
+                    <button class="match-btn def" data-match="2">A machine that breaks down samples using sound waves.</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 2: Multiple Choice -->
+        <div class="task-box peach-box">
+            <h2>📋 2. Knowledge Check</h2>
+            <p style="font-size: 0.9em; margin-bottom: 20px;">Choose the correct answer based on the laboratory process.</p>
+
+            <div class="quiz-question">
+                <p>1. Why do we need to perform "pH optimization"?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q1" value="wrong"> To completely destroy the glyphosate.</label>
+                    <label><input type="radio" name="q1" value="correct"> To find the perfect acid/base balance to preserve the substance.</label>
+                    <label><input type="radio" name="q1" value="wrong"> To clean the mass spectrometer.</label>
+                </div>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What is the main job of the Triple Quadrupole Mass Spectrometer?</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="q2" value="wrong"> To break open plant cells to extract the liquid.</label>
+                    <label><input type="radio" name="q2" value="wrong"> To add methyl groups to the herbicide.</label>
+                    <label><input type="radio" name="q2" value="correct"> To filter, break down, and identify chemicals by weighing their fragments.</label>
+                </div>
+            </div>
+
+            <button class="check-btn" onclick="checkQuiz()">Check Answers</button>
+            <div id="quiz-result"></div>
+        </div>
+
+        <!-- Task 3: Speaking Prompt (Styled like the reference image) -->
+        <div class="speech-bubble-container">
+            <div class="speech-bubble">
+                <div style="margin-bottom: 10px; font-weight: bold; font-size: 1.2em;">Instant Decisions: Lab Routine</div>
+                <p>Your new lab assistant looks confused and asks:<br> 
+                <i>"Hey, what exactly did we do with those soybean samples yesterday? How did we find the herbicide?"</i></p>
+                
+                <p style="margin-top: 20px; font-style: italic; font-size: 0.9em;">
+                    • Explain the process to them out loud.<br>
+                    • Try to use at least <span class="highlight">3 verbs</span> from the list below:
+                </p>
+
+                <div class="verb-list">
+                    <span class="verb-badge">detect</span>
+                    <span class="verb-badge">extract</span>
+                    <span class="verb-badge">alter</span>
+                    <span class="verb-badge">measure</span>
+                    <span class="verb-badge">break down</span>
+                    <span class="verb-badge">enhance</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Matching Game Logic ---
+        let selectedTerm = null;
+        let selectedDef = null;
+
+        const termBtns = document.querySelectorAll('.term');
+        const defBtns = document.querySelectorAll('.def');
+
+        function handleMatchClick(e) {
+            const btn = e.target;
+            const isTerm = btn.classList.contains('term');
+
+            if (isTerm) {
+                termBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedTerm = btn;
+            } else {
+                defBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedDef = btn;
+            }
+
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (selectedTerm && selectedDef) {
+                if (selectedTerm.dataset.match === selectedDef.dataset.match) {
+                    // Match found!
+                    selectedTerm.classList.remove('selected');
+                    selectedDef.classList.remove('selected');
+                    selectedTerm.classList.add('matched');
+                    selectedDef.classList.add('matched');
+                    
+                    // Reset selections
+                    selectedTerm = null;
+                    selectedDef = null;
+                } else {
+                    // Wrong match - shake effect or just reset
+                    setTimeout(() => {
+                        selectedTerm.classList.remove('selected');
+                        selectedDef.classList.remove('selected');
+                        selectedTerm = null;
+                        selectedDef = null;
+                    }, 500);
+                }
+            }
+        }
+
+        termBtns.forEach(btn => btn.addEventListener('click', handleMatchClick));
+        defBtns.forEach(btn => btn.addEventListener('click', handleMatchClick));
+
+        // --- Quiz Logic ---
+        function checkQuiz() {
+            let score = 0;
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const resultDiv = document.getElementById('quiz-result');
+
+            if (!q1 || !q2) {
+                resultDiv.style.color = '#e74c3c';
+                resultDiv.innerText = "Please answer all questions!";
+                return;
+            }
+
+            if (q1.value === 'correct') score++;
+            if (q2.value === 'correct') score++;
+
+            if (score === 2) {
+                resultDiv.style.color = '#27ae60';
+                resultDiv.innerText = "Excellent! 2/2 correct! 🎯";
+            } else {
+                resultDiv.style.color = '#e67e22';
+                resultDiv.innerText = `You got ${score}/2. Let's review the definitions! 📚`;
+            }
+        }
+    </script>
+</body>
+</html>
