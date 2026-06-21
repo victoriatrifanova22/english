@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herbicide Detection - Vocabulary</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f4f5f8;
+  --color-border-secondary: #ced4da;
+  --color-border-tertiary: #e9ecef;
+  --color-text-primary: #212529;
+  --color-text-secondary: #495057;
+  --color-text-tertiary: #868e96;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans); background-color: #fafbfc; color: var(--color-text-primary);}
+.pg{max-width:660px;margin:0 auto;padding:2rem 1rem 4rem; background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.03); min-height: 100vh;}
+.lesson-hdr{border-bottom:.5px solid var(--color-border-tertiary);padding-bottom:1.25rem;margin-bottom:2rem}
+.ltag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary);font-weight:600;margin-bottom:.35rem}
+.ltitle{font-size:24px;font-weight:600;color:var(--color-text-primary);line-height:1.2;margin-bottom:.25rem}
+.lsub{font-size:13px;color:var(--color-text-secondary)}
+.sep{height:.5px;background:var(--color-border-tertiary);margin:2.25rem 0}
+.ex-title{font-size:18px;font-weight:600;color:var(--color-text-primary);margin-bottom:.2rem}
+.ex-sub{font-size:13px;color:var(--color-text-secondary);font-style:italic;margin-bottom:1rem}
+.note{background:var(--color-background-secondary);border-left:3px solid #534AB7;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:.8rem 1rem;font-size:13px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.25rem}
+.note b{color:#3C3489;font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:8px 16px;border-radius:var(--border-radius-md);border:1px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary);cursor:pointer;transition:all .15s ease}
+.btn:hover{background:var(--color-background-secondary); border-color:#adb5bd;}
+.btn.p{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489}
+.btn.p:hover{background:#CECBF6; border-color:#928ce3;}
+.btn-row{display:flex;align-items:center;gap:10px;margin-top:1rem;flex-wrap:wrap}
+.stxt{font-size:13px;color:var(--color-text-tertiary)}
+.fb{font-size:12px;font-weight:600}
+.fb.ok{color:#0F6E56}
+.fb.err{color:#A32D2D}
+
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:1.25rem}
+.flip-card{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.2rem;cursor:pointer;transition:all .2s ease;min-height:100px;display:flex;flex-direction:column;justify-content:space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+.flip-card:hover{border-color:var(--color-border-secondary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.04);}
+.flip-card.open{border-color:#534AB7;background:#f8f7ff;}
+.flip-front{}
+.flip-cat{font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.flip-cat.subj{background:#FAEEDA;color:#633806}
+.flip-cat.equip{background:#E6F1FB;color:#0C447C}
+.flip-cat.proc{background:#E1F5EE;color:#085041}
+.flip-word{font-size:16px;font-weight:600;color:var(--color-text-primary);margin-bottom:4px}
+.flip-pron{font-size:13px;color:#534AB7; opacity: 0.8;}
+.flip-toggle{font-size:12px;color:var(--color-text-tertiary);margin-top:10px;display:flex;align-items:center;gap:4px; font-weight: 500;}
+.flip-card.open .flip-toggle{color:#3C3489}
+.flip-def{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #dcd9fa;font-size:13.5px;color:#3C3489;line-height:1.6}
+.flip-card.open .flip-def{display:block}
+.flip-ru{font-size:13px;color:#534AB7;font-weight:600;margin-bottom:6px}
+
+.mc-item{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.2rem;margin-bottom:1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+.mc-q{font-size:14.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:.8rem;line-height:1.5}
+.mc-opts{display:flex;flex-direction:column;gap:6px}
+.mc-opt{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--color-text-secondary);padding:.6rem .8rem;border-radius:var(--border-radius-md);cursor:pointer;transition:all .15s ease;line-height:1.5;border:1px solid transparent}
+.mc-opt:hover{background:var(--color-background-secondary)}
+.mc-opt input[type=radio]{accent-color:#534AB7;margin-top:3px;flex-shrink:0; cursor: pointer;}
+.mc-opt.correct{background:#eefaf5;border-color:#5DCAA5;color:#085041}
+.mc-opt.wrong{background:#FCEBEB;border-color:#F09595;color:#791F1F}
+.mc-fb{font-size:13px;margin-top:.8rem;min-height:18px; line-height: 1.5;}
+
+.speak-card{background:var(--color-background-primary);border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.2rem 1.5rem;margin-bottom:1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+.speak-topic{display:flex;align-items:center;gap:10px;margin-bottom:.8rem}
+.speak-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.speak-badge.subj{background:#EEEDFE;color:#3C3489}
+.speak-badge.equip{background:#E6F1FB;color:#0C447C}
+.speak-badge.proc{background:#E1F5EE;color:#085041}
+.speak-q{font-size:15px;font-weight:600;color:var(--color-text-primary);line-height:1.55;margin-bottom:.8rem}
+.speak-verbs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem}
+.speak-verb{font-size:13px;background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:20px;padding:4px 12px;color:var(--color-text-secondary)}
+.speak-verb b{color:#534AB7;font-weight:600}
+.speak-hint{font-size:13px;color:var(--color-text-tertiary);line-height:1.55;margin-bottom:1rem; display: flex; align-items: flex-start; gap: 6px;}
+.speak-reveal{display:none}
+.speak-reveal.open{display:block}
+.speak-ans{font-size:14px;color:var(--color-text-secondary);line-height:1.7;padding:.9rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-top:1rem; border-left: 3px solid #ced4da;}
+.speak-ans b{color:var(--color-text-primary);font-weight:600}
+.speak-ans .vh{color:#3C3489;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="pg">
+<h2 class="sr-only" style="display:none;">Interactive vocabulary lesson — herbicide detection</h2>
+
+<div class="lesson-hdr">
+  <div class="ltag">Scientific English · Vocabulary · B2</div>
+  <div class="ltitle">Herbicide detection — vocabulary in depth</div>
+  <div class="lsub">Three exercises: term cards · multiple choice · explain your lab routine</div>
+</div>
+
+<div class="ex-title">Exercise 1 — Term cards</div>
+<div class="ex-sub">Click any card to reveal its definition. Try to recall the meaning before you open it.</div>
+<div class="note"><b>Strategy:</b> read the term → say the definition aloud in your own words → then click to check.</div>
+
+<div class="flip-grid" id="flip-grid"></div>
+<div class="btn-row">
+  <button class="btn" onclick="collapseAll()"><i class="ti ti-eye-off" aria-hidden="true"></i> Hide all</button>
+  <button class="btn" onclick="expandAll()"><i class="ti ti-eye" aria-hidden="true"></i> Show all</button>
+</div>
+
+<div class="sep"></div>
+
+<div class="ex-title">Exercise 2 — Multiple choice</div>
+<div class="ex-sub">Choose the best answer for each question about the analytical method</div>
+
+<div id="mc-wrap"></div>
+<div class="btn-row">
+  <button class="btn p" onclick="checkMC()"><i class="ti ti-check" aria-hidden="true"></i> Check all</button>
+  <button class="btn" onclick="resetMC()"><i class="ti ti-refresh" aria-hidden="true"></i> Reset</button>
+  <span class="stxt" id="mcs"></span>
+</div>
+
+<div class="sep"></div>
+
+<div class="ex-title">Exercise 3 — Explain your lab routine</div>
+<div class="ex-sub">Read the question, use the suggested verbs, then reveal a model answer to compare</div>
+<div class="note"><b>Speaking strategy:</b> define the term → say what it does → explain why it matters in your experiment. Use the action verbs provided.</div>
+
+<div id="speak-wrap"></div>
+
+</div>
+
+<script>
+const cards = [
+  {word:"Glyphosate", pron:"ˈɡlaɪfəseɪt", ru:"Глифосат", cat:"subj", catLabel:"Subject",
+   def:"A very common herbicide that accumulates in the tissues of GM crops after field application."},
+  {word:"Herbicide-resistant crops", pron:"ˈhɜːrbɪsaɪd rɪˈzɪstənt krɒps", ru:"Гербицидоустойчивые культуры", cat:"subj", catLabel:"Subject",
+   def:"Plants genetically modified to survive herbicide application, but which may still accumulate residues in their tissue."},
+  {word:"Sample", pron:"ˈsæmpl", ru:"Образец", cat:"subj", catLabel:"Subject",
+   def:"A small piece of plant material (e.g. a leaf) taken for laboratory testing and analysis."},
+  {word:"Trace", pron:"treɪs", ru:"Следовые количества", cat:"subj", catLabel:"Subject",
+   def:"An extremely small amount of a substance — detectable only with sensitive instrumentation."},
+  {word:"Ultrasound bath", pron:"ˈʌltrəsaʊnd bɑːθ", ru:"Ультразвуковая ванна", cat:"equip", catLabel:"Equipment",
+   def:"A device that applies distributed ultrasonic energy through water to gently break down samples."},
+  {word:"Probe sonicator", pron:"prəʊb ˈsɒnɪkeɪtər", ru:"Ультразвуковой зонд", cat:"equip", catLabel:"Equipment",
+   def:"A metal rod inserted directly into a sample tube to deliver intense, targeted ultrasonic energy for cell disruption."},
+  {word:"Mass spectrometer", pron:"mæs spɛkˈtrɒmɪtər", ru:"Масс-спектрометр", cat:"equip", catLabel:"Equipment",
+   def:"An analytical instrument that identifies compounds by measuring the mass-to-charge ratio of their ions."},
+  {word:"Triple quadrupole", pron:"ˈtrɪpl ˈkwɒdrʊpəʊl", ru:"Тройной квадруполь", cat:"equip", catLabel:"Equipment",
+   def:"A mass spectrometer with three sequential stages: ion selection → fragmentation → fragment detection."},
+  {word:"Derivatization", pron:"dɪˌrɪvətaɪˈzeɪʃn", ru:"Дериватизация", cat:"proc", catLabel:"Process",
+   def:"A chemical reaction that modifies a target molecule to improve its detectability by the instrument."},
+  {word:"TrEnDi", pron:"ˈtrendi", ru:"ТрЭнДи", cat:"proc", catLabel:"Process",
+   def:"Trimethylation Enhancement using Diazomethane — a method that adds methyl groups to glyphosate, giving it a permanent positive charge for sensitive MS detection."},
+  {word:"Extraction", pron:"ɪkˈstrækʃn", ru:"Экстракция", cat:"proc", catLabel:"Process",
+   def:"The process of pulling a target substance out of a complex plant matrix into a liquid solvent."},
+  {word:"pH optimization", pron:"piː-eɪtʃ ˌɒptɪmaɪˈzeɪʃn", ru:"Оптимизация pH", cat:"proc", catLabel:"Process",
+   def:"Systematic testing of acid–base conditions to maximise analyte recovery during extraction."},
+  {word:"MRM", pron:"ˌem ɑːr ˈem", ru:"МРМ-режим", cat:"proc", catLabel:"Process",
+   def:"Multiple Reaction Monitoring — an instrument mode pre-programmed to detect only one specific ion transition, ignoring all other compounds."},
+];
+
+const fg = document.getElementById('flip-grid');
+cards.forEach((c, i) => {
+  const el = document.createElement('div');
+  el.className = 'flip-card';
+  el.id = 'fc_' + i;
+  el.innerHTML = `<div class="flip-front">
+    <span class="flip-cat ${c.cat}">${c.catLabel}</span>
+    <div class="flip-word">${c.word}</div>
+    <div class="flip-pron">[${c.pron}]</div>
+    <div class="flip-toggle"><i class="ti ti-chevron-down" aria-hidden="true" style="font-size:14px"></i> tap to reveal</div>
+  </div>
+  <div class="flip-def">
+    <div class="flip-ru">${c.ru}</div>
+    ${c.def}
+  </div>`;
+  el.onclick = () => {
+    el.classList.toggle('open');
+    el.querySelector('.flip-toggle').innerHTML = el.classList.contains('open')
+      ? '<i class="ti ti-chevron-up" aria-hidden="true" style="font-size:14px"></i> hide'
+      : '<i class="ti ti-chevron-down" aria-hidden="true" style="font-size:14px"></i> tap to reveal';
+  };
+  fg.appendChild(el);
+});
+function collapseAll() {
+  document.querySelectorAll('.flip-card').forEach(c => {
+    c.classList.remove('open');
+    c.querySelector('.flip-toggle').innerHTML = '<i class="ti ti-chevron-down" aria-hidden="true" style="font-size:14px"></i> tap to reveal';
+  });
+}
+function expandAll() {
+  document.querySelectorAll('.flip-card').forEach(c => {
+    c.classList.add('open');
+    c.querySelector('.flip-toggle').innerHTML = '<i class="ti ti-chevron-up" aria-hidden="true" style="font-size:14px"></i> hide';
+  });
+}
+
+const mcQ = [
+  {q:"Why is derivatization necessary before analysing glyphosate by LC-MS/MS?",
+   opts:["Glyphosate is too heavy for the instrument to detect.","Glyphosate gives a weak or no signal without chemical modification.","The instrument can only detect gases, not liquids.","Derivatization removes all other plant compounds from the sample."],
+   ans:1, exp:"Glyphosate is highly polar and lacks properties needed for a strong MS signal. TrEnDi adds a permanent charge that dramatically enhances detection sensitivity."},
+  {q:"What is the main advantage of using a probe sonicator over an ultrasound bath?",
+   opts:["The probe sonicator is quieter and easier to use.","The ultrasound bath cannot work with aqueous solutions.","The probe delivers more intense, targeted energy directly into the sample.","The probe sonicator requires no calibration."],
+   ans:2, exp:"A probe concentrates ultrasonic energy at a single point, causing more powerful cavitation and more efficient cell disruption than the distributed energy of a bath."},
+  {q:"In MRM mode, the triple quadrupole monitors specific ion transitions. What does this mean in practice?",
+   opts:["The instrument scans all masses and selects the best match afterwards.","The instrument is pre-programmed to look only for a target ion and its characteristic fragments.","MRM maximises signal intensity across all compounds.","The instrument fragments all molecules and reassembles them computationally."],
+   ans:1, exp:"MRM pre-programs Q1 to pass only the target precursor ion, Q2 to fragment it, and Q3 to monitor specific fragment ions — giving high selectivity in complex matrices."},
+  {q:"Why is pH optimization an important step in glyphosate extraction?",
+   opts:["Higher pH always increases the yield of all compounds.","Glyphosate is stable only at exactly pH 7.0.","The ionisation state of glyphosate at different pH values affects extraction efficiency.","pH controls the speed of the ultrasound bath."],
+   ans:2, exp:"Glyphosate is zwitterionic — its charge depends on pH. Optimising pH ensures the molecule is in the right state for efficient extraction and subsequent derivatization."},
+  {q:"What structural change does TrEnDi produce on the glyphosate molecule?",
+   opts:["It triples the molecular weight of glyphosate.","It adds methyl groups, converting glyphosate into a permanently charged species.","It concentrates glyphosate before injection into the instrument.","It transfers glyphosate between solvents without changing its structure."],
+   ans:1, exp:"Diazomethane methylates the amine and phosphonate groups, converting glyphosate into a permanently charged quaternary ammonium species — ideal for ESI-MS/MS detection."},
+];
+
+function buildMC() {
+  const wrap = document.getElementById('mc-wrap');
+  wrap.innerHTML = '';
+  mcQ.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'mc-item';
+    div.innerHTML = `<div class="mc-q">${i+1}. ${q.q}</div>
+    <div class="mc-opts">${q.opts.map((o,j)=>`<label class="mc-opt" id="mc_${i}_${j}"><input type="radio" name="mc${i}" value="${j}"> ${o}</label>`).join('')}</div>
+    <div class="mc-fb" id="mc_fb_${i}"></div>`;
+    wrap.appendChild(div);
+  });
+}
+buildMC();
+function checkMC() {
+  let ok = 0;
+  mcQ.forEach((q, i) => {
+    const fb = document.getElementById('mc_fb_'+i);
+    const sel = document.querySelector(`input[name="mc${i}"]:checked`);
+    q.opts.forEach((_, j) => document.getElementById('mc_'+i+'_'+j).classList.remove('correct','wrong'));
+    if (!sel) { fb.innerHTML = '<span class="fb err">Please select an option.</span>'; return; }
+    const val = parseInt(sel.value);
+    if (val === q.ans) {
+      document.getElementById('mc_'+i+'_'+val).classList.add('correct');
+      fb.innerHTML = `<span class="fb ok"><i class="ti ti-check" style="vertical-align:bottom"></i> Correct.</span> <span style="color:var(--color-text-secondary)">${q.exp}</span>`;
+      ok++;
+    } else {
+      document.getElementById('mc_'+i+'_'+val).classList.add('wrong');
+      document.getElementById('mc_'+i+'_'+q.ans).classList.add('correct');
+      fb.innerHTML = `<span class="fb err"><i class="ti ti-x" style="vertical-align:bottom"></i> Not quite.</span> <span style="color:var(--color-text-secondary)">${q.exp}</span>`;
+    }
+  });
+  document.getElementById('mcs').textContent = ok + ' / ' + mcQ.length + ' correct';
+}
+function resetMC() { buildMC(); document.getElementById('mcs').textContent = ''; }
+
+const speakQ = [
+  {badge:'Process', bclass:'proc',
+   q:"A colleague asks: \"What exactly is derivatization and why do we do it before running the sample on the mass spec?\"",
+   verbs:[{v:'modify',ru:'изменять'},{v:'attach',ru:'присоединять'},{v:'enhance',ru:'усиливать'},{v:'allow',ru:'позволять'}],
+   hint:"Think: what is the problem with the raw molecule → what chemical change is made → what result does this produce for the instrument.",
+   model:`<b>Derivatization</b> is the process by which we chemically <span class="vh">modify</span> the glyphosate molecule before analysis. We <span class="vh">attach</span> additional chemical groups to it — in our case, methyl groups using diazomethane (TrEnDi). This <span class="vh">enhances</span> the signal dramatically because the modified molecule carries a permanent positive charge, which <span class="vh">allows</span> the mass spectrometer to detect it with much greater sensitivity.`},
+  {badge:'Equipment', bclass:'equip',
+   q:"Describe how you use ultrasound to prepare a plant sample. What options do you have and when do you choose each one?",
+   verbs:[{v:'break down',ru:'разрушать'},{v:'use',ru:'использовать'},{v:'insert',ru:'помещать'},{v:'release',ru:'высвобождать'}],
+   hint:"Describe both tools (bath vs probe), what each does to the cells, and when you'd choose one over the other.",
+   model:`We <span class="vh">use</span> ultrasound to <span class="vh">break down</span> plant cell walls and <span class="vh">release</span> the intracellular contents into the extraction solvent. We have two options: an ultrasound bath for gentler, uniform treatment, and a probe sonicator where we <span class="vh">insert</span> a metal probe directly into the tube for more intense, targeted disruption. For tough matrices like soybean leaves, the probe is preferred.`},
+  {badge:'Process', bclass:'proc',
+   q:"How does MRM mode work on the triple quadrupole, and why is it useful for detecting trace amounts of glyphosate in a complex plant extract?",
+   verbs:[{v:'detect',ru:'обнаруживать'},{v:'filter',ru:'отфильтровывать'},{v:'fragment',ru:'фрагментировать'},{v:'measure',ru:'измерять'}],
+   hint:"Walk through Q1 → Q2 → Q3. Then explain what the biological matrix contains that makes selectivity so important.",
+   model:`In the first quadrupole, the instrument <span class="vh">filters</span> ions and selects only the precursor ion with the mass of our derivatized glyphosate. In the collision cell, it <span class="vh">fragments</span> that ion into characteristic pieces. The third quadrupole then <span class="vh">measures</span> only specific fragment ions. This means we can <span class="vh">detect</span> glyphosate even at trace concentrations, ignoring all the other compounds present in the plant matrix.`},
+  {badge:'Subject', bclass:'subj',
+   q:"Your new student asks: \"What makes herbicide-resistant crops different, and why would we analyse them for glyphosate?\"",
+   verbs:[{v:'modify',ru:'изменять'},{v:'survive',ru:'выживать'},{v:'accumulate',ru:'накапливаться'},{v:'measure',ru:'измерять'}],
+   hint:"Explain what genetic modification does → what happens when the field is sprayed → why residues matter.",
+   model:`Herbicide-resistant crops are plants whose genetic material has been <span class="vh">modify</span>ed so they can <span class="vh">survive</span> when the field is sprayed with glyphosate. However, the herbicide can still <span class="vh">accumulate</span> in the plant's tissues. We therefore need to <span class="vh">measure</span> these residues for regulatory compliance and food safety studies.`},
+  {badge:'Process', bclass:'proc',
+   q:"Why do you run pH optimization experiments before finalising your extraction protocol? Walk through your reasoning.",
+   verbs:[{v:'affect',ru:'влиять'},{v:'extract',ru:'извлекать'},{v:'test',ru:'тестировать'},{v:'optimise',ru:'оптимизировать'}],
+   hint:"Think about glyphosate's ionisation states → why that matters for solvent transfer → what you actually do in the lab.",
+   model:`Glyphosate's charge state is directly <span class="vh">affect</span>ed by pH. At different pH values, how efficiently we can <span class="vh">extract</span> it from the plant matrix changes significantly. So we <span class="vh">test</span> a range of pH conditions and compare recovery rates. This allows us to <span class="vh">optimise</span> the extraction step before derivatization and LC-MS/MS analysis.`},
+];
+
+const sw = document.getElementById('speak-wrap');
+speakQ.forEach((q, i) => {
+  const div = document.createElement('div');
+  div.className = 'speak-card';
+  div.innerHTML = `<div class="speak-topic">
+    <span class="speak-badge ${q.bclass}">${q.badge}</span>
+    <span style="font-size:12px;color:var(--color-text-tertiary)">Speaking task ${i+1} of ${speakQ.length}</span>
+  </div>
+  <div class="speak-q">${q.q}</div>
+  <div class="speak-verbs">${q.verbs.map(v=>`<span class="speak-verb"><b>to ${v.v}</b> — ${v.ru}</span>`).join('')}</div>
+  <div class="speak-hint"><i class="ti ti-bulb" aria-hidden="true" style="font-size:16px;color:#f59f00"></i><span>${q.hint}</span></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn" onclick="toggleAns(${i})" id="rev_btn_${i}"><i class="ti ti-eye" aria-hidden="true"></i> Show model answer</button>
+  </div>
+  <div class="speak-reveal" id="speak_rev_${i}">
+    <div class="speak-ans">${q.model}</div>
+  </div>`;
+  sw.appendChild(div);
+});
+function toggleAns(i) {
+  const rev = document.getElementById('speak_rev_'+i);
+  const btn = document.getElementById('rev_btn_'+i);
+  const open = rev.classList.toggle('open');
+  btn.innerHTML = open
+    ? '<i class="ti ti-eye-off" aria-hidden="true"></i> Hide model answer'
+    : '<i class="ti ti-eye" aria-hidden="true"></i> Show model answer';
+}
+</script>
+</body>
+</html>
