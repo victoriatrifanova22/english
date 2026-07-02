@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generations: A Field Guide — English Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F1E6;
+  --paper-deep:#EEE6D6;
+  --ink:#232733;
+  --ink-soft:#5B5F6B;
+  --rose:#C1707B;
+  --sage:#6E8563;
+  --mustard:#D6A24C;
+  --teal:#3E7069;
+  --line: rgba(35,39,51,0.16);
+  --radius: 14px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter', sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  margin:0 0 .4em 0;
+  letter-spacing:-.01em;
+}
+.eyebrow, .stage-tag{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+p{margin:0 0 1em 0;}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+/* ---------- HERO ---------- */
+.hero{
+  padding:56px 0 28px;
+  background:
+    radial-gradient(ellipse 700px 300px at 15% -10%, rgba(193,112,123,.18), transparent 60%),
+    radial-gradient(ellipse 600px 260px at 100% 0%, rgba(214,162,76,.16), transparent 60%);
+  border-bottom:1px solid var(--line);
+}
+.hero h1{font-size:clamp(2rem, 5vw, 3.1rem); max-width:14ch;}
+.hero .lede{max-width:56ch; color:var(--ink-soft); font-size:1.05rem;}
+
+.dial{
+  margin-top:34px;
+  display:flex;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#fff;
+}
+.dial-block{
+  flex:1;
+  padding:14px 10px;
+  text-align:center;
+  border-right:1px dashed var(--line);
+  position:relative;
+}
+.dial-block:last-child{border-right:none;}
+.dial-block .years{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.66rem;
+  color:var(--ink-soft);
+  display:block;
+  margin-bottom:4px;
+}
+.dial-block .name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:.9rem;
+}
+.dial-block:nth-child(1){background:#EFEAE2;}
+.dial-block:nth-child(2){background:#F0E4E0;}
+.dial-block:nth-child(3){background:#EFE7D8;}
+.dial-block:nth-child(4){background:#E7ECDE;}
+.dial-block:nth-child(5){background:#DEEAE6;}
+.dial-block:nth-child(6){background:#E3E7F0;}
+
+/* ---------- STICKY NAV ---------- */
+.stops{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(246,241,230,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.stops .wrap{display:flex; gap:6px; padding:10px 24px; overflow-x:auto;}
+.stops a{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.72rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink);
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  white-space:nowrap;
+  transition:background .15s, color .15s;
+}
+.stops a:hover{background:var(--ink); color:var(--paper);}
+
+/* ---------- SECTIONS ---------- */
+.section{padding:56px 0;border-bottom:1px solid var(--line);}
+.section:last-of-type{border-bottom:none;}
+.stage-tag{margin-bottom:10px;}
+.stage-presentation .stage-tag{color:var(--rose);}
+.stage-practice .stage-tag{color:var(--teal);}
+.stage-production .stage-tag{color:var(--mustard);}
+.section .intro{max-width:62ch; color:var(--ink-soft);}
+
+/* ---------- FLIP CARDS ---------- */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+  gap:14px;
+  margin:28px 0 40px;
+}
+.flip-card{
+  perspective:1000px;
+  height:150px;
+  cursor:pointer;
+}
+.flip-inner{
+  position:relative;
+  width:100%; height:100%;
+  transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-front, .flip-back{
+  position:absolute; inset:0;
+  border-radius:var(--radius);
+  padding:16px;
+  backface-visibility:hidden;
+  display:flex; flex-direction:column; justify-content:center;
+  border:1px solid var(--line);
+}
+.flip-front{
+  background:#fff;
+  align-items:flex-start;
+}
+.flip-front .word{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:1.15rem;
+}
+.flip-front .hint{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.66rem;
+  color:var(--ink-soft);
+  margin-top:8px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.flip-back{
+  background:var(--ink);
+  color:var(--paper);
+  transform:rotateY(180deg);
+  font-size:.86rem;
+}
+.flip-back .def{margin-bottom:0;}
+
+/* ---------- CONTEXT / GAP FILL ---------- */
+.context-block{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px 26px 10px;
+}
+.word-bank{
+  display:flex; flex-wrap:wrap; gap:8px;
+  margin-bottom:22px;
+}
+.word-bank span{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.72rem;
+  background:var(--paper-deep);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:5px 12px;
+}
+.gap-item{
+  display:flex; align-items:center; flex-wrap:wrap; gap:8px;
+  margin-bottom:16px;
+  font-size:.98rem;
+}
+.gap-item .num{
+  font-family:'IBM Plex Mono', monospace;
+  color:var(--ink-soft);
+  font-size:.78rem;
+  min-width:20px;
+}
+.gap-item input{
+  font-family:'Inter', sans-serif;
+  font-size:.95rem;
+  border:none;
+  border-bottom:2px solid var(--ink);
+  background:transparent;
+  padding:2px 4px;
+  width:170px;
+  outline:none;
+}
+.gap-item input:focus{border-color:var(--teal);}
+.gap-item input.correct{border-color:var(--sage); background:rgba(110,133,99,.1);}
+.gap-item input.wrong{border-color:var(--rose); background:rgba(193,112,123,.1);}
+.check-row{margin:18px 0 22px;}
+button{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.75rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  background:var(--ink);
+  color:var(--paper);
+  border:none;
+  border-radius:999px;
+  padding:11px 20px;
+  cursor:pointer;
+  transition:opacity .15s, transform .15s;
+}
+button:hover{opacity:.85;}
+button:active{transform:scale(.97);}
+button.ghost{
+  background:transparent;
+  color:var(--ink);
+  border:1px solid var(--ink);
+}
+.status-note{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.78rem;
+  color:var(--teal);
+  min-height:1.4em;
+}
+
+/* ---------- MATCHING GAME ---------- */
+.match-game{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px 18px;
+  margin:24px 0 10px;
+}
+.match-col h4{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--ink-soft);
+  margin:0 0 10px;
+}
+.chip{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px 14px;
+  margin-bottom:10px;
+  font-size:.88rem;
+  cursor:pointer;
+  transition:border-color .15s, background .15s, transform .1s;
+}
+.chip:hover{border-color:var(--ink);}
+.chip.selected{border-color:var(--teal); background:rgba(62,112,105,.08);}
+.chip.matched{
+  border-color:var(--sage);
+  background:rgba(110,133,99,.14);
+  cursor:default;
+  opacity:.75;
+}
+.chip.shake{animation:shake .35s;}
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-4px);}
+  75%{transform:translateX(4px);}
+}
+.score-line{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.8rem;
+  color:var(--ink-soft);
+  margin-top:6px;
+}
+
+/* ---------- RECAP + QUIZ ---------- */
+.recap-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-left:4px solid var(--teal);
+  border-radius:10px;
+  padding:20px 22px;
+  margin:24px 0 32px;
+  font-size:.95rem;
+  color:var(--ink);
+}
+.quiz-list{list-style:none; margin:0; padding:0;}
+.quiz-item{
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  padding:16px 18px;
+  margin-bottom:10px;
+}
+.quiz-item .qtext{font-size:.95rem; margin-bottom:10px;}
+.tfn-buttons{display:flex; gap:8px;}
+.tfn-buttons button{
+  background:transparent;
+  color:var(--ink);
+  border:1px solid var(--line);
+  padding:7px 16px;
+}
+.tfn-buttons button.right{background:var(--sage); color:#fff; border-color:var(--sage);}
+.tfn-buttons button.wrong{background:var(--rose); color:#fff; border-color:var(--rose);}
+.quiz-score{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.85rem;
+  margin-top:14px;
+  color:var(--ink-soft);
+}
+
+/* ---------- OPINION TOOLKIT ---------- */
+.phrase-columns{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+  gap:16px;
+  margin:26px 0 44px;
+}
+.phrase-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px;
+}
+.phrase-card h4{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin:0 0 12px;
+}
+.phrase-card:nth-child(1) h4{color:var(--teal);}
+.phrase-card:nth-child(2) h4{color:var(--sage);}
+.phrase-card:nth-child(3) h4{color:var(--rose);}
+.phrase-card:nth-child(4) h4{color:var(--mustard);}
+.phrase-card ul{margin:0; padding-left:18px; font-size:.87rem;}
+.phrase-card li{margin-bottom:8px;}
+
+/* ---------- DEBATE PASSPORT CARD ---------- */
+.passport-card{
+  max-width:440px;
+  margin:26px 0 18px;
+  background:var(--ink);
+  color:var(--paper);
+  border-radius:16px;
+  padding:30px 28px;
+  position:relative;
+  overflow:hidden;
+  min-height:150px;
+  display:flex;
+  align-items:center;
+  transition:opacity .25s;
+}
+.passport-card::before{
+  content:"";
+  position:absolute;
+  top:14px; right:16px;
+  width:56px; height:56px;
+  border:2px dashed rgba(246,241,230,.35);
+  border-radius:50%;
+}
+.passport-card::after{
+  content:"DEBATE";
+  position:absolute;
+  top:26px; right:34px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.55rem;
+  letter-spacing:.1em;
+  color:rgba(246,241,230,.5);
+  transform:rotate(12deg);
+}
+.passport-card p{
+  font-family:'Fraunces', serif;
+  font-size:1.25rem;
+  font-weight:500;
+  margin:0;
+  max-width:80%;
+}
+.passport-card.fade{opacity:0;}
+.draw-row{display:flex; align-items:center; gap:14px; margin-bottom:34px;}
+.draw-count{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.78rem;
+  color:var(--ink-soft);
+}
+.debate-steps{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 24px;
+}
+.debate-steps ol{margin:0; padding-left:20px; font-size:.92rem;}
+.debate-steps li{margin-bottom:8px;}
+
+footer{
+  text-align:center;
+  padding:34px 24px 50px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:.72rem;
+  color:var(--ink-soft);
+  letter-spacing:.05em;
+}
+
+@media (max-width:640px){
+  .dial{flex-wrap:wrap;}
+  .dial-block{flex:1 1 33%; border-bottom:1px dashed var(--line);}
+  .match-game{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">English B1 · Review Lesson</span>
+    <h1>Generations: A Field Guide</h1>
+    <p class="lede">Six generations, one shared world. Today you'll unlock the vocabulary that describes how people grow up, work, and see life differently — then use it to argue your own point of view.</p>
+    <div class="dial">
+      <div class="dial-block"><span class="years">1928–45</span><span class="name">Silent Gen.</span></div>
+      <div class="dial-block"><span class="years">1946–64</span><span class="name">Boomers</span></div>
+      <div class="dial-block"><span class="years">1965–80</span><span class="name">Gen X</span></div>
+      <div class="dial-block"><span class="years">1981–96</span><span class="name">Millennials</span></div>
+      <div class="dial-block"><span class="years">1997–2012</span><span class="name">Gen Z</span></div>
+      <div class="dial-block"><span class="years">2013–now</span><span class="name">Gen Alpha</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="stops">
+  <div class="wrap">
+    <a href="#vocab">01 · Vocabulary Passport</a>
+    <a href="#practice">02 · Practice</a>
+    <a href="#speak">03 · Speak Up</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============ STAGE 1 — PRESENTATION ============ -->
+  <section id="vocab" class="section stage-presentation">
+    <div class="wrap">
+      <div class="stage-tag">Stage 1 · Presentation</div>
+      <h2>Vocabulary Passport</h2>
+      <p class="intro">Tap each card to flip it and read the meaning. These are the words you'll need for the tasks ahead.</p>
+
+      <div class="card-grid" id="cardGrid"></div>
+
+      <div class="context-block">
+        <h3>Stamp it in context</h3>
+        <p class="intro" style="margin-bottom:6px;">Now put the words to work. Fill each gap with the correct word or phrase from the box below. Type your answer, then press <strong>Check my answers</strong>.</p>
+        <div class="word-bank" id="wordBank"></div>
+        <ol class="gap-item" id="gapList" style="list-style:none; padding:0;"></ol>
+        <div class="check-row">
+          <button id="checkGaps">Check my answers</button>
+          <span class="status-note" id="gapStatus"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STAGE 2 — PRACTICE ============ -->
+  <section id="practice" class="section stage-practice">
+    <div class="wrap">
+      <div class="stage-tag">Stage 2 · Practice</div>
+      <h2>Collocation Match-Up</h2>
+      <p class="intro">Click a collocation on the left, then click its meaning on the right. Matched pairs turn green.</p>
+      <div class="match-game">
+        <div class="match-col">
+          <h4>Collocation</h4>
+          <div id="matchLeft"></div>
+        </div>
+        <div class="match-col">
+          <h4>Meaning</h4>
+          <div id="matchRight"></div>
+        </div>
+      </div>
+      <div class="score-line" id="matchScore">Matched: 0 / 8</div>
+
+      <h2 style="margin-top:56px;">True, False, or Not Given?</h2>
+      <p class="intro">Read the short recap, then decide whether each statement is True, False, or Not Given.</p>
+      <div class="recap-box">
+        Today six generations share the same workplaces and cities. The Silent Generation (1928–1945) values discipline and stability. Baby Boomers (1946–1964) grew up during strong economic growth and are known for a powerful work ethic. Generation X (1965–1980) is practical and independent, and is sometimes called the "forgotten generation." Millennials (1981–1996) are digital natives who care about flexibility and work-life balance. Generation Z (1997–2012) grew up with smartphones and is interested in careers linked to technology, such as artificial intelligence and renewable energy. Generation Alpha (2013–now) is the first generation to grow up in a fully digital world.
+      </div>
+
+      <ol class="quiz-list" id="quizList" style="list-style:none;"></ol>
+      <div class="quiz-score" id="quizScore">Score: 0 / 8</div>
+    </div>
+  </section>
+
+  <!-- ============ STAGE 3 — PRODUCTION ============ -->
+  <section id="speak" class="section stage-production">
+    <div class="wrap">
+      <div class="stage-tag">Stage 3 · Production</div>
+      <h2>Opinion Toolkit</h2>
+      <p class="intro">Before you debate, arm yourself with these phrases. Try to use at least one from each column.</p>
+
+      <div class="phrase-columns">
+        <div class="phrase-card">
+          <h4>Giving an opinion</h4>
+          <ul>
+            <li>In my opinion, ...</li>
+            <li>From my point of view, ...</li>
+            <li>As far as I'm concerned, ...</li>
+          </ul>
+        </div>
+        <div class="phrase-card">
+          <h4>Agreeing</h4>
+          <ul>
+            <li>I completely agree that ...</li>
+            <li>That's a fair point.</li>
+            <li>You've got a point there.</li>
+          </ul>
+        </div>
+        <div class="phrase-card">
+          <h4>Disagreeing</h4>
+          <ul>
+            <li>I see your point, but ...</li>
+            <li>I'm not totally convinced, because ...</li>
+            <li>I'd have to disagree, since ...</li>
+          </ul>
+        </div>
+        <div class="phrase-card">
+          <h4>Giving a reason</h4>
+          <ul>
+            <li>This is mainly because ...</li>
+            <li>For example, ...</li>
+            <li>This shows that ...</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Draw a Debate Card</h2>
+      <p class="intro">Press the button to draw a topic. Say whether you agree or disagree, and explain why — using at least two opinion phrases above.</p>
+
+      <div class="passport-card" id="debateCard">
+        <p id="debateText">Press "Draw a card" to begin.</p>
+      </div>
+      <div class="draw-row">
+        <button id="drawBtn">Draw a card</button>
+        <span class="draw-count" id="drawCount"></span>
+      </div>
+
+      <div class="debate-steps">
+        <h3 style="font-size:1rem;">How to structure your mini debate</h3>
+        <ol>
+          <li>State your opinion clearly, using a phrase from the toolkit.</li>
+          <li>Give one reason and one real-life example to support it.</li>
+          <li>Consider the opposite view — and respond to it.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Generations — English Review · B1</footer>
+
+<script>
+/* ---------------- DATA ---------------- */
+const vocab = [
+  {word:"self-employment", def:"Working for yourself and running your own business, instead of working for a company.", ex:"After years as an employee, she chose ____ and opened her own online shop."},
+  {word:"diversity", def:"Having many different types of people — backgrounds, cultures, opinions — in one place.", ex:"The company is proud of the ____ of its team; staff come from twelve countries."},
+  {word:"inclusion", def:"Making sure everyone feels welcome and valued, whatever their differences.", ex:"Workplace ____ means every employee feels they truly belong."},
+  {word:"artificial intelligence", def:"Computer technology that can learn and make decisions in a human-like way.", ex:"____ is already changing the way doctors diagnose illnesses."},
+  {word:"renewable energy", def:"Power from natural sources that never run out, such as sun or wind.", ex:"Solar panels and wind turbines both produce ____."},
+  {word:"employee", def:"A person who works for a company or another person.", ex:"Every ____ at the firm gets private health insurance."},
+  {word:"employer", def:"A person or company that pays others to work for them.", ex:"A good ____ listens to their staff and offers fair pay."},
+  {word:"independent", def:"Able to do things by yourself, without needing help from others.", ex:"Generation X is often described as practical and ____."},
+  {word:"take effort", def:"To need energy, time, or hard work in order to happen.", ex:"Changing an old habit ____s — it doesn't happen overnight."},
+  {word:"go abroad", def:"To travel to, or live in, a foreign country.", ex:"Many young people dream of going ____ to study or work."},
+  {word:"border", def:"The official line that separates two countries.", ex:"You need a passport to cross the ____."},
+  {word:"personal boundary", def:"A limit you set to protect your own feelings, time, or space.", ex:"Saying no to work emails after 6 pm is a healthy ____."}
+];
+
+const gapAnswers = [
+  {sentence:"After years as an employee, she chose ______ and opened her own online shop.", answer:"self-employment"},
+  {sentence:"The company is proud of the ______ of its team; staff come from twelve countries.", answer:"diversity"},
+  {sentence:"Workplace ______ means every employee feels they truly belong.", answer:"inclusion"},
+  {sentence:"______ is already changing the way doctors diagnose illnesses.", answer:"artificial intelligence"},
+  {sentence:"Solar panels and wind turbines both produce ______.", answer:"renewable energy"},
+  {sentence:"Every ______ at the firm gets private health insurance.", answer:"employee"},
+  {sentence:"A good ______ listens to their staff and offers fair pay.", answer:"employer"},
+  {sentence:"Generation X is often described as practical and ______.", answer:"independent"},
+  {sentence:"Changing an old habit takes ______ — it doesn't happen overnight.", answer:"effort"},
+  {sentence:"Many young people dream of going ______ to study or work.", answer:"abroad"},
+  {sentence:"You need a passport to cross the ______.", answer:"border"},
+  {sentence:"Saying no to work emails after 6 pm is a healthy personal ______.", answer:"boundary"}
+];
+
+const collocations = [
+  {term:"work-life balance", def:"Having enough time for both your job and your personal life."},
+  {term:"professional growth", def:"Developing new skills to advance in your career."},
+  {term:"make a difference", def:"To have an important, positive effect on something."},
+  {term:"flexible work environment", def:"A workplace where you can choose your hours or location."},
+  {term:"job stability", def:"The security of keeping your job for a long time."},
+  {term:"value creativity", def:"To think original ideas and imagination are important."},
+  {term:"digital native", def:"A person who grew up using computers and the internet."},
+  {term:"grow up", def:"To become an adult; to spend your childhood somewhere."}
+];
+
+const quiz = [
+  {q:"Six generations currently share the same workplaces.", a:"T"},
+  {q:"Baby Boomers are known for having a strong work ethic.", a:"T"},
+  {q:"Generation X is sometimes called the \"forgotten generation.\"", a:"T"},
+  {q:"Millennials were born between 1997 and 2012.", a:"F"},
+  {q:"Generation Z is interested in careers connected to artificial intelligence.", a:"T"},
+  {q:"Generation Alpha was born before the year 2000.", a:"F"},
+  {q:"The recap says Generation X values flexible work environments the most.", a:"N"},
+  {q:"The recap mentions the average salary of each generation.", a:"N"}
+];
+
+const debateTopics = [
+  "Older generations understand technology just as well as younger generations.",
+  "Every generation believes life was harder for them than for the next one.",
+  "A good work-life balance matters more than a high salary.",
+  "Young people should go abroad to work or study before settling down.",
+  "Social media connects generations more than it divides them.",
+  "Companies should offer a flexible work environment to every employee, not just some."
+];
+
+/* ---------------- FLIP CARDS ---------------- */
+const cardGrid = document.getElementById("cardGrid");
+vocab.forEach(v=>{
+  const card = document.createElement("div");
+  card.className = "flip-card";
+  card.innerHTML = `
+    <div class="flip-inner">
+      <div class="flip-front">
+        <div class="word">${v.word}</div>
+        <div class="hint">tap to reveal</div>
+      </div>
+      <div class="flip-back">
+        <p class="def">${v.def}</p>
+      </div>
+    </div>`;
+  card.addEventListener("click", ()=> card.classList.toggle("flipped"));
+  cardGrid.appendChild(card);
+});
+
+/* ---------------- WORD BANK + GAP FILL ---------------- */
+const wordBank = document.getElementById("wordBank");
+const bankWords = ["self-employment","diversity","inclusion","artificial intelligence","renewable energy","employee","employer","independent","effort","abroad","border","boundary"];
+bankWords.forEach(w=>{
+  const s = document.createElement("span");
+  s.textContent = w;
+  wordBank.appendChild(s);
+});
+
+const gapList = document.getElementById("gapList");
+gapAnswers.forEach((g,i)=>{
+  const li = document.createElement("li");
+  li.className = "gap-item";
+  const parts = g.sentence.split("______");
+  li.innerHTML = `<span class="num">${i+1}.</span> ${parts[0]}<input type="text" data-answer="${g.answer.toLowerCase()}" autocomplete="off">${parts[1]}`;
+  gapList.appendChild(li);
+});
+
+document.getElementById("checkGaps").addEventListener("click", ()=>{
+  const inputs = gapList.querySelectorAll("input");
+  let correct = 0;
+  inputs.forEach(inp=>{
+    const val = inp.value.trim().toLowerCase();
+    const target = inp.dataset.answer;
+    if(val === target){
+      inp.classList.add("correct");
+      inp.classList.remove("wrong");
+      correct++;
+    } else {
+      inp.classList.add("wrong");
+      inp.classList.remove("correct");
+    }
+  });
+  document.getElementById("gapStatus").textContent = `${correct} / ${inputs.length} correct`;
+});
+
+/* ---------------- MATCHING GAME ---------------- */
+const matchLeft = document.getElementById("matchLeft");
+const matchRight = document.getElementById("matchRight");
+const shuffledDefs = [...collocations].sort(()=>Math.random()-0.5);
+
+let selectedTerm = null;
+let selectedDef = null;
+let matchedCount = 0;
+
+collocations.forEach((c,i)=>{
+  const el = document.createElement("div");
+  el.className = "chip";
+  el.textContent = c.term;
+  el.dataset.id = i;
+  el.addEventListener("click", ()=>{
+    if(el.classList.contains("matched")) return;
+    document.querySelectorAll("#matchLeft .chip").forEach(ch=>ch.classList.remove("selected"));
+    el.classList.add("selected");
+    selectedTerm = el;
+    tryMatch();
+  });
+  matchLeft.appendChild(el);
+});
+
+shuffledDefs.forEach(c=>{
+  const el = document.createElement("div");
+  el.className = "chip";
+  el.textContent = c.def;
+  el.dataset.id = collocations.indexOf(c);
+  el.addEventListener("click", ()=>{
+    if(el.classList.contains("matched")) return;
+    document.querySelectorAll("#matchRight .chip").forEach(ch=>ch.classList.remove("selected"));
+    el.classList.add("selected");
+    selectedDef = el;
+    tryMatch();
+  });
+  matchRight.appendChild(el);
+});
+
+function tryMatch(){
+  if(!selectedTerm || !selectedDef) return;
+  if(selectedTerm.dataset.id === selectedDef.dataset.id){
+    selectedTerm.classList.add("matched");
+    selectedDef.classList.add("matched");
+    selectedTerm.classList.remove("selected");
+    selectedDef.classList.remove("selected");
+    matchedCount++;
+    document.getElementById("matchScore").textContent = `Matched: ${matchedCount} / 8`;
+    if(matchedCount === collocations.length){
+      document.getElementById("matchScore").textContent = "All matched! Well done.";
+    }
+  } else {
+    selectedTerm.classList.add("shake");
+    selectedDef.classList.add("shake");
+    setTimeout(()=>{
+      selectedTerm.classList.remove("shake","selected");
+      selectedDef.classList.remove("shake","selected");
+    },350);
+  }
+  selectedTerm = null;
+  selectedDef = null;
+}
+
+/* ---------------- QUIZ ---------------- */
+const quizList = document.getElementById("quizList");
+let quizScore = 0;
+const answered = new Set();
+
+quiz.forEach((item,i)=>{
+  const li = document.createElement("li");
+  li.className = "quiz-item";
+  li.innerHTML = `
+    <div class="qtext">${i+1}. ${item.q}</div>
+    <div class="tfn-buttons">
+      <button data-val="T">True</button>
+      <button data-val="F">False</button>
+      <button data-val="N">Not Given</button>
+    </div>`;
+  const btns = li.querySelectorAll("button");
+  btns.forEach(b=>{
+    b.addEventListener("click", ()=>{
+      if(answered.has(i)) return;
+      answered.add(i);
+      btns.forEach(bb=>{
+        if(bb.dataset.val === item.a) bb.classList.add("right");
+      });
+      if(b.dataset.val !== item.a) b.classList.add("wrong");
+      else quizScore++;
+      document.getElementById("quizScore").textContent = `Score: ${quizScore} / ${quiz.length}`;
+    });
+  });
+  quizList.appendChild(li);
+});
+
+/* ---------------- DEBATE CARD DRAW ---------------- */
+let deck = [...debateTopics].sort(()=>Math.random()-0.5);
+let drawIndex = -1;
+const debateCard = document.getElementById("debateCard");
+const debateText = document.getElementById("debateText");
+const drawCount = document.getElementById("drawCount");
+
+document.getElementById("drawBtn").addEventListener("click", ()=>{
+  drawIndex++;
+  if(drawIndex >= deck.length){
+    deck = [...debateTopics].sort(()=>Math.random()-0.5);
+    drawIndex = 0;
+  }
+  debateCard.classList.add("fade");
+  setTimeout(()=>{
+    debateText.textContent = deck[drawIndex];
+    debateCard.classList.remove("fade");
+    drawCount.textContent = `Card ${drawIndex+1} of ${deck.length}`;
+  }, 200);
+});
+</script>
+</body>
+</html>
