@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Speaking Mastery | B1 Revision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #50E3C2;
+            --dark: #2C3E50;
+            --light: #F4F7F6;
+            --white: #FFFFFF;
+            --accent: #FF6B6B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            background-color: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards & Grids */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vocab-word {
+            display: inline-block;
+            background: #E8F0FE;
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 2px;
+        }
+
+        /* Interactive Elements */
+        .interactive-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .interactive-btn:hover {
+            background: #ff4c4c;
+        }
+
+        .hidden-content {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #FFF9E6;
+            border-left: 4px solid #FFC107;
+            border-radius: 4px;
+        }
+
+        .useful-phrases {
+            background: #F8F9FA;
+            border: 1px dashed #BDBDBD;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        .useful-phrases h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        /* Randomizer Wheel Style */
+        .randomizer-box {
+            background: var(--white);
+            text-align: center;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .random-result {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            min-height: 80px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Speak Up & Stand Out</h1>
+        <p>Your interactive speaking playground. No pens allowed. Just talk!</p>
+    </header>
+
+    <div class="container">
+        <!-- Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('travel')">✈️ Travel & Troubles</button>
+            <button class="tab-btn" onclick="openTab('choices')">🤔 Would You Rather?</button>
+            <button class="tab-btn" onclick="openTab('generations')">👥 Work & Generations</button>
+            <button class="tab-btn" onclick="openTab('challenge')">🎲 The Story Challenge</button>
+        </div>
+
+        <!-- TAB 1: TRAVEL & TROUBLES -->
+        <div id="travel" class="tab-content active">
+            <h2>✈️ Travel & Troubles (Roleplays)</h2>
+            <p style="margin-bottom: 2rem;">Read the situation and explain what you would do. Use <strong>Must</strong> or <strong>Should</strong> and the required vocabulary.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Situation 1: The Airport</h3>
+                    <p>You are at the check-in desk. The staff tells you your <span class="vocab-word">luggage</span> is 5kg overweight. You don't want to pay extra.</p>
+                    <p><strong>Required Words:</strong> <span class="vocab-word">realize</span> <span class="vocab-word">change my mind</span> <span class="vocab-word">should</span></p>
+                    <button class="interactive-btn" onclick="toggleContent('hint1')">Show Hint</button>
+                    <div id="hint1" class="hidden-content">
+                        <em>"When I realized my bag was too heavy, I..."<br>"I should probably..."</em>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Situation 2: The Disaster</h3>
+                    <p>You are travelling to a very <span class="vocab-word">well-known</span> destination. Suddenly, there is a 6-hour <span class="vocab-word">delay</span>. You have no <span class="vocab-word">accommodation</span> booked yet.</p>
+                    <p><strong>Required Words:</strong> <span class="vocab-word">anxious</span> <span class="vocab-word">must</span> <span class="vocab-word">rely on</span></p>
+                    <button class="interactive-btn" onclick="toggleContent('hint2')">Show Hint</button>
+                    <div id="hint2" class="hidden-content">
+                        <em>"I feel very anxious because..."<br>"I must rely on..."</em>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Situation 3: The Advice</h3>
+                    <p>Your friend is going abroad for the first time. They want a perfect <span class="vocab-word">itinerary</span> but they get tired easily.</p>
+                    <p><strong>Required Words:</strong> <span class="vocab-word">sightseeing</span> <span class="vocab-word">take a lot of time</span> <span class="vocab-word">should not</span></p>
+                    <button class="interactive-btn" onclick="toggleContent('hint3')">Show Hint</button>
+                    <div id="hint3" class="hidden-content">
+                        <em>"You shouldn't plan too much sightseeing because..."</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: WOULD YOU RATHER -->
+        <div id="choices" class="tab-content">
+            <h2>🤔 Would You Rather...?</h2>
+            <p style="margin-bottom: 2rem;">Explain your choice in detail. Give at least two reasons.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Choice A</h3>
+                    <p>Would you rather have a fully planned <span class="vocab-word">itinerary</span> but no free time, OR just wander around <span class="vocab-word">sightseeing</span> with no plan at all?</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Choice B</h3>
+                    <p>Would you rather <span class="vocab-word">take care of</span> a friend's pet for a month, OR deal with a 12-hour flight <span class="vocab-word">delay</span>?</p>
+                </div>
+
+                <div class="card">
+                    <h3>Choice C</h3>
+                    <p>Would you rather visit a <span class="vocab-word">well-known</span> crowded tourist spot, OR an <span class="vocab-word">unknown</span> place where you can't <span class="vocab-word">keep in touch</span> with anyone (no internet)?</p>
+                </div>
+            </div>
+
+            <div class="useful-phrases">
+                <h4>🗣️ Useful Phrases to start your answer:</h4>
+                <ul>
+                    <li>"I'd rather choose the first option because..."</li>
+                    <li>"For me, the second option is more interesting because..."</li>
+                    <li>"I've always dreamed of..."</li>
+                    <li>"The other option sounds nice, but..."</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TAB 3: GENERATIONS & WORK -->
+        <div id="generations" class="tab-content">
+            <h2>👥 Work & Generations (Discussion)</h2>
+            <p style="margin-bottom: 2rem;">Read the statements below. Do you agree or disagree? Defend your opinion.</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>Statement 1</h3>
+                    <p>"For modern employees, a good <span class="vocab-word">work-life balance</span> and a <span class="vocab-word">flexible work environment</span> are much more important than a high salary."</p>
+                </div>
+
+                <div class="card">
+                    <h3>Statement 2</h3>
+                    <p>"<span class="vocab-word">Digital natives</span> (Zoomers) have an easier life than Baby Boomers because they can easily <span class="vocab-word">explore the world</span> using technology."</p>
+                </div>
+
+                <div class="card">
+                    <h3>Statement 3</h3>
+                    <p>"It's impossible to have <span class="vocab-word">job stability</span> today if you want to <span class="vocab-word">make a difference</span> in your career."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: THE STORY CHALLENGE -->
+        <div id="challenge" class="tab-content">
+            <div class="randomizer-box">
+                <h2>🎲 The 1-Minute Story Challenge</h2>
+                <p>Click the button to get 3 random words and 1 grammar rule. <br>You have exactly 1 minute to tell a story connecting them all!</p>
+                
+                <div class="random-result" id="result-box">
+                    <em>Click "Generate" to get your prompt...</em>
+                </div>
+
+                <button class="interactive-btn" style="max-width: 300px; margin: 0 auto;" onclick="generatePrompt()">Generate Prompt</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Tab Switching Logic
+        function openTab(tabId) {
+            let contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            let buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Toggle Hint Content
+        function toggleContent(id) {
+            let el = document.getElementById(id);
+            if (el.style.display === "block") {
+                el.style.display = "none";
+            } else {
+                el.style.display = "block";
+            }
+        }
+
+        // Randomizer Logic for Tab 4
+        const vocabList = [
+            "burnout", "accommodation", "keep in touch", "make a difference", 
+            "queue", "passport control", "rely on", "flexible work environment", 
+            "take care of", "digital native", "sightseeing", "change my mind"
+        ];
+        
+        const grammarList = [
+            "Use the <b>Past Continuous</b> (I was doing...)",
+            "Use the <b>Past Perfect</b> (I had already done...)",
+            "Use the <b>Passive Voice</b> (It was built by...)",
+            "Use a <b>Modal Verb for Advice</b> (You should / must...)",
+            "Use the <b>Present Continuous for future plans</b> (I am flying tomorrow...)"
+        ];
+
+        function generatePrompt() {
+            let shuffledVocab = vocabList.sort(() => 0.5 - Math.random());
+            let word1 = shuffledVocab[0];
+            let word2 = shuffledVocab[1];
+            let word3 = shuffledVocab[2];
+
+            let randomGrammar = grammarList[Math.floor(Math.random() * grammarList.length)];
+
+            const resultBox = document.getElementById('result-box');
+            resultBox.innerHTML = `
+                <div><strong>Words to use:</strong> <span class="vocab-word">${word1}</span>, <span class="vocab-word">${word2}</span>, <span class="vocab-word">${word3}</span></div>
+                <div style="margin-top: 15px; font-size: 1.1rem; color: #2C3E50;"><strong>Grammar Rule:</strong> ${randomGrammar}</div>
+            `;
+        }
+    </script>
+</body>
+</html>
