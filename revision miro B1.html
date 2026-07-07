@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boarding Pass — Speaking Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE7D8;
+    --paper-dark:#E3D8BE;
+    --ink:#21302B;
+    --teal:#1B4F49;
+    --teal-deep:#12332F;
+    --gold:#C89A3A;
+    --rust:#A6472B;
+    --line: rgba(33,48,43,0.18);
+    --shadow: 0 10px 30px rgba(18,51,47,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(200,154,58,0.10), transparent 60%),
+      radial-gradient(1000px 700px at 100% 0%, rgba(27,79,73,0.08), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px;}
+
+  /* ---------- Header: boarding pass ---------- */
+  .pass{
+    position:relative;
+    background:var(--teal);
+    color:var(--paper);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:26px 30px 22px;
+    overflow:hidden;
+    animation:riseIn .7s ease both;
+  }
+  .pass::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .pass-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+  .pass-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:.14em;
+    font-size:.72rem;
+    color:var(--gold);
+    text-transform:uppercase;
+  }
+  .pass-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(1.7rem, 4vw, 2.5rem);
+    margin:.2rem 0 .1rem;
+    letter-spacing:.01em;
+  }
+  .pass-sub{font-size:.95rem; color:rgba(239,231,216,0.82); max-width:46ch;}
+  .pass-code{
+    font-family:'IBM Plex Mono', monospace;
+    text-align:right;
+    font-size:.78rem;
+    color:rgba(239,231,216,0.75);
+    line-height:1.7;
+  }
+  .pass-code b{color:var(--gold); font-weight:600;}
+
+  .perf{
+    position:relative;
+    height:1px;
+    margin:22px -30px 16px;
+    border-top:2px dashed rgba(239,231,216,0.35);
+  }
+  .perf::before, .perf::after{
+    content:"";
+    position:absolute; top:-11px;
+    width:22px; height:22px; border-radius:50%;
+    background:var(--paper);
+  }
+  .perf::before{left:-11px;}
+  .perf::after{right:-11px;}
+
+  .stamps-row{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .stamps-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+    color:rgba(239,231,216,0.7);
+  }
+  .stamp-dots{display:flex; gap:10px;}
+  .stamp-dot{
+    width:34px; height:34px; border-radius:50%;
+    border:2px solid rgba(239,231,216,0.45);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem; color:rgba(239,231,216,0.7);
+    transition:transform .35s ease, background .35s ease, border-color .35s ease;
+  }
+  .stamp-dot.stamped{
+    background:var(--gold); border-color:var(--gold); color:var(--teal-deep);
+    transform:scale(1.12) rotate(-6deg);
+    font-weight:600;
+  }
+
+  .ribbon{
+    margin:18px 0 26px;
+    background:var(--paper-dark);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 18px;
+    font-size:.92rem;
+    display:flex; gap:10px; align-items:center;
+  }
+  .ribbon b{color:var(--rust);}
+
+  /* ---------- Gate navigation ---------- */
+  nav.gate-nav{
+    display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin-bottom:26px;
+    scrollbar-width:thin;
+  }
+  .gate-tab{
+    flex:0 0 auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    background:var(--paper);
+    border:1.5px solid var(--line);
+    border-radius:10px 10px 3px 3px;
+    padding:10px 16px 9px;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex; flex-direction:column; gap:2px; align-items:flex-start;
+    position:relative;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .gate-tab .g-num{color:var(--rust); letter-spacing:.08em;}
+  .gate-tab .g-name{font-family:'Fraunces', serif; font-size:.98rem; font-weight:600; letter-spacing:.01em;}
+  .gate-tab:hover{transform:translateY(-2px); box-shadow:0 6px 14px rgba(33,48,43,0.12);}
+  .gate-tab.active{
+    background:var(--teal); color:var(--paper); border-color:var(--teal);
+    box-shadow:var(--shadow);
+  }
+  .gate-tab.active .g-num{color:var(--gold);}
+  .gate-tab:focus-visible{outline:3px solid var(--rust); outline-offset:2px;}
+
+  /* ---------- Gate panels ---------- */
+  .gate-panel{display:none; animation:fadeSlide .45s ease both;}
+  .gate-panel.active{display:block;}
+  @keyframes fadeSlide{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+  @keyframes riseIn{from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);}}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:24px 26px;
+    margin-bottom:20px;
+    box-shadow:0 4px 14px rgba(33,48,43,0.06);
+  }
+  .card h2{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.5rem; margin:0 0 6px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .card h2 .icon{font-size:1.3rem;}
+  .card .lead{color:#48544e; margin:0 0 18px; font-size:.98rem;}
+  .card h3{font-family:'Fraunces', serif; font-size:1.08rem; font-weight:600; margin:0 0 10px; color:var(--teal-deep);}
+
+  .overlap-tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:.7rem;
+    background:var(--paper-dark); border:1px solid var(--line);
+    border-radius:20px; padding:4px 10px; color:var(--teal-deep);
+    margin:2px 6px 2px 0;
+  }
+
+  /* ---------- Flip cards ---------- */
+  .deck-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; margin:10px 0 4px;
+  }
+  .flip-card{perspective:1200px; height:132px; cursor:pointer;}
+  .flip-inner{
+    position:relative; width:100%; height:100%; transition:transform .55s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-front, .flip-back{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  .flip-front{
+    background:var(--paper-dark); border:1.5px dashed var(--teal);
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; color:var(--teal-deep);
+  }
+  .flip-back{
+    background:var(--teal); color:var(--paper); transform:rotateY(180deg);
+    font-size:.78rem; line-height:1.4; flex-direction:column; gap:6px;
+  }
+  .flip-back em{color:var(--gold); font-style:normal; font-weight:600;}
+
+  /* ---------- Deck draw ---------- */
+  .deck-box{
+    background:var(--paper-dark); border:1px solid var(--line); border-radius:14px;
+    padding:18px; margin-top:12px;
+  }
+  .draw-btn, .util-btn{
+    font-family:'IBM Plex Mono', monospace; font-size:.8rem; letter-spacing:.03em;
+    background:var(--teal); color:var(--paper); border:none; border-radius:8px;
+    padding:10px 16px; cursor:pointer; transition:transform .15s ease, background .15s ease;
+  }
+  .draw-btn:hover, .util-btn:hover{background:var(--teal-deep); transform:translateY(-1px);}
+  .draw-btn:active{transform:scale(.97);}
+  .drawn-card{
+    margin-top:14px; background:#fff; border-radius:10px; padding:16px 18px;
+    font-family:'Fraunces', serif; font-size:1.05rem; color:var(--ink);
+    border-left:4px solid var(--rust); min-height:26px;
+  }
+  .drawn-card.pop{animation:pop .35s ease;}
+  @keyframes pop{0%{transform:scale(.97);} 60%{transform:scale(1.015);} 100%{transform:scale(1);}}
+
+  /* ---------- Sorter chips ---------- */
+  .chip-row{display:flex; flex-wrap:wrap; gap:10px; margin:8px 0 4px;}
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:.78rem;
+    background:#fff; border:1.5px solid var(--line); border-radius:20px;
+    padding:8px 14px; cursor:pointer; transition:background .2s, border-color .2s, color .2s;
+  }
+  .chip[data-state="before"]{background:#EAF2E9; border-color:#7BA98F;}
+  .chip[data-state="during"]{background:#FBF1DC; border-color:var(--gold);}
+  .chip[data-state="after"]{background:#F6E4DD; border-color:var(--rust);}
+  .chip .tag{font-weight:600; margin-left:6px; opacity:.7;}
+
+  /* ---------- Roleplay cards ---------- */
+  .role-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .role-card{
+    background:var(--paper-dark); border:1px solid var(--line); border-radius:12px; padding:16px;
+  }
+  .role-card .who{font-family:'IBM Plex Mono', monospace; font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--rust);}
+  .role-card p{margin:.4rem 0 0; font-size:.92rem;}
+  .word-bank{margin-top:12px; padding-top:10px; border-top:1px dashed var(--line); display:flex; flex-wrap:wrap; align-items:center; gap:6px;}
+  .word-bank-label{font-family:'IBM Plex Mono', monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--teal-deep); margin-right:4px;}
+  .word-chip{
+    font-family:'IBM Plex Mono', monospace; font-size:.74rem; font-weight:600;
+    background:var(--paper); border:1px solid var(--teal); color:var(--teal-deep);
+    border-radius:14px; padding:3px 10px;
+  }
+
+  /* ---------- Timer ---------- */
+  .timer-box{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:10px;}
+  .timer-display{
+    font-family:'IBM Plex Mono', monospace; font-size:2rem; font-weight:600; color:var(--teal-deep);
+    background:#fff; border:1.5px solid var(--line); border-radius:10px; padding:6px 18px;
+    min-width:110px; text-align:center;
+  }
+
+  /* ---------- Checklist (self-assessment, click only) ---------- */
+  .check-row{display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px dashed var(--line);}
+  .check-row:last-child{border-bottom:none;}
+  .check-box{
+    width:22px; height:22px; border-radius:5px; border:2px solid var(--teal); flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:.8rem; color:transparent;
+    transition:background .2s, color .2s;
+  }
+  .check-box.on{background:var(--teal); color:var(--paper);}
+  .check-row span.txt{font-size:.92rem;}
+
+  .stamp-btn{
+    margin-top:18px; display:inline-flex; align-items:center; gap:8px;
+    background:var(--gold); color:var(--teal-deep); border:none; border-radius:10px;
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:.82rem;
+    padding:11px 18px; cursor:pointer; transition:transform .15s ease;
+  }
+  .stamp-btn:hover{transform:translateY(-1px) rotate(-1deg);}
+  .stamp-btn.done{background:#cfe3d4; color:var(--teal-deep);}
+
+  footer{text-align:center; font-size:.78rem; color:#7a8580; margin-top:36px; font-family:'IBM Plex Mono', monospace;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  @media (max-width:560px){
+    .pass{padding:20px 18px 18px;}
+    .perf{margin:18px -18px 14px;}
+    .card{padding:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===================== HEADER / BOARDING PASS ===================== -->
+  <header class="pass">
+    <div class="pass-top">
+      <div>
+        <div class="pass-eyebrow">Speaking Revision · Boarding Pass</div>
+        <h1 class="pass-title">Round-the-Topics Route</h1>
+        <p class="pass-sub">Six gates, one language. Talk your way through travel, airports, everyday life, generations, life stories and reflection — no writing today, just voice.</p>
+      </div>
+      <div class="pass-code">
+        CLASS <b>B1 · SPEAKING</b><br>
+        ROUTE <b>GATE 1 → GATE 6</b><br>
+        SEAT <b>OPEN — TALK FREELY</b>
+      </div>
+    </div>
+    <div class="perf"></div>
+    <div class="stamps-row">
+      <div class="stamps-label">Passport progress</div>
+      <div class="stamp-dots">
+        <div class="stamp-dot" data-gate="1">1</div>
+        <div class="stamp-dot" data-gate="2">2</div>
+        <div class="stamp-dot" data-gate="3">3</div>
+        <div class="stamp-dot" data-gate="4">4</div>
+        <div class="stamp-dot" data-gate="5">5</div>
+        <div class="stamp-dot" data-gate="6">6</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="ribbon">🎙️ <span><b>Books closed, mouths open.</b> Every task below is spoken aloud. Read prompts silently if you like — but answer out loud.</span></div>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="gate-nav" id="gateNav">
+    <button class="gate-tab active" data-target="gate-1"><span class="g-num">GATE 01</span><span class="g-name">✈️ Travel Advice</span></button>
+    <button class="gate-tab" data-target="gate-2"><span class="g-num">GATE 02</span><span class="g-name">🛫 At the Airport</span></button>
+    <button class="gate-tab" data-target="gate-3"><span class="g-num">GATE 03</span><span class="g-name">💬 Everyday Talk</span></button>
+    <button class="gate-tab" data-target="gate-4"><span class="g-num">GATE 04</span><span class="g-name">🕰️ Generations</span></button>
+    <button class="gate-tab" data-target="gate-5"><span class="g-num">GATE 05</span><span class="g-name">🎨 Life Stories</span></button>
+    <button class="gate-tab" data-target="gate-6"><span class="g-num">GATE 06</span><span class="g-name">🌏 Reflections</span></button>
+  </nav>
+
+  <main>
+    <!-- ===================== GATE 1 — TRAVEL ADVICE ===================== -->
+    <section class="gate-panel active" id="gate-1">
+
+      <div class="card">
+        <h2><span class="icon">✈️</span> Gate 1 — Travel Advice</h2>
+        <p class="lead">Vocabulary and modal verbs (must / should) for planning a trip. Connects forward to Gate 6 (dream destinations) and Gate 2 (airport procedure).</p>
+        <span class="overlap-tag">🔗 links to Gate 6 · dream trips</span>
+        <span class="overlap-tag">🔗 links to Gate 2 · airport steps</span>
+
+        <h3 style="margin-top:20px;">Flip the tickets — say a sentence for each</h3>
+        <div class="deck-grid" id="deck1-vocab"></div>
+      </div>
+
+      <div class="card">
+        <h3>Sort the luggage: Before / During / After</h3>
+        <p class="lead">Tap each word to cycle its stage. Then explain your choice out loud: "I put this before the trip because…"</p>
+        <div class="chip-row" id="sorter1"></div>
+      </div>
+
+      <div class="card">
+        <h3>Give the advice — must or should?</h3>
+        <p class="lead">Read each mini-situation aloud and give real advice using <b>must</b> (rules, obligation) or <b>should</b> (recommendation). Draw a roleplay partner below.</p>
+        <div class="role-grid" id="role1"></div>
+      </div>
+
+      <div class="card">
+        <h3>Draw a speaking card</h3>
+        <div class="deck-box">
+          <button class="draw-btn" onclick="drawCard('gate1')">🎴 Draw a travel prompt</button>
+          <div class="drawn-card" id="drawn-gate1">Tap the button — talk for at least 45 seconds.</div>
+        </div>
+        <button class="stamp-btn" onclick="stampGate(1, this)">🖋️ Stamp my passport for Gate 1</button>
+      </div>
+    </section>
+
+    <!-- ===================== GATE 2 — AIRPORT ===================== -->
+    <section class="gate-panel" id="gate-2">
+
+      <div class="card">
+        <h2><span class="icon">🛫</span> Gate 2 — At the Airport</h2>
+        <p class="lead">Airport vocabulary plus present simple (routines, facts) vs present continuous (happening now). Connects back to Gate 1 (travel words) and forward to Gate 6 (departure boards of the imagination).</p>
+        <span class="overlap-tag">🔗 links to Gate 1 · travel vocabulary</span>
+
+        <h3 style="margin-top:20px;">Flip the tickets — say a sentence for each</h3>
+        <div class="deck-grid" id="deck2-vocab"></div>
+      </div>
+
+      <div class="card">
+        <h3>Live departures board</h3>
+        <p class="lead">Read this board aloud like an announcer, then explain: which lines use present simple, and which use present continuous — and why?</p>
+        <div class="drawn-card" style="font-family:'IBM Plex Mono', monospace; font-size:.92rem; line-height:1.8;">
+          GATE 12 — Flight to Lisbon <b>is boarding</b> now.<br>
+          GATE 14 — This gate <b>closes</b> thirty minutes before every departure.<br>
+          GATE 9 — Passengers <b>are queuing</b> for a security recheck.<br>
+          GATE 3 — This airline <b>usually offers</b> free snacks before boarding.<br>
+          GATE 21 — The 10:40 flight <b>is currently delayed</b> by forty minutes.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Describe it live</h3>
+        <p class="lead">Pick a scene and describe what is happening right now (present continuous), then what usually happens there (present simple).</p>
+        <div class="role-grid" id="role2"></div>
+      </div>
+
+      <div class="card">
+        <h3>Draw a speaking card</h3>
+        <div class="deck-box">
+          <button class="draw-btn" onclick="drawCard('gate2')">🎴 Draw an airport prompt</button>
+          <div class="drawn-card" id="drawn-gate2">Tap the button — talk for at least 45 seconds.</div>
+        </div>
+        <button class="stamp-btn" onclick="stampGate(2, this)">🖋️ Stamp my passport for Gate 2</button>
+      </div>
+    </section>
+
+    <!-- ===================== GATE 3 — EVERYDAY TALK ===================== -->
+    <section class="gate-panel" id="gate-3">
+
+      <div class="card">
+        <h2><span class="icon">💬</span> Gate 3 — Everyday Talk</h2>
+        <p class="lead">The phrasal and idiomatic vocabulary bank — used in real conversation about routines, relationships and feelings. These phrases will reappear in Gate 4 and Gate 5.</p>
+        <span class="overlap-tag">🔗 reused in Gate 4 · generations debate</span>
+        <span class="overlap-tag">🔗 reused in Gate 5 · storytelling</span>
+
+        <h3 style="margin-top:20px;">Flip the tickets — say a sentence for each</h3>
+        <div class="deck-grid" id="deck3-vocab"></div>
+      </div>
+
+      <div class="card">
+        <h3>What should they do?</h3>
+        <p class="lead">Read the situation, then give spoken advice. Try to use the phrases in bold naturally, not one after another like a list.</p>
+        <div class="role-grid" id="role3"></div>
+      </div>
+
+      <div class="card">
+        <h3>Draw a speaking card</h3>
+        <div class="deck-box">
+          <button class="draw-btn" onclick="drawCard('gate3')">🎴 Draw a personal question</button>
+          <div class="drawn-card" id="drawn-gate3">Tap the button — you must use at least one bold phrase from above.</div>
+        </div>
+        <button class="stamp-btn" onclick="stampGate(3, this)">🖋️ Stamp my passport for Gate 3</button>
+      </div>
+    </section>
+
+    <!-- ===================== GATE 4 — GENERATIONS ===================== -->
+    <section class="gate-panel" id="gate-4">
+
+      <div class="card">
+        <h2><span class="icon">🕰️</span> Gate 4 — Generations</h2>
+        <p class="lead">Generation vocabulary and passive voice for describing trends. Feeds into Gate 5 (telling someone's life story) and reuses Gate 3's phrases for personal opinions.</p>
+        <span class="overlap-tag">🔗 links to Gate 5 · passive voice storytelling</span>
+        <span class="overlap-tag">🔗 reuses Gate 3 · personal phrases</span>
+
+        <h3 style="margin-top:20px;">Flip the tickets — say a sentence for each</h3>
+        <div class="deck-grid" id="deck4-vocab"></div>
+      </div>
+
+      <div class="card">
+        <h3>Match the decade — then defend your guess</h3>
+        <p class="lead">Tap a decade to reveal the generation. Before you tap, say your guess out loud and explain why.</p>
+        <div class="chip-row" id="matcher4"></div>
+        <div class="drawn-card" id="matcher4-reveal" style="margin-top:14px;">Tap a decade above to reveal it.</div>
+      </div>
+
+      <div class="card">
+        <h3>True, false — or debatable?</h3>
+        <p class="lead">Say True, False, or "it depends" for each statement, then explain your reasoning aloud.</p>
+        <div class="role-grid" id="role4"></div>
+      </div>
+
+      <div class="card">
+        <h3>Draw a speaking card</h3>
+        <div class="deck-box">
+          <button class="draw-btn" onclick="drawCard('gate4')">🎴 Draw a debate question</button>
+          <div class="drawn-card" id="drawn-gate4">Tap the button — take a clear side and give two reasons.</div>
+        </div>
+        <button class="stamp-btn" onclick="stampGate(4, this)">🖋️ Stamp my passport for Gate 4</button>
+      </div>
+    </section>
+
+    <!-- ===================== GATE 5 — LIFE STORIES ===================== -->
+    <section class="gate-panel" id="gate-5">
+
+      <div class="card">
+        <h2><span class="icon">🎨</span> Gate 5 — Life Stories</h2>
+        <p class="lead">A three-step storytelling frame (beginnings → struggle → legacy) practised with passive voice. Choose anyone — a family member, a public figure, even yourself in twenty years.</p>
+        <span class="overlap-tag">🔗 reuses Gate 4 · generation vocabulary</span>
+        <span class="overlap-tag">🔗 reuses Gate 3 · personal phrases</span>
+
+        <h3 style="margin-top:20px;">Passive-voice starters — flip and build a sentence</h3>
+        <div class="deck-grid" id="deck5-vocab"></div>
+      </div>
+
+      <div class="card">
+        <h3>Your three-step frame</h3>
+        <p class="lead">Speak through all three steps for one person. Try to land on at least two passive sentences total.</p>
+        <div class="role-grid" id="role5"></div>
+      </div>
+
+      <div class="card">
+        <h3>Guess who — clue swap</h3>
+        <p class="lead">Draw three clues below (all passive voice) and guess the mystery figure out loud. Then invent your own three clues for someone else and test them on your teacher.</p>
+        <div class="deck-box">
+          <button class="draw-btn" onclick="drawCard('gate5')">🎴 Draw three clues</button>
+          <div class="drawn-card" id="drawn-gate5">Tap the button to reveal a set of clues.</div>
+        </div>
+        <button class="stamp-btn" onclick="stampGate(5, this)">🖋️ Stamp my passport for Gate 5</button>
+      </div>
+    </section>
+
+    <!-- ===================== GATE 6 — REFLECTIONS ===================== -->
+    <section class="gate-panel" id="gate-6">
+
+      <div class="card">
+        <h2><span class="icon">🌏</span> Gate 6 — Reflections</h2>
+        <p class="lead">Would-you-rather travel choices, the idea of <i>ichigo ichie</i> ("one time, one meeting" — treasuring unrepeatable moments), and a final challenge that pulls every earlier gate together.</p>
+        <span class="overlap-tag">🔗 pulls together Gates 1–5</span>
+
+        <h3 style="margin-top:20px;">Useful language for this gate</h3>
+        <div class="deck-grid" id="deck6-vocab"></div>
+      </div>
+
+      <div class="card">
+        <h3>Would you rather…?</h3>
+        <div class="deck-box">
+          <button class="draw-btn" onclick="drawCard('gate6wyr')">🎲 Draw a would-you-rather</button>
+          <div class="drawn-card" id="drawn-gate6wyr">Tap to draw a pair, choose one, and explain why for at least 30 seconds.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Once in a lifetime — ichigo ichie</h3>
+        <div class="deck-box">
+          <button class="draw-btn" onclick="drawCard('gate6')">🎴 Draw a reflection question</button>
+          <div class="drawn-card" id="drawn-gate6">Tap the button and take your time — there's no wrong answer here.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Final challenge — 90 seconds, every gate</h3>
+        <p class="lead">Tell a story about a memorable trip. Try to include: one travel word (Gate 1), one present continuous line (Gate 2), one everyday phrase (Gate 3), one generations opinion (Gate 4), one passive sentence (Gate 5).</p>
+        <div class="timer-box">
+          <div class="timer-display" id="timerDisplay">01:30</div>
+          <button class="util-btn" onclick="startTimer()">▶ Start</button>
+          <button class="util-btn" onclick="resetTimer()">⟲ Reset</button>
+        </div>
+
+        <div style="margin-top:22px;">
+          <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><span class="txt">I used a travel word from Gate 1.</span></div>
+          <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><span class="txt">I used a present continuous line from Gate 2.</span></div>
+          <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><span class="txt">I used an everyday phrase from Gate 3.</span></div>
+          <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><span class="txt">I shared an opinion using Gate 4 vocabulary.</span></div>
+          <div class="check-row"><div class="check-box" onclick="toggleCheck(this)"></div><span class="txt">I used one passive sentence from Gate 5.</span></div>
+        </div>
+
+        <button class="stamp-btn" onclick="stampGate(6, this)">🖋️ Stamp my passport for Gate 6 — journey complete</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>Boarding Pass · Speaking Revision — talk first, check grammar later.</footer>
+</div>
+
+<script>
+/* ---------------- Navigation ---------------- */
+const tabs = document.querySelectorAll('.gate-tab');
+const panels = document.querySelectorAll('.gate-panel');
+tabs.forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.target).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+/* ---------------- Passport stamps ---------------- */
+function stampGate(n, btn){
+  const dot = document.querySelector('.stamp-dot[data-gate="'+n+'"]');
+  if(dot){ dot.classList.add('stamped'); dot.textContent = '✓'; }
+  if(btn){ btn.textContent = '✓ Gate ' + n + ' stamped'; btn.classList.add('done'); }
+}
+
+/* ---------------- Flip-card factory ---------------- */
+function buildDeck(containerId, items){
+  const el = document.getElementById(containerId);
+  items.forEach(item=>{
+    const card = document.createElement('div');
+    card.className = 'flip-card';
+    card.innerHTML = `<div class="flip-inner">
+        <div class="flip-front">${item.front}</div>
+        <div class="flip-back">${item.back}</div>
+      </div>`;
+    card.addEventListener('click', ()=>card.classList.toggle('flipped'));
+    el.appendChild(card);
+  });
+}
+
+buildDeck('deck1-vocab', [
+  {front:'itinerary', back:'A plan of where and when you travel.<br><em>Say:</em> Sketch tomorrow\'s itinerary out loud.'},
+  {front:'delay', back:'A wait caused by late transport.<br><em>Say:</em> Tell me about your longest delay.'},
+  {front:'accommodation', back:'Where you stay — hotel, guesthouse, flat.<br><em>Say:</em> Describe your ideal accommodation.'},
+  {front:'luggage', back:'The bags you travel with.<br><em>Say:</em> One luggage mistake you\'ve made.'},
+  {front:'travel insurance', back:'Protection if things go wrong abroad.<br><em>Say:</em> Convince a friend to buy it.'},
+  {front:'sightseeing', back:'Visiting famous places in a city.<br><em>Say:</em> Your top sightseeing spot ever.'}
+]);
+
+buildDeck('deck2-vocab', [
+  {front:'check-in desk', back:'Where you show documents and drop bags.<br><em>Say:</em> Describe checking in step by step.'},
+  {front:'boarding pass', back:'Your ticket to get on the plane.<br><em>Say:</em> What happens if you lose it?'},
+  {front:'security check', back:'Where bags and people are screened.<br><em>Say:</em> A slow security line story.'},
+  {front:'passport control', back:'Where officers check your identity.<br><em>Say:</em> Was it ever stressful for you?'},
+  {front:'departure lounge', back:'Where you wait before boarding.<br><em>Say:</em> How do you usually pass the time?'},
+  {front:'layover', back:'A stop between two flights.<br><em>Say:</em> Your longest or strangest layover.'}
+]);
+
+buildDeck('deck3-vocab', [
+  {front:'keep in touch', back:'Stay in contact with someone.<br><em>Say:</em> Who do you keep in touch with, and how?'},
+  {front:'take care of', back:'Look after someone or something.<br><em>Say:</em> Something you take care of daily.'},
+  {front:'change my mind', back:'Decide differently than before.<br><em>Say:</em> A time you changed your mind fast.'},
+  {front:'since then', back:'From that point in time onward.<br><em>Say:</em> Use it about a life event.'},
+  {front:'realize', back:'Suddenly understand something.<br><em>Say:</em> Something you realized too late.'},
+  {front:'be anxious', back:'Feel nervous or worried.<br><em>Say:</em> What makes you anxious before travel?'},
+  {front:'be caring', back:'Show kindness and attention to others.<br><em>Say:</em> Describe the most caring person you know.'},
+  {front:'this field / sphere', back:'The area you work or study in.<br><em>Say:</em> Why are you drawn to your field?'}
+]);
+
+buildDeck('deck4-vocab', [
+  {front:'digital native', back:'Someone who grew up with the internet.<br><em>Say:</em> Are you one? Explain.'},
+  {front:'work-life balance', back:'Enough time for both job and life.<br><em>Say:</em> Rate your own balance out of 10.'},
+  {front:'job stability', back:'A secure job, unlikely to disappear.<br><em>Say:</em> Would you trade it for freedom?'},
+  {front:'professional growth', back:'Improving your skills over time.<br><em>Say:</em> How do you grow professionally?'},
+  {front:'make a difference', back:'Do something that improves a situation.<br><em>Say:</em> One way you\'d like to make a difference.'},
+  {front:'emotional salary', back:'Non-money job benefits — flexibility, wellbeing.<br><em>Say:</em> What\'s in your ideal emotional salary?'},
+  {front:'flexible work environment', back:'A workplace with adaptable hours or location.<br><em>Say:</em> Describe yours, real or ideal.'},
+  {front:'self-employment', back:'Working for yourself, not an employer.<br><em>Say:</em> Would you ever try it? Why?'}
+]);
+
+buildDeck('deck5-vocab', [
+  {front:'was inspired by…', back:'Use for someone\'s creative influence.<br><em>Say:</em> "My love of ___ was inspired by…"'},
+  {front:'is admired by…', back:'Use for lasting reputation.<br><em>Say:</em> "This person is admired by…"'},
+  {front:'was created in…', back:'Use for when/where something was made.<br><em>Say:</em> Name a place and year.'},
+  {front:'were influenced by…', back:'Use for multiple shaping factors.<br><em>Say:</em> "Their style/choices were influenced by…"'},
+  {front:'is remembered for…', back:'Use for a lasting legacy.<br><em>Say:</em> Someone remembered for one big thing.'},
+  {front:'was passed down…', back:'Use for traditions across generations.<br><em>Say:</em> Something passed down in your family.'}
+]);
+
+buildDeck('deck6-vocab', [
+  {front:"I'd rather…because", back:'State a preference with a reason.<br><em>Say:</em> Try it with a travel choice.'},
+  {front:"I've always dreamed of…", back:'A long-held wish.<br><em>Say:</em> Finish the sentence out loud.'},
+  {front:'Looking back, I realize…', back:'Reflect on the past from today.<br><em>Say:</em> About a trip or a decision.'},
+  {front:'Since then, I\'ve…', back:'Describe change after a turning point.<br><em>Say:</em> Link it to something that "changed since then".'}
+]);
+
+/* ---------------- Sorter (Gate 1) ---------------- */
+const sorterWords = ['pack your suitcase','book accommodation','buy travel insurance','check your itinerary','go through customs','show your passport','wait for departure','buy souvenirs','deal with a delay','arrive at destination'];
+const states = ['before','during','after'];
+const labels = {before:'BEFORE', during:'DURING', after:'AFTER'};
+(function(){
+  const el = document.getElementById('sorter1');
+  sorterWords.forEach(w=>{
+    const chip = document.createElement('div');
+    chip.className='chip';
+    let idx = 0;
+    chip.dataset.state = states[idx];
+    chip.innerHTML = w + ' <span class="tag">'+labels[states[idx]]+'</span>';
+    chip.addEventListener('click', ()=>{
+      idx = (idx+1) % states.length;
+      chip.dataset.state = states[idx];
+      chip.innerHTML = w + ' <span class="tag">'+labels[states[idx]]+'</span>';
+    });
+    el.appendChild(chip);
+  });
+})();
+
+/* ---------------- Roleplay grids ---------------- */
+function buildRoles(containerId, items){
+  const el = document.getElementById(containerId);
+  items.forEach(it=>{
+    const div = document.createElement('div');
+    div.className='role-card';
+    let wordsHtml = '';
+    if(it.words && it.words.length){
+      wordsHtml = '<div class="word-bank"><span class="word-bank-label">Words to use</span>'
+        + it.words.map(w=>'<span class="word-chip">'+w+'</span>').join('') + '</div>';
+    }
+    div.innerHTML = `<div class="who">${it.who}</div><p>${it.text}</p>${wordsHtml}`;
+    el.appendChild(div);
+  });
+}
+
+buildRoles('role1', [
+  {who:'Situation A', text:'A friend is visiting your country for the first time. What must and should they do?'},
+  {who:'Situation B', text:'Someone is flying for the very first time and is nervous. Reassure them with advice.'},
+  {who:'Situation C', text:'A tourist wants to go hiking alone in the mountains near you. What are the rules and recommendations?'}
+]);
+
+buildRoles('role2', [
+  {who:'Scene 1', text:'The security line right now — long, slow, someone forgot to remove their laptop.'},
+  {who:'Scene 2', text:'A normal Tuesday check-in desk — describe the routine, then describe today\'s chaos.'},
+  {who:'Scene 3', text:'The gate five minutes before boarding closes — panic, running, last calls.'}
+]);
+
+buildRoles('role3', [
+  {who:'Situation', text:'Your friend keeps saying he wants to leave his profession and start over in a completely different field, but for years he has never actually done it. What should he think about before making a final decision?', words:['change their mind','this field / sphere','since then','realize']}
+]);
+
+buildRoles('role4', [
+  {who:'Statement', text:'Generation X is sometimes called "the forgotten generation."'},
+  {who:'Statement', text:'Millennials don\'t care about work-life balance at all.'},
+  {who:'Statement', text:'Every digital native is automatically good with new technology at work.'},
+  {who:'Statement', text:'Job stability matters less to younger workers than to older ones.'}
+]);
+
+buildRoles('role5', [
+  {who:'Step 1 — Beginnings', text:'Where was this person born and brought up? Where was their talent or interest first discovered?'},
+  {who:'Step 2 — Struggle', text:'Who or what were they influenced by? What difficulty did they face before success?'},
+  {who:'Step 3 — Legacy', text:'What are they remembered for today? Who is inspired by their story now?'}
+]);
+
+/* ---------------- Generation decade matcher (Gate 4) ---------------- */
+const genData = [
+  {decade:'1946–1964', name:'Baby Boomers', trait:'Strong work ethic, believe in steady progress.'},
+  {decade:'1965–1980', name:'Generation X', trait:'Independent, pragmatic, adapts well to change.'},
+  {decade:'1981–1996', name:'Millennials', trait:'Tech-savvy, value flexibility and purpose.'},
+  {decade:'1997–2012', name:'Generation Z', trait:'True digital natives, want fast communication.'}
+];
+(function(){
+  const el = document.getElementById('matcher4');
+  const reveal = document.getElementById('matcher4-reveal');
+  genData.forEach(g=>{
+    const chip = document.createElement('div');
+    chip.className='chip';
+    chip.textContent = g.decade;
+    chip.addEventListener('click', ()=>{
+      reveal.innerHTML = '<b>'+g.decade+'</b> → '+g.name+'. '+g.trait+' — now say whether you agree, and why.';
+      reveal.classList.remove('pop'); void reveal.offsetWidth; reveal.classList.add('pop');
+    });
+    el.appendChild(chip);
+  });
+})();
+
+/* ---------------- Card decks (random draw) ---------------- */
+const decks = {
+  gate1: [
+    'Your colleague is going on their first solo trip abroad next month. Give three pieces of advice using must and should.',
+    'You\'re a travel agent. A client wants both a beach holiday and museums. Suggest an itinerary and what they must/should pack.',
+    'Describe the worst delay you\'ve ever experienced — what happened, and how did you feel?',
+    'A friend refuses to buy travel insurance. Convince them, using at least two travel words.',
+    'You have twenty-four hours in a city you\'ve never visited. Talk through your itinerary, hour by hour.',
+    'What\'s one piece of luggage advice you wish someone had given you before a big trip?',
+    'Compare booking accommodation through an app versus asking a local for a recommendation.'
+  ],
+  gate2: [
+    'You\'re a gate agent making an announcement right now — describe what\'s happening, using present continuous.',
+    'Explain what usually happens at check-in, from arrival to boarding, using present simple.',
+    'Tell me about a time you felt stressed at an airport. What was happening around you?',
+    'Describe today\'s imaginary departure board — three flights: on time, delayed, and boarding.',
+    'If you were cabin crew, what would you be saying to passengers as they board right now?',
+    'Talk about your dream airport experience — no queues, no stress. What is happening there?'
+  ],
+  gate3: [
+    'How do you keep in touch with someone you don\'t see often anymore?',
+    'Tell me about something that takes a lot of time in your daily routine, and how you deal with it.',
+    'Describe a moment when you had to take care of someone unexpectedly.',
+    'Have you ever changed your mind about a big decision at the last minute? What happened?',
+    'Since when have you been interested in your current field? What pulled you toward it?',
+    'What\'s something you only realized about yourself after time had passed?',
+    'Who is the most caring person you know, and what do they actually do that shows it?'
+  ],
+  gate4: [
+    'Which generation do you think adapts to change the fastest, and why?',
+    'Does "emotional salary" (free time, flexibility, wellbeing) matter more than money to you? Argue your side.',
+    'Explain the idea of a "digital native" to someone from your grandparents\' generation.',
+    'Do younger generations really care more about making a difference than about job stability?',
+    'Which generation in your own family do you feel closest to, and why?',
+    'Debate: is self-employment more attractive than job stability today?'
+  ],
+  gate5: [
+    'Clue 1: "This person was inspired by nature." Clue 2: "Their work is admired by millions today." Clue 3: "They were not fully recognized during their own lifetime." Who could this be?',
+    'Clue 1: "This invention was created almost by accident." Clue 2: "It was influenced by an earlier failed idea." Clue 3: "It is used by billions of people daily." What is it?',
+    'Clue 1: "This tradition was passed down for generations." Clue 2: "It is practiced differently in each family." Clue 3: "It is remembered for bringing people together." What is it?',
+    'Clue 1: "This artist was shaped by hardship." Clue 2: "Their style was influenced by a place they only visited briefly." Clue 3: "Their work was barely sold while they were alive." Who could this be?'
+  ],
+  gate6: [
+    'Tell me about a "once in a lifetime" moment you\'ve had. What made it unrepeatable?',
+    'Why do people often miss these small, unique moments in everyday life?',
+    'How could you bring more "ichigo ichie" — treasuring the present moment — into an ordinary day?',
+    'Is it better to plan a trip carefully or to travel spontaneously? Since when have you preferred one over the other?'
+  ],
+  gate6wyr: [
+    'Would you rather visit the Eiffel Tower or the Colosseum?',
+    'Would you rather go to a crowded, famous place or a quiet, unknown beautiful one?',
+    'Would you rather see the Pyramids or Machu Picchu?',
+    'Would you rather spend a day at the Louvre Museum or at Disneyland?',
+    'Would you rather visit a famous natural wonder (like Niagara Falls) or a man-made one (like the Taj Mahal)?',
+    'Would you rather take a photo at the Statue of Liberty or walk along the Great Wall of China?',
+    'Would you rather see Big Ben or the Sydney Opera House?'
+  ]
+};
+const lastDrawn = {};
+function drawCard(id){
+  const arr = decks[id];
+  let idx;
+  do{ idx = Math.floor(Math.random()*arr.length); }while(arr.length>1 && idx===lastDrawn[id]);
+  lastDrawn[id]=idx;
+  const targetId = 'drawn-'+id;
+  const box = document.getElementById(targetId);
+  box.textContent = arr[idx];
+  box.classList.remove('pop'); void box.offsetWidth; box.classList.add('pop');
+}
+
+/* ---------------- Checklist toggles ---------------- */
+function toggleCheck(el){
+  el.classList.toggle('on');
+  el.textContent = el.classList.contains('on') ? '✓' : '';
+}
+
+/* ---------------- Timer (Gate 6 final challenge) ---------------- */
+let timerSeconds = 90;
+let timerInterval = null;
+function renderTimer(){
+  const m = Math.floor(timerSeconds/60).toString().padStart(2,'0');
+  const s = (timerSeconds%60).toString().padStart(2,'0');
+  document.getElementById('timerDisplay').textContent = m+':'+s;
+}
+function startTimer(){
+  if(timerInterval) return;
+  timerInterval = setInterval(()=>{
+    if(timerSeconds<=0){ clearInterval(timerInterval); timerInterval=null; return; }
+    timerSeconds--; renderTimer();
+  },1000);
+}
+function resetTimer(){
+  clearInterval(timerInterval); timerInterval=null;
+  timerSeconds=90; renderTimer();
+}
+renderTimer();
+</script>
+</body>
+</html>
