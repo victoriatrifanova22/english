@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Take One — English Mix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2140;
+    --ink-2:#262C52;
+    --ink-3:#333B6C;
+    --paper:#F4EFE1;
+    --paper-2:#E7DEC2;
+    --gold:#E8A33D;
+    --gold-2:#F4C067;
+    --teal:#4FB0A5;
+    --red:#D9534F;
+    --green:#5FAE6B;
+    --text-light:#F5F1E8;
+    --text-dark:#241C10;
+    --font-display:'Fraunces', serif;
+    --font-body:'Manrope', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% -10%, #2C3468 0%, transparent 45%),
+      radial-gradient(circle at 100% 10%, #2A3260 0%, transparent 40%),
+      var(--ink);
+    color:var(--text-light);
+    font-family:var(--font-body);
+    line-height:1.5;
+    padding-bottom:80px;
+  }
+
+  a{ color:var(--gold-2); }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:56px 0 32px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--teal);
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(32px,6vw,48px);
+    margin:10px 0 8px;
+    color:var(--text-light);
+  }
+  .hero h1 em{
+    color:var(--gold);
+    font-style:italic;
+  }
+  .hero p{
+    max-width:520px;
+    margin:0 auto;
+    color:#C9CCE6;
+    font-size:15px;
+  }
+
+  /* ---------- FILMSTRIP PROGRESS ---------- */
+  .filmstrip{
+    position:relative;
+    height:34px;
+    margin:28px 0 6px;
+    border-radius:6px;
+    background:var(--ink-2);
+    border:1px solid rgba(245,241,232,.15);
+    overflow:hidden;
+  }
+  .filmstrip::before,
+  .filmstrip::after{
+    content:'';
+    position:absolute;
+    left:0; right:0;
+    height:7px;
+    background-image:repeating-linear-gradient(to right, rgba(245,241,232,.4) 0 6px, transparent 6px 15px);
+  }
+  .filmstrip::before{ top:0; }
+  .filmstrip::after{ bottom:0; }
+  .filmstrip .fill{
+    position:absolute;
+    top:7px; bottom:7px; left:0;
+    width:0%;
+    background:linear-gradient(90deg,var(--gold),var(--gold-2));
+    transition:width .35s ease;
+  }
+  .progress-label{
+    text-align:center;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:#9DA3C9;
+    margin-bottom:34px;
+  }
+  .progress-label b{ color:var(--gold-2); }
+
+  /* ---------- TICKETS ---------- */
+  #quizContainer{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+
+  .ticket{
+    display:flex;
+    background:var(--paper);
+    color:var(--text-dark);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 10px 24px rgba(0,0,0,.28);
+    opacity:0;
+    transform:translateY(14px);
+    animation:riseIn .5s ease forwards;
+  }
+  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
+
+  .stub{
+    flex:0 0 78px;
+    background:var(--ink-2);
+    color:var(--gold-2);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    padding:14px 6px;
+    position:relative;
+    border-right:2px dashed rgba(36,28,16,.28);
+  }
+  .stub::before,
+  .stub::after{
+    content:'';
+    position:absolute;
+    right:-9px;
+    width:18px; height:18px;
+    background:var(--ink);
+    border-radius:50%;
+  }
+  .stub::before{ top:-9px; }
+  .stub::after{ bottom:-9px; }
+  .scene-label{
+    font-family:var(--font-mono);
+    font-size:9px;
+    letter-spacing:.14em;
+    color:#9DA3C9;
+  }
+  .scene-num{
+    font-family:var(--font-mono);
+    font-size:22px;
+    font-weight:600;
+  }
+
+  .ticket-body{
+    flex:1;
+    padding:18px 20px;
+  }
+  .prompt{
+    font-size:15.5px;
+    margin:0 0 14px;
+    font-weight:500;
+  }
+  .prompt em{ color:#6b5a33; font-style:italic; }
+
+  /* options */
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .opt{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 12px;
+    border:1.5px solid var(--paper-2);
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14.5px;
+    transition:border-color .15s, background .15s;
+  }
+  .opt:hover{ border-color:var(--teal); }
+  .opt input{ accent-color:var(--teal); width:16px; height:16px; flex:0 0 auto; }
+  .opt.selected{ border-color:var(--teal); background:rgba(79,176,165,.1); }
+
+  .tf-row{ display:flex; gap:10px; }
+  .tf-row .opt{ flex:1; justify-content:center; }
+
+  .fill-input{
+    width:100%;
+    padding:10px 12px;
+    border:1.5px solid var(--paper-2);
+    border-radius:8px;
+    font-family:var(--font-body);
+    font-size:14.5px;
+    background:#fffdf8;
+    color:var(--text-dark);
+  }
+  .fill-input:focus{ outline:none; border-color:var(--teal); }
+
+  .feedback{
+    margin:12px 0 0;
+    font-size:13.5px;
+    font-family:var(--font-mono);
+    padding:8px 10px;
+    border-radius:6px;
+    display:none;
+  }
+  .ticket.correct .feedback{
+    display:block;
+    background:rgba(95,174,107,.15);
+    color:#2f5c37;
+  }
+  .ticket.incorrect .feedback{
+    display:block;
+    background:rgba(217,83,79,.13);
+    color:#8a2e2b;
+  }
+  .ticket.correct{ box-shadow:0 0 0 2px var(--green), 0 10px 24px rgba(0,0,0,.28); }
+  .ticket.incorrect{ box-shadow:0 0 0 2px var(--red), 0 10px 24px rgba(0,0,0,.28); }
+
+  /* ---------- CONTROLS / RESULT ---------- */
+  .controls{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    margin:34px 0 10px;
+    flex-wrap:wrap;
+  }
+  button{
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:14.5px;
+    padding:13px 26px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  button:focus-visible{ outline:3px solid var(--teal); outline-offset:2px; }
+  button:active{ transform:scale(.97); }
+  #checkBtn{ background:linear-gradient(90deg,var(--gold),var(--gold-2)); color:#231B0C; box-shadow:0 6px 18px rgba(232,163,61,.35); }
+  #resetBtn{ background:transparent; color:var(--text-light); border:1.5px solid rgba(245,241,232,.35); }
+
+  #resultBanner{
+    display:none;
+    text-align:center;
+    margin:24px auto 0;
+    max-width:520px;
+    background:var(--ink-2);
+    border:1px solid rgba(245,241,232,.15);
+    border-radius:14px;
+    padding:22px 26px;
+  }
+  #resultBanner.show{ display:block; }
+  #resultBanner .eyebrow{ color:var(--gold-2); }
+  #resultBanner h2{
+    font-family:var(--font-display);
+    font-size:30px;
+    margin:6px 0 4px;
+  }
+  #resultBanner p{ color:#C9CCE6; font-size:14.5px; margin:0; }
+
+  /* ---------- QUOTES ---------- */
+  .quotes-section{ margin-top:70px; }
+  .quotes-section .eyebrow{ text-align:center; display:block; }
+  .quotes-section h2{
+    font-family:var(--font-display);
+    text-align:center;
+    font-size:clamp(26px,4.5vw,34px);
+    margin:8px 0 6px;
+  }
+  .quotes-section > .wrap > p.sub{
+    text-align:center;
+    color:#C9CCE6;
+    font-size:14.5px;
+    max-width:480px;
+    margin:0 auto 34px;
+  }
+
+  .quote-card{
+    background:linear-gradient(160deg, var(--ink-2), var(--ink-3));
+    border:1px solid rgba(245,241,232,.12);
+    border-radius:16px;
+    padding:28px 26px 24px;
+    margin-bottom:22px;
+    position:relative;
+  }
+  .quote-card .qnum{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    color:var(--teal);
+    text-transform:uppercase;
+  }
+  .quote-card blockquote{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(19px,3vw,23px);
+    color:var(--gold-2);
+    margin:10px 0 8px;
+    line-height:1.35;
+  }
+  .quote-card cite{
+    display:block;
+    font-style:normal;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:#9DA3C9;
+    margin-bottom:16px;
+  }
+  .quote-card .divider{
+    height:1px;
+    background:rgba(245,241,232,.14);
+    margin:14px 0;
+  }
+  .quote-card ul{
+    margin:0;
+    padding-left:0;
+    list-style:none;
+  }
+  .quote-card li{
+    display:flex;
+    gap:10px;
+    font-size:14px;
+    color:#DCDEEF;
+    margin-bottom:10px;
+  }
+  .quote-card li::before{
+    content:'▸';
+    color:var(--teal);
+    flex:0 0 auto;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:60px;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:#6B72A0;
+    letter-spacing:.05em;
+  }
+
+  @media (max-width:560px){
+    .ticket{ flex-direction:column; }
+    .stub{
+      flex-direction:row;
+      justify-content:space-between;
+      width:100%;
+      border-right:none;
+      border-bottom:2px dashed rgba(36,28,16,.28);
+      padding:10px 16px;
+    }
+    .stub::before,.stub::after{ display:none; }
+    .tf-row{ flex-direction:column; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ticket{ animation:none; opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Take one · English Mix</span>
+    <h1>Take One: English <em>Mix</em></h1>
+    <p>20 scenes of vocabulary and grammar from our lessons — mixed up like a film edit, with no topic hints. Just watch and answer.</p>
+  </header>
+
+  <div class="filmstrip"><div class="fill" id="progressFill"></div></div>
+  <p class="progress-label">Answered: <b><span id="answeredCount">0</span>/20</b></p>
+
+  <main id="quizContainer"></main>
+
+  <div class="controls">
+    <button id="checkBtn">🎬 Check My Take</button>
+    <button id="resetBtn">↺ Reshoot</button>
+  </div>
+
+  <div id="resultBanner">
+    <span class="eyebrow">Final Cut</span>
+    <h2 id="scoreText">0 / 20</h2>
+    <p id="scoreComment"></p>
+  </div>
+</div>
+
+<section class="quotes-section">
+  <div class="wrap">
+    <span class="eyebrow">Post-credits scene</span>
+    <h2>5 Quotes to Reflect On</h2>
+    <p class="sub">Just like the extra scene after the credits in a superhero movie — read the quote and discuss it out loud in English using the ideas below.</p>
+
+    <div class="quote-card">
+      <span class="qnum">Scene 01 / 05</span>
+      <blockquote>"Comparison is the thief of joy."</blockquote>
+      <cite>— Theodore Roosevelt</cite>
+      <div class="divider"></div>
+      <ul>
+        <li>Do you agree that comparing yourself to others usually makes people less happy? Why or why not?</li>
+        <li>Describe a moment when comparing yourself to someone else affected your mood.</li>
+        <li>What is one way to measure your own progress without comparing yourself to others?</li>
+      </ul>
+    </div>
+
+    <div class="quote-card">
+      <span class="qnum">Scene 02 / 05</span>
+      <blockquote>"The only way to do great work is to love what you do."</blockquote>
+      <cite>— Steve Jobs</cite>
+      <div class="divider"></div>
+      <ul>
+        <li>Do you think you have to love a job to be excellent at it, or can skill alone be enough?</li>
+        <li>What is one activity you love doing so much that time seems to disappear?</li>
+        <li>If money were not a factor, what work would you choose, and why?</li>
+      </ul>
+    </div>
+
+    <div class="quote-card">
+      <span class="qnum">Scene 03 / 05</span>
+      <blockquote>"It always seems impossible until it's done."</blockquote>
+      <cite>— Nelson Mandela</cite>
+      <div class="divider"></div>
+      <ul>
+        <li>Think of a goal that once felt impossible to you. What changed your mind?</li>
+        <li>How do you usually react when a task looks too difficult at first?</li>
+        <li>What is one "impossible" goal you would like to try this year?</li>
+      </ul>
+    </div>
+
+    <div class="quote-card">
+      <span class="qnum">Scene 04 / 05</span>
+      <blockquote>"The future belongs to those who believe in the beauty of their dreams."</blockquote>
+      <cite>— Eleanor Roosevelt</cite>
+      <div class="divider"></div>
+      <ul>
+        <li>What role do you think belief plays in reaching a dream, compared to hard work or luck?</li>
+        <li>Describe a dream you have for the next five years.</li>
+        <li>Who is someone you admire because they followed their dream despite difficulties?</li>
+      </ul>
+    </div>
+
+    <div class="quote-card">
+      <span class="qnum">Scene 05 / 05</span>
+      <blockquote>"Fear is only as deep as the mind allows."</blockquote>
+      <cite>— Japanese proverb</cite>
+      <div class="divider"></div>
+      <ul>
+        <li>Can you think of a fear that turned out to be smaller than you expected once you faced it?</li>
+        <li>What is a strategy you use to manage fear or anxiety before a big event, like an exam?</li>
+        <li>Do you think all fears can be overcome with the right mindset, or are some fears useful to keep?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>END OF REEL · vocabulary &amp; grammar mix</footer>
+
+<script>
+const questions = [
+  { id:1, type:'fill_blank', prompt:'Look outside! It <strong>_____</strong> (rain) right now — take an umbrella.',
+    accepted:['is raining'], match:'exact', note:"Present Continuous: 'is raining' — the action is happening right now." },
+
+  { id:2, type:'multiple_choice', prompt:"\u201cTo be honest, I didn't like the ending.\u201d What does <em>to be honest</em> mean here?",
+    options:[{k:'a',t:'I am telling you my true opinion'},{k:'b',t:'I am sorry about this'},{k:'c',t:'As always'},{k:'d',t:'By the way'}],
+    correct:'a', note:"'to be honest / honestly' means speaking truthfully, without hiding your opinion." },
+
+  { id:3, type:'true_false', prompt:'Andrew Garfield is a French citizen.',
+    correct:false, note:'False — he was actually born in the USA and grew up in the UK.' },
+
+  { id:4, type:'fill_blank', prompt:'I have an allergy <strong>_____</strong> pollen every spring.',
+    accepted:['to'], match:'exact', note:"'allergy TO something' — that's the correct preposition." },
+
+  { id:5, type:'multiple_choice', prompt:"Which phrase correctly describes the symptom \u201ca runny nose\u201d?",
+    options:[{k:'a',t:'to have a blocked nose'},{k:'b',t:'to have a runny nose'},{k:'c',t:'to have a pain in throat'},{k:'d',t:'to have a headache'}],
+    correct:'b', note:"'a runny nose' means your nose keeps running, unlike a blocked nose." },
+
+  { id:6, type:'fill_blank', prompt:"Spiders are frightening — I'm really <strong>_____</strong> of them.",
+    accepted:['afraid'], match:'exact', note:"'to be afraid of something' — the correct structure." },
+
+  { id:7, type:'true_false', prompt:'Emma Stone has won two Oscars.',
+    correct:true, note:'True — she is a talented actress and a two-time Oscar winner.' },
+
+  { id:8, type:'fill_blank', prompt:'My brother wants to <strong>_____</strong> the guitar every evening.',
+    accepted:['play'], match:'exact', note:"'play THE' + musical instrument — no preposition needed." },
+
+  { id:9, type:'multiple_choice', prompt:"Choose the correct command form: \u201cYou should be careful on the road.\u201d",
+    options:[{k:'a',t:'Be careful on the road!'},{k:'b',t:'You be careful on the road!'},{k:'c',t:'Being careful on the road!'},{k:'d',t:'To be careful on the road!'}],
+    correct:'a', note:"Imperative with 'to be': Be careful! / Don't be careful!" },
+
+  { id:10, type:'multiple_choice', prompt:"Choose the correct negative command: \u201cYou shouldn't help him right now.\u201d",
+    options:[{k:'a',t:"Don't help him now!"},{k:'b',t:'Not help him now!'},{k:'c',t:"You don't help him now!"},{k:'d',t:'Helping him not now!'}],
+    correct:'a', note:"Negative imperative: Don't + verb." },
+
+  { id:11, type:'multiple_choice', prompt:'Which word matches the number 1000?',
+    options:[{k:'a',t:'hundred'},{k:'b',t:'thousand'},{k:'c',t:'million'},{k:'d',t:'dozen'}],
+    correct:'b', note:'hundred = 100, thousand = 1000.' },
+
+  { id:12, type:'fill_blank', prompt:'Please send me the report <strong>_____ _____</strong> possible.',
+    accepted:['as soon as','as fast as','as quickly as'], match:'includes',
+    note:"'as soon / fast / quickly as possible' — used to say something should happen with no delay." },
+
+  { id:13, type:'multiple_choice', prompt:'Which sentence is grammatically correct?',
+    options:[{k:'a',t:'The film sets in New York City.'},{k:'b',t:'The film is set in New York City.'},{k:'c',t:'The film settled in New York City.'},{k:'d',t:'The film was setting in New York City.'}],
+    correct:'b', note:"'The film is set in...' describes where a film's story takes place." },
+
+  { id:14, type:'fill_blank', prompt:"Translate this sentence into English, using the phrase <strong>\u201cWhat I liked most about... was...\u201d</strong>:<br><em>\u00abБольше всего мне понравилась актёрская игра в этом фильме.\u00bb</em>",
+    accepted:['what i liked','acting'], match:'all',
+    note:"Model answer: 'What I liked most about the film was the acting.'" },
+
+  { id:15, type:'multiple_choice', prompt:"Which word doesn't belong with the others (it's not a synonym for \u201cto answer\u201d)?",
+    options:[{k:'a',t:'reply'},{k:'b',t:'answer'},{k:'c',t:'response'},{k:'d',t:'question'}],
+    correct:'d', note:"'reply / answer / response' all mean to answer; 'question' does not." },
+
+  { id:16, type:'fill_blank', prompt:'She <strong>_____</strong> (be able) to take care of her grandmother all last week.',
+    accepted:['was able'], match:'exact', note:"'was able to' = could (ability in the past)." },
+
+  { id:17, type:'multiple_choice', prompt:"Don't compare yourself <strong>_____</strong> other people — just look at your own achievements.",
+    options:[{k:'a',t:'with'},{k:'b',t:'to'},{k:'c',t:'from'},{k:'d',t:'at'}],
+    correct:'a', note:"'to compare yourself WITH someone else' — the correct preposition." },
+
+  { id:18, type:'true_false', prompt:'Judo and karate are examples of martial arts.',
+    correct:true, note:"True — 'martial art' refers to disciplines like judo and karate." },
+
+  { id:19, type:'fill_blank', prompt:'He is very strong. His physical <strong>_____</strong> helped him win the competition.',
+    accepted:['strength'], match:'exact', note:'strong (adjective) → strength (noun).' },
+
+  { id:20, type:'multiple_choice', prompt:"Which word best describes traditional dances that come from a country's own culture (not classical ballet)?",
+    options:[{k:'a',t:'ballet'},{k:'b',t:'folk dance'},{k:'c',t:'bouquet'},{k:'d',t:'martial art'}],
+    correct:'b', note:"'folk dance' refers to traditional dances tied to a country's culture and history." },
+];
+
+const container = document.getElementById('quizContainer');
+
+function normalize(s){
+  return s.toLowerCase().trim().replace(/['".,!?;:]/g,'').replace(/\s+/g,' ');
+}
+
+function renderQuestion(q, index){
+  const article = document.createElement('article');
+  article.className = 'ticket';
+  article.dataset.id = q.id;
+  article.style.animationDelay = (index * 0.04) + 's';
+
+  let inputHtml = '';
+  if(q.type === 'multiple_choice'){
+    inputHtml = `<div class="options">` + q.options.map(o => `
+      <label class="opt" data-key="${o.k}">
+        <input type="radio" name="q${q.id}" value="${o.k}">
+        <span>${o.t}</span>
+      </label>`).join('') + `</div>`;
+  } else if(q.type === 'true_false'){
+    inputHtml = `<div class="tf-row">
+      <label class="opt" data-key="true"><input type="radio" name="q${q.id}" value="true"><span>True</span></label>
+      <label class="opt" data-key="false"><input type="radio" name="q${q.id}" value="false"><span>False</span></label>
+    </div>`;
+  } else if(q.type === 'fill_blank'){
+    inputHtml = `<input type="text" class="fill-input" id="input-${q.id}" placeholder="Your answer...">`;
+  }
+
+  article.innerHTML = `
+    <div class="stub">
+      <span class="scene-label">SCENE</span>
+      <span class="scene-num">${String(index+1).padStart(2,'0')}</span>
+    </div>
+    <div class="ticket-body">
+      <p class="prompt">${q.prompt}</p>
+      ${inputHtml}
+      <p class="feedback"></p>
+    </div>
+  `;
+  return article;
+}
+
+questions.forEach((q, i) => container.appendChild(renderQuestion(q, i)));
+
+// highlight selected radio option + live progress
+container.addEventListener('change', (e) => {
+  const opt = e.target.closest('.opt');
+  if(opt){
+    opt.parentElement.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+  }
+  updateProgress();
+});
+container.addEventListener('input', (e) => {
+  if(e.target.classList.contains('fill-input')) updateProgress();
+});
+
+function isAnswered(q){
+  if(q.type === 'fill_blank'){
+    const el = document.getElementById(`input-${q.id}`);
+    return el && el.value.trim().length > 0;
+  }
+  return !!document.querySelector(`input[name="q${q.id}"]:checked`);
+}
+
+function updateProgress(){
+  const answered = questions.filter(isAnswered).length;
+  document.getElementById('answeredCount').textContent = answered;
+  document.getElementById('progressFill').style.width = (answered/questions.length*100) + '%';
+}
+
+function isCorrect(q){
+  if(q.type === 'multiple_choice'){
+    const sel = document.querySelector(`input[name="q${q.id}"]:checked`);
+    return !!sel && sel.value === q.correct;
+  }
+  if(q.type === 'true_false'){
+    const sel = document.querySelector(`input[name="q${q.id}"]:checked`);
+    if(!sel) return false;
+    return (sel.value === 'true') === q.correct;
+  }
+  if(q.type === 'fill_blank'){
+    const el = document.getElementById(`input-${q.id}`);
+    if(!el) return false;
+    const val = normalize(el.value);
+    if(!val) return false;
+    if(q.match === 'includes'){
+      return q.accepted.some(a => val.includes(normalize(a)));
+    }
+    if(q.match === 'all'){
+      return q.accepted.every(a => val.includes(normalize(a)));
+    }
+    return q.accepted.some(a => val === normalize(a));
+  }
+  return false;
+}
+
+document.getElementById('checkBtn').addEventListener('click', () => {
+  let score = 0;
+  questions.forEach(q => {
+    const ticket = container.querySelector(`.ticket[data-id="${q.id}"]`);
+    const fb = ticket.querySelector('.feedback');
+    ticket.classList.remove('correct','incorrect');
+    if(isCorrect(q)){
+      score++;
+      ticket.classList.add('correct');
+      fb.innerHTML = '✓ Correct! ' + q.note;
+    } else {
+      ticket.classList.add('incorrect');
+      fb.innerHTML = '✗ Not quite. ' + q.note;
+    }
+  });
+
+  const banner = document.getElementById('resultBanner');
+  banner.classList.add('show');
+  document.getElementById('scoreText').textContent = `${score} / ${questions.length}`;
+  let comment;
+  if(score >= 18) comment = 'Excellent take! Almost no reshoots needed — you know this material well.';
+  else if(score >= 13) comment = 'Good result! A few scenes need a reshoot — check the notes above.';
+  else comment = "Time to review the material again — use the hints on each card and try once more.";
+  document.getElementById('scoreComment').textContent = comment;
+  banner.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  questions.forEach(q => {
+    const ticket = container.querySelector(`.ticket[data-id="${q.id}"]`);
+    ticket.classList.remove('correct','incorrect');
+    ticket.querySelector('.feedback').textContent = '';
+    if(q.type === 'fill_blank'){
+      document.getElementById(`input-${q.id}`).value = '';
+    } else {
+      ticket.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+      ticket.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    }
+  });
+  document.getElementById('resultBanner').classList.remove('show');
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+</script>
+</body>
+</html>
